@@ -6,29 +6,100 @@
     <title>Dashboard</title>
     <link rel="stylesheet" href="../src/output.css">
 </head>
-<body>
-    <main>
-        <!-- header -->
-        <header>
+<body class="bg-gray-100">
+    <main class="min-h-screen flex">
+        <!-- Sidebar -->
+        <nav class="w-64 bg-white shadow-lg hidden md:block">
+            <div class="p-6 border-b">
+                <h2 class="text-xl font-bold">Admin Panel</h2>
+            </div>
 
-        </header>
-        <!-- Menu -->
-        <nav>
+            <ul class="mt-4 space-y-2">
+                <li class="px-6 py-3 bg-indigo-100 text-indigo-600 font-medium">
+                    Dashboard
+                </li>
 
+                <li class="px-6 py-3 hover:bg-indigo-100 cursor-pointer">
+                    Restaurant
+                </li>
+
+                <li class="px-6 py-3 hover:bg-indigo-100 cursor-pointer">
+                    Orders
+                </li>
+
+                <li class="px-6 py-3 hover:bg-indigo-100 cursor-pointer">
+                    Users
+                </li>
+            </ul>
         </nav>
-        <section>
+        <!-- Right Content -->
+        <div class="flex-1 flex flex-col">
 
-        </section>
-        <article>
+            <!-- Header -->
+            <header class="bg-white shadow p-4 flex justify-between items-center">
+                <h1 class="text-lg font-semibold">Admin Dashboard</h1>
+                <div class="text-sm text-gray-600">
+                    Welcome, Admin
+                </div>
+            </header>
 
-        </article>
-        <aside>
 
-        </aside>
-        <!-- footers -->
-        <footer>
+            <!-- Title Section -->
+            <section class="p-6">
+                <div class="bg-gradient-to-r from-indigo-500 to-purple-600 
+                            text-white p-6 rounded-lg shadow">
+                    <h2 class="text-2xl font-semibold">Dashboard Overview</h2>
+                </div>
+            </section>
 
-        </footer>
-    </main>
+
+            <!-- Cards -->
+            <article class="px-6 pb-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                <!-- Card -->
+                <div class="bg-white p-6 rounded-xl shadow flex justify-between items-center">
+                    <div>
+                        <h3 class="text-2xl font-bold">100</h3>
+                        <p class="text-gray-500">Dishes</p>
+                    </div>
+                    <div class="text-indigo-500 text-3xl">
+                        🍽
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow flex justify-between items-center">
+                    <div>
+                        <h3 class="text-2xl font-bold">100</h3>
+                        <p class="text-gray-500">Users</p>
+                    </div>
+                    <div class="text-indigo-500 text-3xl">
+                        👤
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow flex justify-between items-center">
+                    <div>
+                        <h3 class="text-2xl font-bold">100</h3>
+                        <p class="text-gray-500">Total Orders</p>
+                    </div>
+                    <div class="text-indigo-500 text-3xl">
+                        🛒
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow flex justify-between items-center">
+                    <div>
+                        <h3 class="text-2xl font-bold">$100</h3>
+                        <p class="text-gray-500">Total Earning</p>
+                    </div>
+                    <div class="text-indigo-500 text-3xl">
+                        💰
+                    </div>
+                </div>
+
+            </article>
+
+        </div>
+    </main>  
 </body>
 </html>
