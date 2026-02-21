@@ -6,6 +6,8 @@
     <title>Dashboard</title>
 </head>
 <body>
-    
+    <main>
+        
+    </main>
 </body>
 </html>
