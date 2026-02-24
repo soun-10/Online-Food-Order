@@ -6,7 +6,6 @@
     <title>Login</title>
     <link rel="stylesheet" href="src/output.css">
 </head>
-
 <body class="min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat"style="background-image: url('Image/bg login.jpg');">
     <main class="relative w-full flex items-center justify-center px-4 sm:px-6 md:px-8">
         <div class="w-full max-w-sm sm:max-w-md bg-white/40 backdrop-blur-xl rounded-2xl shadow-2xl p-6 sm:p-8 z-10">
