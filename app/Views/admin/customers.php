@@ -9,7 +9,7 @@
 <body class="bg-gray-100 flex min-h-screen font-sans">
   <main class="">
     <nav class="flex-1 px-2 py-4 space-y-1">
-      <a href="dashboard.php" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-blue-600 font-semibold">
+      <a href="dashboard.php" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-600 font-semibold">
           <i class="fas fa-gauge-high w-5 text-center"></i> Dashboard
       </a>
       <a href="categories.php" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-600 transition">
@@ -19,7 +19,7 @@
           <i class="fas fa-cart-shopping w-5 text-center"></i> Orders
           <span class="ml-auto bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">8</span>
       </a>
-      <a href="customers.php" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-600 transition">
+      <a href="customers.php" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-blue-600 transition">
           <i class="fas fa-users w-5 text-center"></i> Customers
       </a>
       <a href="drivers.php"

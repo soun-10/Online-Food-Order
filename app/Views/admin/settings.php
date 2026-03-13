@@ -9,7 +9,7 @@
 <body class="bg-gray-100 flex min-h-screen font-sans">
   <main class="">
     <nav class="flex-1 px-2 py-4 space-y-1">
-      <a href="dashboard.php" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-blue-600 font-semibold">
+      <a href="dashboard.php" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-600 font-semibold">
           <i class="fas fa-gauge-high w-5 text-center"></i> Dashboard
       </a>
       <a href="categories.php" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-600 transition">
@@ -29,7 +29,7 @@
       <a href="reports.php" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-600 transition">
           <i class="fas fa-chart-line w-5 text-center"></i> Reports
         </a>
-      <a href="settings.php" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-600 transition">
+      <a href="settings.php" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-blue-600 transition">
           <i class="fas fa-gear w-5 text-center"></i> Settings
       </a>
     </nav>
