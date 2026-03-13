@@ -7,6 +7,8 @@
             $this->userModel = new User($db);
         }
 
-        public function getUser($)
+        public function getUser($username){
+            return $this->userModel->selectUser($username);
+        }
     }
 ?>
