@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Food Delivery - Admin Panel</title>
-    <?php __DIR__. "/components/cdns.php" ?>
+    <?php include __DIR__. "/components/cdns.php" ?>
   </head>
   <body class="bg-gray-100 flex min-h-screen font-sans">
     <!-- Sidebar -->

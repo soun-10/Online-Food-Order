@@ -4,10 +4,9 @@
     class UserController{
         private $userModel;
         public function __construct($db){
-            
+            $this->userModel = new User($db);
         }
-        {
-            throw new \Exception('Not implemented');
-        }
+
+        public function getUser($)
     }
 ?>
