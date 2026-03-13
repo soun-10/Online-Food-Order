@@ -4,5 +4,5 @@
     $password_db = "";
     $db_name = "online_food_order_app";
 
-    $con = new PDO("mysqul:host=$server_db; dbname=$db_name, $user_db, $password_db")
+    $con = new PDO("mysql:host=$server_db; dbname=$db_name", $user_db, $password_db);
 ?>
