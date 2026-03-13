@@ -68,6 +68,9 @@
                     class="w-full py-2.5 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition duration-300"><i
                         class="fa-solid fa-unlock"></i>Log In</button>
             </form>
+            <?php
+                echo $err;
+            ?>
         </div>
     </main>
 </body>
