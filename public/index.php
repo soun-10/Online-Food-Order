@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <?php
-        include __DIR__ ."/../app/Views/components/cdns.php"; 
-    ?>
-</head>
+    <?php include __DIR__ ."/../app/Views/components/cdns.php"; ?>
+</head> 
 <body class="min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat"style="background-image: url('image/bg login.jpg');">
     <main class="relative w-full flex items-center justify-center px-4 sm:px-6 md:px-8">
         <div class="w-full max-w-sm sm:max-w-md bg-white/40 backdrop-blur-xl rounded-2xl shadow-2xl p-6 sm:p-8 z-10">
