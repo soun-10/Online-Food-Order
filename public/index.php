@@ -46,7 +46,7 @@
                 <br> Admin Login
             </h1>
             <p class="text-center text-gray-800 mb-6">Online Food Order</p>
-            <form class="space-y-4 sm:space-y-5" action="login.php" method="post">
+            <form class="space-y-4 sm:space-y-5" action="" method="post">
                 <!-- Username -->
                 <div>
                     <label class="block text-gray-700 font-medium mb-1 text-sm sm:text-base">
