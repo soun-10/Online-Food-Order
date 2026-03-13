@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require_once __DIR__."/../app/Controllers/UserController.php";
+    require_once __DIR__."/../../app/Controllers/UserController.php";
     $err="";
     $user = new UserController($con);
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -14,7 +14,7 @@
                 $row["password"]
             ) {
                 $_SESSION['username'] = $userLogin;  //បង្កើត session ចាប់ឈ្មោះ user ទុក
-                header("Location: ../app/Views/dashboard.php");
+                header("Location: ../../app/Views/admin/dashboard.php");
                 exit;
             } else {
                 $err = '<div class="alert alert-danger" role="alert">Invalid
@@ -35,11 +35,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <?php include __DIR__ ."/../app/Views/components/cdns.php"; ?>
+    <?php include __DIR__ ."/../../app/Views/components/cdns.php"; ?>
 </head>
 
 <body class="min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat"
-    style="background-image: url('image/bg login.jpg');">
+    style="background-image: url('../image/bg login.jpg');">
     <main class="relative w-full flex items-center justify-center px-4 sm:px-6 md:px-8">
         <div class="w-full max-w-sm sm:max-w-md bg-white/40 backdrop-blur-xl rounded-2xl shadow-2xl p-6 sm:p-8 z-10">
             <h1 class="text-2xl sm:text-3xl font-bold text-center text-gray-800"><i class="fa-solid fa-user-lock"></i>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Food Delivery - Admin Panel</title>
-    <?php include __DIR__. "/components/cdns.php" ?>
+    <?php include __DIR__. "/../components/cdns.php" ?>
   </head>
   <body class="bg-gray-100 flex min-h-screen font-sans">
     <!-- Sidebar -->
@@ -23,16 +23,6 @@
           class="flex items-center gap-3 px-4 py-3 rounded-lg bg-blue-600 font-semibold"
         >
           <i class="fas fa-gauge-high w-5 text-center"></i> Dashboard
-        </a>
-        <a
-          href="#"
-          class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-600 transition"
-        >
-          <i class="fas fa-utensils w-5 text-center"></i> Restaurants
-          <span
-            class="ml-auto bg-blue-400 text-white text-xs font-bold px-2 py-0.5 rounded-full"
-            >2</span
-          >
         </a>
         <a
           href="#"
