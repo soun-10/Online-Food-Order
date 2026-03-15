@@ -10,7 +10,7 @@
   <nav class="w-64 bg-blue-700 text-white flex flex-col">
     <!-- Logo -->
     <div class="px-6 py-5 border-b border-blue-600 text-center">
-      <p class="text-xl font-bold"><i class="fas fa-store"></i> Food Delivery</p>
+      <p class="text-xl font-bold"><i class="fas fa-store"></i>Online Food Order</p>
       <p class="text-xs text-blue-200 mt-1">Admin Panel</p>
     </div>
     <!-- Links -->
