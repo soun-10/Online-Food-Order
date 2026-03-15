@@ -51,7 +51,11 @@
       <i class="fas fa-circle-user text-gray-500 text-xl ml-3"></i>
     </header>
     <section class="p-6 space-y-6">
-      <!-- content នៅទីនេះ -->
+      <div class="p-8 space-y-6">
+        <div class="bg-white rounded-xl shadow p-5 flex items-center justify-between border-l-4 border-blue-500">
+          
+        </div>
+      </div>
     </section>
   </main>
 </body>
