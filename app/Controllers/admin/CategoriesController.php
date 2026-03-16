@@ -9,7 +9,7 @@
         }
         public function store ($food_name, $category, $price, $action)
         {
-            $this->categoryModel->createCategory($food_name, $category, $price, $action);
+            $this->categoryModel->createCategories($food_name, $category, $price, $action);
             
         }
         public function show(){
