@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require_once __DIR__."/../../app/Controllers/UserController.php";
+    require_once __DIR__."/../../app/Controllers/admin/UserController.php";
     $err="";
     $user = new UserController($con);
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
