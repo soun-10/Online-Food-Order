@@ -1,58 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Settings</title>
-  <?php include __DIR__. "/../components/cdns.php"; ?>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <?php include __DIR__. "/../components/cdns.php"; ?>
 </head>
+
 <body class="bg-gray-100 font-sans flex min-h-screen">
-  <nav class="w-64 bg-blue-700 text-white flex flex-col">
-    <!-- Logo -->
-    <div class="px-6 py-5 border-b border-blue-600 text-center">
-      <p class="text-xl font-bold"><i class="fas fa-store"></i>Online Food Order</p>
-      <p class="text-xs text-blue-200 mt-1">Admin Panel</p>
-    </div>
-    <!-- Links -->
-    <div class="flex-1 px-2 py-4 space-y-1">
-      <a href="dashboard.php" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-600 font-semibold">
-        <i class="fas fa-gauge-high w-5 text-center"></i> Dashboard
-      </a>
-      <a href="categories.php" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-600 transition">
-        <i class="fas fa-tag w-5 text-center"></i> Categories
-      </a>
-      <a href="orders.php" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-600 transition">
-        <i class="fas fa-cart-shopping w-5 text-center"></i> Orders
-      </a>
-      <a href="customers.php" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-600 transition">
-        <i class="fas fa-users w-5 text-center"></i> Customers
-      </a>
-      <a href="drivers.php" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-600 transition">
-        <i class="fas fa-person-biking w-5 text-center"></i> Drivers
-      </a>
-      <a href="reports.php" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-600 transition">
-        <i class="fas fa-chart-line w-5 text-center"></i> Reports
-      </a>
-      <a href="settings.php" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-blue-600 transition">
-        <i class="fas fa-gear w-5 text-center"></i> Settings
-      </a>
-    </div>
-    <!-- Logout -->
-    <div class="px-2 py-4 border-t border-blue-600">
-      <a href="logout.php" class="flex items-center gap-3 px-4 py-3 rounded-lg text-red-300 hover:bg-blue-600 transition">
-        <i class="fas fa-right-from-bracket w-5 text-center"></i> Logout
-      </a>
-    </div>
-  </nav>
-  <!-- Main Content -->
-  <main class="flex-1 flex flex-col">
-    <header class="bg-white shadow-sm px-8 py-4 flex justify-end items-center">
-      <span class="text-gray-600 text-sm">Welcome, <strong>Admin</strong></span>
-      <i class="fas fa-circle-user text-gray-500 text-xl ml-3"></i>
-    </header>
-    <section class="p-6 space-y-6">
-      <!-- content នៅទីនេះ -->
-    </section>
-  </main>
+    <nav class="w-64 bg-blue-700 text-white flex flex-col">
+        <!-- Logo -->
+        <div class="px-6 py-5 border-b border-blue-600 text-center">
+            <p class="text-xl font-bold"><i class="fas fa-store"></i>Online Food Order</p>
+            <p class="text-xs text-blue-200 mt-1">Admin Panel</p>
+        </div>
+        <!-- Links -->
+        <div class="flex-1 px-2 py-4 space-y-1">
+            <a href="dashboard.php"
+                class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-600 font-semibold">
+                <i class="fas fa-gauge-high w-5 text-center"></i> Dashboard
+            </a>
+            <a href="categories.php" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-600 transition">
+                <i class="fas fa-tag w-5 text-center"></i> Categories
+            </a>
+            <a href="orders.php" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-600 transition">
+                <i class="fas fa-cart-shopping w-5 text-center"></i> Orders
+            </a>
+            <a href="customers.php" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-600 transition">
+                <i class="fas fa-users w-5 text-center"></i> Customers
+            </a>
+            <a href="drivers.php" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-600 transition">
+                <i class="fas fa-person-biking w-5 text-center"></i> Drivers
+            </a>
+            <a href="reports.php" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-600 transition">
+                <i class="fas fa-chart-line w-5 text-center"></i> Reports
+            </a>
+            <a href="settings.php" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-blue-600 transition">
+                <i class="fas fa-gear w-5 text-center"></i> Settings
+            </a>
+        </div>
+        <!-- Logout -->
+        <div class="px-2 py-4 border-t border-blue-600">
+            <a href="logout.php"
+                class="flex items-center gap-3 px-4 py-3 rounded-lg text-red-300 hover:bg-blue-600 transition">
+                <i class="fas fa-right-from-bracket w-5 text-center"></i> Logout
+            </a>
+        </div>
+    </nav>
+    <main class="flex-1 p-6 space-y-6">
+
+        <h1 class="text-2xl font-bold text-gray-700">Settings</h1>
+
+        <!-- Admin Profile Settings -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-lg font-semibold mb-4">Admin Profile</h2>
+
+            <form class="grid grid-cols-2 gap-4">
+
+                <div>
+                    <label class="block text-gray-600 mb-1">Name</label>
+                    <input type="text" placeholder="Admin Name"
+                        class="w-full border p-2 rounded focus:ring-2 focus:ring-blue-400 outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-gray-600 mb-1">Email</label>
+                    <input type="email" placeholder="admin@example.com"
+                        class="w-full border p-2 rounded focus:ring-2 focus:ring-blue-400 outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-gray-600 mb-1">Password</label>
+                    <input type="password" placeholder="********"
+                        class="w-full border p-2 rounded focus:ring-2 focus:ring-blue-400 outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-gray-600 mb-1">Confirm Password</label>
+                    <input type="password" placeholder="********"
+                        class="w-full border p-2 rounded focus:ring-2 focus:ring-blue-400 outline-none">
+                </div>
+
+                <div class="col-span-2">
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
+                        Update Profile
+                    </button>
+                </div>
+
+            </form>
+        </div>
+
+        <!-- Site Settings -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-lg font-semibold mb-4">Site Settings</h2>
+
+            <form class="grid grid-cols-2 gap-4">
+
+                <div>
+                    <label class="block text-gray-600 mb-1">Business Name</label>
+                    <input type="text" placeholder="My Food Delivery"
+                        class="w-full border p-2 rounded focus:ring-2 focus:ring-blue-400 outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-gray-600 mb-1">Contact Email</label>
+                    <input type="email" placeholder="info@example.com"
+                        class="w-full border p-2 rounded focus:ring-2 focus:ring-blue-400 outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-gray-600 mb-1">Contact Phone</label>
+                    <input type="text" placeholder="+123456789"
+                        class="w-full border p-2 rounded focus:ring-2 focus:ring-blue-400 outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-gray-600 mb-1">Logo</label>
+                    <input type="file" class="w-full border p-2 rounded focus:ring-2 focus:ring-blue-400 outline-none">
+                </div>
+
+                <div class="col-span-2">
+                    <button type="submit" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">
+                        Save Settings
+                    </button>
+                </div>
+
+            </form>
+        </div>
+
+        <!-- Delivery / System Settings -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-lg font-semibold mb-4">Delivery Settings</h2>
+
+            <form class="grid grid-cols-2 gap-4">
+
+                <div>
+                    <label class="block text-gray-600 mb-1">Minimum Order Amount</label>
+                    <input type="number" placeholder="5"
+                        class="w-full border p-2 rounded focus:ring-2 focus:ring-blue-400 outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-gray-600 mb-1">Delivery Fee</label>
+                    <input type="number" placeholder="2"
+                        class="w-full border p-2 rounded focus:ring-2 focus:ring-blue-400 outline-none">
+                </div>
+
+                <div class="col-span-2">
+                    <button type="submit" class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded">
+                        Update Delivery Settings
+                    </button>
+                </div>
+
+            </form>
+        </div>
+
+    </main>
 </body>
+
 </html>
