@@ -66,53 +66,10 @@
             <span class="text-gray-600">Welcome, <strong>Admin</strong></span>
             <i class="fas fa-circle-user text-2xl text-gray-500"></i>
         </header>
-
         <!-- Content -->
         <div class="p-8 space-y-6">
-
-            <!-- Stat Cards -->
-            <div class="grid grid-cols-4 gap-5">
-
-                <div
-                    class="bg-white rounded-xl shadow p-5 flex items-center justify-between border-l-4 border-blue-500">
-                    <div>
-                        <div class="text-xs text-blue-500 font-semibold uppercase tracking-wide">Total Orders</div>
-                        <div class="text-3xl font-bold mt-1">44</div>
-                    </div>
-                    <i class="fas fa-cart-shopping text-4xl text-gray-300"></i>
-                </div>
-
-                <div
-                    class="bg-white rounded-xl shadow p-5 flex items-center justify-between border-l-4 border-green-500">
-                    <div>
-                        <div class="text-xs text-green-500 font-semibold uppercase tracking-wide">Total Revenue</div>
-                        <div class="text-3xl font-bold mt-1">$146.00</div>
-                    </div>
-                    <i class="fas fa-dollar-sign text-4xl text-gray-300"></i>
-                </div>
-
-                <div
-                    class="bg-white rounded-xl shadow p-5 flex items-center justify-between border-l-4 border-cyan-500">
-                    <div>
-                        <div class="text-xs text-cyan-500 font-semibold uppercase tracking-wide">Restaurants</div>
-                        <div class="text-3xl font-bold mt-1">8</div>
-                    </div>
-                    <i class="fas fa-store text-4xl text-gray-300"></i>
-                </div>
-
-                <div
-                    class="bg-white rounded-xl shadow p-5 flex items-center justify-between border-l-4 border-yellow-500">
-                    <div>
-                        <div class="text-xs text-yellow-500 font-semibold uppercase tracking-wide">Pending Orders</div>
-                        <div class="text-3xl font-bold mt-1">8</div>
-                    </div>
-                    <i class="fas fa-clock text-4xl text-gray-300"></i>
-                </div>
-
-            </div>
-
+            
         </div>
-
     </main>
 
 </body>
