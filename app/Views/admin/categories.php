@@ -1,3 +1,41 @@
+<?php
+session_start();
+
+if (!isset($_SESSION["username"])) {
+    header("Location: ../../public");
+}
+
+require_once __DIR__ . "/../../Controllers/admin/CategoryController.php";
+
+$Category = new CategoryController($con);
+$result = $Category->show();
+
+$msg = "";
+
+if (isset($_POST['food_name'])) {
+
+    $food_name = $_POST["food_name"];
+    $categorye = $_POST["categorye"];
+    $price = $_POST["price"];
+    $action = "available";
+
+    
+   if ($food_name && $categorye) {
+
+    $Category->store (
+        $food_name,
+        $categorye,
+        $price,
+        $action
+    );
+
+        header("Location: categories.php");
+        exit();
+    } else {
+    $msg = "<div>Student insert failed.</div>";
+}
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -72,9 +110,8 @@
         </div>
 
     </nav>
-
     <!-- // admin header -->
-    <main class="ml-64 flex-1 flex flex-col">
+    <main class=" w-full ml-64 flex-1 flex flex-col">
 
         <!-- Topbar -->
         <header class="bg-white shadow px-8 py-4 flex justify-end items-center gap-3">
@@ -91,7 +128,7 @@
 
                 <h3 class="text-lg font-semibold mb-4">Add New Food</h3>
 
-                <form method="POST" action="add_food.php" class="space-y-3">
+                <form method="POST" action="" class="space-y-3">
 
                     <input type="text" name="food_name" placeholder="Food Name"
                         class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
@@ -99,9 +136,9 @@
                     <input type="number" name="price" placeholder="Price"
                         class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
 
-                    <select name="category"
+                    <select name="categorye"
                         class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
-                        <option>Pizza</option>
+                        <option>FastFood</option>
                         <option>Burger</option>
                         <option>Drink</option>
                     </select>
@@ -111,48 +148,42 @@
                     </button>
 
                 </form>
+                <table class="w-full bg-gray-100">
+                    <tr>
+                        <td class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Food Name</td>
+                        <td class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Category</td>
+                        <td class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Price</td>
+                        <td class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Status</td>
+                    </tr>
+                </table>
 
-            </div>
+                <table class="w-full divide-y divide-gray-200">
 
+                    <?php foreach ($result as $food) { ?>
+                    <tr class="hover:bg-gray-50">
 
-            <!-- FOOD TABLE -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <td class="px-8 py-4 text-sm text-gray-700">
+                            <?php echo $food['food_name']; ?>
+                        </td>
 
-                <table class="w-full text-left">
+                        <td class="px-6 py-4 text-sm text-gray-700">
+                            <?php echo $food['category']; ?>
+                        </td>
 
-                    <thead class="bg-gray-200">
-                        <tr>
-                            <th class="p-3">Food</th>
-                            <th class="p-3">Category</th>
-                            <th class="p-3">Price</th>
-                            <th class="p-3">Action</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-
-                        <tr class="border-t">
-                            <td class="p-3">Cheese Pizza</td>
-                            <td class="p-3">Pizza</td>
-                            <td class="p-3">$12</td>
-                            <td class="p-3 space-x-2">
-
-                                <button class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded">
-                                    Edit
-                                </button>
-
-                                <button class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded">
-                                    Delete
-                                </button>
-
-                            </td>
-                        </tr>
-
-                    </tbody>
+                        <td class="px-6 py-4 text-sm text-gray-700">
+                            $<?php echo $food['price']; ?>
+                        </td>
+                        <td class="px-6 py-4 text-sm text-gray-700">
+                            <?php echo $food['action']; ?>
+                        </td>
+                    </tr>
+                    <?php } ?>
 
                 </table>
 
             </div>
+
+
 
 
         </div>
