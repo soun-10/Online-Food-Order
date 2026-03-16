@@ -42,82 +42,90 @@
         </div>
         <!-- Logout -->
         <div class="px-2 py-4 border-t border-blue-600">
-            <a href="logout.php"
+            <a href="../../../public/admin/index.php"
                 class="flex items-center gap-3 px-4 py-3 rounded-lg text-red-300 hover:bg-blue-600 transition">
                 <i class="fas fa-right-from-bracket w-5 text-center"></i> Logout
             </a>
         </div>
     </nav>
+    <!-- // admin header -->
+    <main class=" flex-1 flex flex-col">
 
-    <!-- //main contant -->
+        <!-- Topbar -->
+        <header class="bg-white shadow px-8 py-4 flex justify-end items-center gap-3">
+            <span class="text-gray-600"><strong>Admin</strong></span>
+            <i class="fas fa-circle-user text-2xl text-gray-500"></i>
+        </header>
+        <!-- //main contant -->
 
-    <main class="flex-1 p-4">
+        <div class=" p-4">
 
-        <!-- Summary Cards -->
-        <div class="grid grid-cols-4 gap-4">
-            <div class="bg-white p-5 rounded-lg shadow">
-                <h3 class="text-gray-500 text-sm">Total Orders</h3>
-                <p class="text-2xl font-bold text-blue-600">120</p>
+            <!-- Summary Cards -->
+            <div class="grid grid-cols-4 gap-4">
+                <div class="bg-white p-5 rounded-lg shadow">
+                    <h3 class="text-gray-500 text-sm">Total Orders</h3>
+                    <p class="text-2xl font-bold text-blue-600">120</p>
+                </div>
+
+                <div class="bg-white p-5 rounded-lg shadow">
+                    <h3 class="text-gray-500 text-sm">Total Revenue</h3>
+                    <p class="text-2xl font-bold text-green-600">$2,450</p>
+                </div>
+
+                <div class="bg-white p-5 rounded-lg shadow">
+                    <h3 class="text-gray-500 text-sm">Customers</h3>
+                    <p class="text-2xl font-bold text-purple-600">85</p>
+                </div>
+
+                <div class="bg-white p-5 rounded-lg shadow">
+                    <h3 class="text-gray-500 text-sm">Delivered Orders</h3>
+                    <p class="text-2xl font-bold text-orange-500">100</p>
+                </div>
             </div>
 
-            <div class="bg-white p-5 rounded-lg shadow">
-                <h3 class="text-gray-500 text-sm">Total Revenue</h3>
-                <p class="text-2xl font-bold text-green-600">$2,450</p>
-            </div>
+            <!-- Sales Report Table -->
+            <div class="bg-white rounded-lg shadow overflow-x-auto p-4 mt-6">
 
-            <div class="bg-white p-5 rounded-lg shadow">
-                <h3 class="text-gray-500 text-sm">Customers</h3>
-                <p class="text-2xl font-bold text-purple-600">85</p>
-            </div>
+                <h2 class="text-xl font-semibold p-4 border-b">Sales Report</h2>
 
-            <div class="bg-white p-5 rounded-lg shadow">
-                <h3 class="text-gray-500 text-sm">Delivered Orders</h3>
-                <p class="text-2xl font-bold text-orange-500">100</p>
+                <table class="w-full table-auto text-left text-sm">
+
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="p-3">Date</th>
+                            <th class="p-3">Orders</th>
+                            <th class="p-3">Revenue</th>
+                            <th class="p-3">Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="divide-y">
+                        <tr class="hover:bg-gray-50">
+                            <td class="p-3">2026-03-15</td>
+                            <td class="p-3">25</td>
+                            <td class="p-3 text-green-600">$320</td>
+                            <td class="p-3">
+                                <span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs">
+                                    Good
+                                </span>
+                            </td>
+                        </tr>
+
+                        <tr class="hover:bg-gray-50">
+                            <td class="p-3">2026-03-16</td>
+                            <td class="p-3">30</td>
+                            <td class="p-3 text-green-600">$410</td>
+                            <td class="p-3">
+                                <span class="bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs">
+                                    Excellent
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
             </div>
         </div>
-
-        <!-- Sales Report Table -->
-        <div class="bg-white rounded-lg shadow overflow-x-auto p-4 mt-6">
-
-            <h2 class="text-xl font-semibold p-4 border-b">Sales Report</h2>
-
-            <table class="w-full table-auto text-left text-sm">
-                <thead class="bg-gray-100">
-                    <tr>
-                        <th class="p-3">Date</th>
-                        <th class="p-3">Orders</th>
-                        <th class="p-3">Revenue</th>
-                        <th class="p-3">Status</th>
-                    </tr>
-                </thead>
-
-                <tbody class="divide-y">
-                    <tr class="hover:bg-gray-50">
-                        <td class="p-3">2026-03-15</td>
-                        <td class="p-3">25</td>
-                        <td class="p-3 text-green-600">$320</td>
-                        <td class="p-3">
-                            <span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs">
-                                Good
-                            </span>
-                        </td>
-                    </tr>
-
-                    <tr class="hover:bg-gray-50">
-                        <td class="p-3">2026-03-16</td>
-                        <td class="p-3">30</td>
-                        <td class="p-3 text-green-600">$410</td>
-                        <td class="p-3">
-                            <span class="bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs">
-                                Excellent
-                            </span>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-
-        </div>
-
     </main>
 </body>
 

@@ -64,7 +64,7 @@
 
         <!-- Logout -->
         <div class="px-2 py-4 border-t border-blue-600">
-            <a href="logout.php"
+            <a href="../../../public/admin/index.php"
                 class="flex items-center gap-3 px-4 py-3 rounded-lg text-red-300 hover:bg-blue-600 transition">
                 <i class="fas fa-right-from-bracket w-5 text-center"></i>
                 Logout
@@ -73,82 +73,89 @@
 
     </nav>
 
+    <!-- // admin header -->
+    <main class="ml-64 flex-1 flex flex-col">
 
-    <!-- MAIN CONTENT -->
-    <main class="flex-1 ml-64 p-6">
+        <!-- Topbar -->
+        <header class="bg-white shadow px-8 py-4 flex justify-end items-center gap-3">
+            <span class="text-gray-600"> <strong>Admin</strong></span>
+            <i class="fas fa-circle-user text-2xl text-gray-500"></i>
+        </header>
+        <!-- MAIN CONTENT -->
+        <div class="p-4">
 
-        <h1 class="text-2xl font-bold mb-6">Category Management</h1>
+            <h1 class="text-2xl font-bold mb-6">Category Management</h1>
 
-        <!-- ADD FOOD FORM -->
-        <div class="bg-white p-6 rounded-lg shadow-md mb-8">
+            <!-- ADD FOOD FORM -->
+            <div class="bg-white p-6 rounded-lg shadow-md mb-8">
 
-            <h3 class="text-lg font-semibold mb-4">Add New Food</h3>
+                <h3 class="text-lg font-semibold mb-4">Add New Food</h3>
 
-            <form method="POST" action="add_food.php" class="space-y-3">
+                <form method="POST" action="add_food.php" class="space-y-3">
 
-                <input type="text" name="food_name" placeholder="Food Name"
-                    class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
+                    <input type="text" name="food_name" placeholder="Food Name"
+                        class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
 
-                <input type="number" name="price" placeholder="Price"
-                    class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
+                    <input type="number" name="price" placeholder="Price"
+                        class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
 
-                <select name="category"
-                    class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
-                    <option>Pizza</option>
-                    <option>Burger</option>
-                    <option>Drink</option>
-                </select>
+                    <select name="category"
+                        class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
+                        <option>Pizza</option>
+                        <option>Burger</option>
+                        <option>Drink</option>
+                    </select>
 
-                <button type="submit" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md">
-                    Add Food
-                </button>
+                    <button type="submit" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md">
+                        Add Food
+                    </button>
 
-            </form>
+                </form>
+
+            </div>
+
+
+            <!-- FOOD TABLE -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+
+                <table class="w-full text-left">
+
+                    <thead class="bg-gray-200">
+                        <tr>
+                            <th class="p-3">Food</th>
+                            <th class="p-3">Category</th>
+                            <th class="p-3">Price</th>
+                            <th class="p-3">Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr class="border-t">
+                            <td class="p-3">Cheese Pizza</td>
+                            <td class="p-3">Pizza</td>
+                            <td class="p-3">$12</td>
+                            <td class="p-3 space-x-2">
+
+                                <button class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded">
+                                    Edit
+                                </button>
+
+                                <button class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded">
+                                    Delete
+                                </button>
+
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
 
         </div>
-
-
-        <!-- FOOD TABLE -->
-        <div class="bg-white rounded-lg shadow-md overflow-hidden">
-
-            <table class="w-full text-left">
-
-                <thead class="bg-gray-200">
-                    <tr>
-                        <th class="p-3">Food</th>
-                        <th class="p-3">Category</th>
-                        <th class="p-3">Price</th>
-                        <th class="p-3">Action</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-
-                    <tr class="border-t">
-                        <td class="p-3">Cheese Pizza</td>
-                        <td class="p-3">Pizza</td>
-                        <td class="p-3">$12</td>
-                        <td class="p-3 space-x-2">
-
-                            <button class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded">
-                                Edit
-                            </button>
-
-                            <button class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded">
-                                Delete
-                            </button>
-
-                        </td>
-                    </tr>
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-    </main>
-
 </body>
 
 </html>

@@ -42,7 +42,7 @@
         </div>
         <!-- Logout -->
         <div class="px-2 py-4 border-t border-blue-600">
-            <a href="logout.php"
+            <a href="../../../public/admin/index.php"
                 class="flex items-center gap-3 px-4 py-3 rounded-lg text-red-300 hover:bg-blue-600 transition">
                 <i class="fas fa-right-from-bracket w-5 text-center"></i> Logout
             </a>

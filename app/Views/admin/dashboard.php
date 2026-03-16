@@ -51,7 +51,7 @@
 
         <!-- Logout -->
         <div class="px-2 py-4 border-t border-blue-600">
-            <a href="logout.php"
+            <a href="../../../public/admin/index.php"
                 class="flex items-center gap-3 px-4 py-3 rounded-lg text-red-300 hover:bg-blue-600 transition">
                 <i class="fas fa-right-from-bracket w-5 text-center"></i> Logout
             </a>
@@ -65,7 +65,6 @@
         <header class="bg-white shadow px-8 py-4 flex justify-end items-center gap-3">
             <span class="text-gray-600">Welcome, <strong>Admin</strong></span>
             <i class="fas fa-circle-user text-2xl text-gray-500"></i>
-            <i class="fas fa-caret-down text-gray-500"></i>
         </header>
 
         <!-- Content -->

@@ -42,79 +42,88 @@
         </div>
         <!-- Logout -->
         <div class="px-2 py-4 border-t border-blue-600">
-            <a href="logout.php"
+            <a href="../../../public/admin/index.php"
                 class="flex items-center gap-3 px-4 py-3 rounded-lg text-red-300 hover:bg-blue-600 transition">
                 <i class="fas fa-right-from-bracket w-5 text-center"></i> Logout
             </a>
         </div>
     </nav>
-    <main class="flex-1 p-4">
+    <!-- // admin header -->
+    <main class=" flex-1 flex flex-col">
 
-        <div class="w-full bg-white p-6 rounded-lg shadow mb-6">
+        <!-- Topbar -->
+        <header class="bg-white shadow px-8 py-4 flex justify-end items-center gap-3">
+            <span class="text-gray-600"> <strong>Admin</strong></span>
+            <i class="fas fa-circle-user text-2xl text-gray-500"></i>
+        </header>
+        <div class="p-4">
 
-            <h2 class="text-lg font-semibold mb-4">Add Customer</h2>
+            <div class="w-full bg-white p-6 rounded-lg shadow mb-6">
 
-            <form class="grid grid-cols-4 gap-4">
+                <h2 class="text-lg font-semibold mb-4">Add Customer</h2>
 
-                <input type="text" placeholder="Customer Name"
-                    class="border p-2 rounded focus:ring-2 focus:ring-blue-400 outline-none">
+                <form class="grid grid-cols-4 gap-4">
 
-                <input type="email" placeholder="Email"
-                    class="border p-2 rounded focus:ring-2 focus:ring-blue-400 outline-none">
+                    <input type="text" placeholder="Customer Name"
+                        class="border p-2 rounded focus:ring-2 focus:ring-blue-400 outline-none">
 
-                <input type="text" placeholder="Phone"
-                    class="border p-2 rounded focus:ring-2 focus:ring-blue-400 outline-none">
+                    <input type="email" placeholder="Email"
+                        class="border p-2 rounded focus:ring-2 focus:ring-blue-400 outline-none">
 
-                <button class="bg-blue-500 hover:bg-blue-600 text-white rounded px-4 py-2">
-                    Add Customer
-                </button>
+                    <input type="text" placeholder="Phone"
+                        class="border p-2 rounded focus:ring-2 focus:ring-blue-400 outline-none">
 
-            </form>
-            <div class="bg-white rounded-lg  overflow-hidden">
+                    <button class="bg-blue-500 hover:bg-blue-600 text-white rounded px-4 py-2">
+                        Add Customer
+                    </button>
 
-                <h2 class="text-xl font-semibold p-4 border-b">Customers</h2>
+                </form>
+                <div class="bg-white rounded-lg  overflow-hidden">
 
-                <table class="w-full text-sm text-left">
+                    <h2 class="text-xl font-semibold p-4 border-b">Customers</h2>
 
-                    <thead class="bg-gray-100 text-gray-600">
-                        <tr>
-                            <th class="p-3">ID</th>
-                            <th class="p-3">Name</th>
-                            <th class="p-3">Email</th>
-                            <th class="p-3">Phone</th>
-                            <th class="p-3">Orders</th>
-                            <th class="p-3">Action</th>
-                        </tr>
-                    </thead>
+                    <table class="w-full text-sm text-left">
 
-                    <tbody class="divide-y">
+                        <thead class="bg-gray-100 text-gray-600">
+                            <tr>
+                                <th class="p-3">ID</th>
+                                <th class="p-3">Name</th>
+                                <th class="p-3">Email</th>
+                                <th class="p-3">Phone</th>
+                                <th class="p-3">Orders</th>
+                                <th class="p-3">Action</th>
+                            </tr>
+                        </thead>
 
-                        <tr class="hover:bg-gray-50">
-                            <td class="p-3">C001</td>
-                            <td class="p-3">John Doe</td>
-                            <td class="p-3">john@gmail.com</td>
-                            <td class="p-3">012345678</td>
-                            <td class="p-3 text-blue-600 font-medium">5</td>
+                        <tbody class="divide-y">
 
-                            <td class="p-3 space-x-2">
-                                <button class="bg-blue-500 text-white px-3 py-1 rounded text-xs">
-                                    View
-                                </button>
+                            <tr class="hover:bg-gray-50">
+                                <td class="p-3">C001</td>
+                                <td class="p-3">John Doe</td>
+                                <td class="p-3">john@gmail.com</td>
+                                <td class="p-3">012345678</td>
+                                <td class="p-3 text-blue-600 font-medium">5</td>
 
-                                <button class="bg-red-500 text-white px-3 py-1 rounded text-xs">
-                                    Delete
-                                </button>
-                            </td>
+                                <td class="p-3 space-x-2">
+                                    <button class="bg-blue-500 text-white px-3 py-1 rounded text-xs">
+                                        View
+                                    </button>
 
-                        </tr>
+                                    <button class="bg-red-500 text-white px-3 py-1 rounded text-xs">
+                                        Delete
+                                    </button>
+                                </td>
 
-                    </tbody>
+                            </tr>
 
-                </table>
+                        </tbody>
 
+                    </table>
+
+                </div>
             </div>
         </div>
-
+    </main>
 </body>
 
 </html>
