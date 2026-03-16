@@ -148,7 +148,7 @@ if (isset($_POST['food_name'])) {
                     </button>
 
                 </form>
-                <table class="w-full bg-gray-100">
+                <table class="w-full bg-gray-100 px-6 py-4 rounded-lg mt-6">
                     <tr>
                         <td class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Food Name</td>
                         <td class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Category</td>
