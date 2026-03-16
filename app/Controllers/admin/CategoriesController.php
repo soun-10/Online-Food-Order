@@ -1,6 +1,6 @@
 <?php
-    require_once __DIR__ . "../../../Models/admin/Category.php";
-    class CategoryController
+    require_once __DIR__ . "../../../Models/admin/Categories.php";
+    class CategoriesController
     {
         private $categoryModel;
         public function __construct($db)

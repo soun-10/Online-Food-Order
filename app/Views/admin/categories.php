@@ -5,9 +5,9 @@ if (!isset($_SESSION["username"])) {
     header("Location: ../../public");
 }
 
-require_once __DIR__ . "/../../Controllers/admin/CategoryController.php";
+require_once __DIR__ . "/../../Controllers/admin/CategoriesController.php";
 
-$Category = new CategoryController($con);
+$Category = new CategoriesController($con);
 $result = $Category->show();
 
 $msg = "";
