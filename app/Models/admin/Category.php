@@ -7,11 +7,11 @@
     {
         $this->db = $con;
     }
-    public function createCategory($food_name, $categorye, $price, $action)
+    public function createCategory($food_name, $category, $price, $action)
     {
         $stmt = $this->db->prepare("INSERT INTO categories(food_name, category, price, action) VALUES(:fn, :cat, :pr, :ac)");
         $stmt->bindParam(':fn', $food_name);
-        $stmt->bindParam(':cat', $categorye);
+        $stmt->bindParam(':cat', $category);
         $stmt->bindParam(':pr', $price);
         $stmt->bindParam(':ac', $action);
         $stmt->execute();
