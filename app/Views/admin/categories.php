@@ -194,7 +194,7 @@ if (isset($_POST['food_name'])) {
                                     </a>
 
                                     <!-- Delete -->
-                                    <a href="categories.php?delete_id=<?php echo $food['id']; ?>"
+                                    <a href="deleteCategory.php?delete_id=<?php echo $food['id']; ?>"
                                         onclick="return confirm('Are you sure you want to delete this item?');"
                                         class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md">
                                         Delete
