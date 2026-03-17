@@ -7,10 +7,9 @@
         {
             $this->categoryModel = new Category($db);
         }
-        public function store ($food_name, $category, $price, $action)
+        public function store ($id, $food_name, $category, $price, $action)
         {
-            $this->categoryModel->createCategories($food_name, $category, $price, $action);
-            
+            $this->categoryModel->createCategories($id, $food_name, $category, $price, $action);
         }
         public function show(){
             return $this->categoryModel->getAllCategories();

@@ -17,12 +17,13 @@ if (isset($_POST['food_name'])) {
     $food_name = $_POST["food_name"];
     $categorye = $_POST["categorye"];
     $price = $_POST["price"];
-    $action = $_POST["action"] ?? 'Available';
+    $action = $_POST["action"];
 
     
    if ($food_name && $categorye) {
 
     $Category->store (
+        $id,
         $food_name,
         $categorye,
         $price,
@@ -149,50 +150,62 @@ if (isset($_POST['food_name'])) {
 
                 </form>
                 <div class="overflow-hidden ">
-                    <table class="w-full bg-gray-100 px-6 py-4 rounded-lg mt-6">
-                        <tr>
-                            <td class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Food Name</td>
-                            <td class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Category</td>
-                            <td class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Price</td>
-                            <td class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Status</td>
-                        </tr>
-                    </table>
+                    <table class="w-full bg-white rounded-lg mt-6 overflow-hidden">
 
-                    <table class="w-full divide-y divide-gray-200 px-6 py-4 rounded-lg mt-2">
+                        <!-- Table Header -->
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">No</th>
+                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Food Name</th>
+                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Category</th>
+                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Price</th>
+                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Action</th>
+                            </tr>
+                        </thead>
 
-                        <?php foreach ($result as $food) { ?>
-                        <tr class=" hover:bg-gray-50 px-6 py-4 transition">
+                        <!-- Table Body -->
+                        <tbody class="divide-y divide-gray-200">
 
-                            <td class="px-6 py-4 text-sm text-gray-700 text-left">
-                                <?php echo $food['food_name']; ?>
-                            </td>
+                            <?php foreach ($result as $food) { ?>
+                            <tr class="hover:bg-gray-50 transition">
 
-                            <td class="px-6 py-4 text-sm text-gray-700 text-left">
-                                <?php echo $food['category']; ?>
-                            </td>
+                                <td class="px-6 py-4 text-sm text-gray-700">
+                                    <?php echo $food['id']; ?>
+                                </td>
 
-                            <td class="px-6 py-4 text-sm text-gray-700">
-                                $<?php echo $food['price']; ?>
-                            </td>
-                            <td class="px-6 py-4 text-sm text-gray-700">
-                                <?php echo $food['action']; ?>
-                            </td>
-                            <td class="px-6 py-4 text-sm text-gray-700 flex gap-2">
-                                <!-- Edit link -->
-                                <a href="edit_food.php?id=<?php echo $food['id']; ?>"
-                                    class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-md">
-                                    Edit
-                                </a>
-                                <!-- Delete link -->
-                                <a href="categories.php?delete_id=<?php echo $food['id']; ?>"
-                                    onclick="return confirm('Are you sure you want to delete this item?');"
-                                    class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md">
-                                    Delete
-                                </a>
-                            </td>
-                        </tr>
-                        <?php } ?>
+                                <td class="px-6 py-4 text-sm text-gray-700">
+                                    <?php echo $food['food_name']; ?>
+                                </td>
 
+                                <td class="px-6 py-4 text-sm text-gray-700">
+                                    <?php echo $food['category']; ?>
+                                </td>
+
+                                <td class="px-6 py-4 text-sm text-gray-700">
+                                    $<?php echo $food['price']; ?>
+                                </td>
+
+                                <td class="px-6 py-4 text-sm text-gray-700 flex gap-2">
+
+                                    <!-- Edit -->
+                                    <a href="edit_food.php?id=<?php echo $food['id']; ?>"
+                                        class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-md">
+                                        Edit
+                                    </a>
+
+                                    <!-- Delete -->
+                                    <a href="categories.php?delete_id=<?php echo $food['id']; ?>"
+                                        onclick="return confirm('Are you sure you want to delete this item?');"
+                                        class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md">
+                                        Delete
+                                    </a>
+
+                                </td>
+
+                            </tr>
+                            <?php } ?>
+
+                        </tbody>
                     </table>
 
                 </div>
