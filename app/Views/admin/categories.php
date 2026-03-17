@@ -188,7 +188,7 @@ if (isset($_POST['food_name'])) {
                                 <td class="px-6 py-4 text-sm text-gray-700 flex gap-2">
 
                                     <!-- Edit -->
-                                    <a href="edit_food.php?id=<?php echo $food['id']; ?>"
+                                    <a href="editCategory.php ?id=<?php echo $food['id']; ?>"
                                         class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-md">
                                         Edit
                                     </a>
