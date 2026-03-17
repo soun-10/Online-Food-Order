@@ -11,7 +11,6 @@ if (isset($_GET['delete_id'])) {
 
     if ($stmt->execute()) {
         header("Location: categories.php");
-        exit();
     }
 }
 ?>
