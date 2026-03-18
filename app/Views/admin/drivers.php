@@ -63,13 +63,19 @@
 
                 <form class="grid grid-cols-4 gap-4">
 
-                    <input type="text" placeholder="Driver Name"
+                    <input type="text" name="driver_name" placeholder="Driver Name"
                         class="border p-2 rounded focus:ring-2 focus:ring-blue-400 outline-none">
 
-                    <input type="text" placeholder="Phone"
+                    <input type="text" name="phone" placeholder="Phone"
+                        class="border p-2 rounded focus:ring-2 focus:ring-blue-400 outline-none">
+                    <input type="date" name="date_of_birth" placeholder="Date of Birth"
+                        class="border p-2 rounded focus:ring-2 focus:ring-blue-400 outline-none">
+                    <input type="text" name="address" placeholder="Address"
                         class="border p-2 rounded focus:ring-2 focus:ring-blue-400 outline-none">
 
-                    <input type="text" placeholder="Vehicle"
+                    <input type="text" name="vehicle" placeholder="Vehicle"
+                        class="border p-2 rounded focus:ring-2 focus:ring-blue-400 outline-none">
+                    <input type="date" name="join_date" placeholder="Join Date"
                         class="border p-2 rounded focus:ring-2 focus:ring-blue-400 outline-none">
 
                     <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
@@ -88,8 +94,10 @@
                                 <th class="p-3">ID</th>
                                 <th class="p-3">Name</th>
                                 <th class="p-3">Phone</th>
+                                <th class="p-3">Date of Birth</th>
+                                <th class="p-3">Address</th>
                                 <th class="p-3">Vehicle</th>
-                                <th class="p-3">Status</th>
+                                <th class="p-3">Join Date</th>
                                 <th class="p-3">Action</th>
                             </tr>
                         </thead>

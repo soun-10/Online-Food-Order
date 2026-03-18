@@ -75,13 +75,13 @@
 
                     <table class="w-full text-sm text-left">
 
-                        <thead class="bg-gray-100 text-gray-600">
+                        <thead class=" bg-gray-100 text-gray-600">
                             <tr>
-                                <th class="p-3">ID</th>
-                                <th class="p-3">Name</th>
-                                <th class="p-3">Email</th>
-                                <th class="p-3">Phone</th>
-                                <th class="p-3">Address</th>
+                                <th class="px-6 py-3 font-medium">ID</th>
+                                <th class="px-6 py-3 font-medium">Name</th>
+                                <th class="px-6 py-3 font-medium">Email</th>
+                                <th class="px-6 py-3 font-medium">Phone</th>
+                                <th class="px-6 py-3 font-medium">Address</th>
                             </tr>
                         </thead>
 
