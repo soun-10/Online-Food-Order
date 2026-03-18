@@ -15,7 +15,6 @@
             ) {
                 $_SESSION['username'] = $userLogin;  //បង្កើត session ចាប់ឈ្មោះ user ទុក
                 header("Location: ../../app/Views/admin/dashboard.php");
-                exit;
             } else {
                 $err = '<div class="alert alert-danger" role="alert">Invalid
         username or password!</div>';

@@ -1,3 +1,11 @@
+<?php
+    require_once __DIR__."/../../Controllers/user/UserLoginController.php";
+    
+    $userLoginController = new UserLoginController($con);
+    $return = $userLoginController->show();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,24 +68,7 @@
 
             <div class="w-full bg-white p-6 rounded-lg shadow mb-6">
 
-                <h2 class="text-lg font-semibold mb-4">Add Customer</h2>
-
-                <form class="grid grid-cols-4 gap-4">
-
-                    <input type="text" placeholder="Customer Name"
-                        class="border p-2 rounded focus:ring-2 focus:ring-blue-400 outline-none">
-
-                    <input type="email" placeholder="Email"
-                        class="border p-2 rounded focus:ring-2 focus:ring-blue-400 outline-none">
-
-                    <input type="text" placeholder="Phone"
-                        class="border p-2 rounded focus:ring-2 focus:ring-blue-400 outline-none">
-
-                    <button class="bg-blue-500 hover:bg-blue-600 text-white rounded px-4 py-2">
-                        Add Customer
-                    </button>
-
-                </form>
+                <h2 class="text-lg font-semibold mb-4">View Customer</h2>
                 <div class="bg-white rounded-lg  overflow-hidden">
 
                     <h2 class="text-xl font-semibold p-4 border-b">Customers</h2>
@@ -90,34 +81,37 @@
                                 <th class="p-3">Name</th>
                                 <th class="p-3">Email</th>
                                 <th class="p-3">Phone</th>
-                                <th class="p-3">Orders</th>
-                                <th class="p-3">Action</th>
+                                <th class="p-3">Address</th>
                             </tr>
                         </thead>
 
-                        <tbody class="divide-y">
+                        <tbody class="divide-y divide-gray-200">
 
-                            <tr class="hover:bg-gray-50">
-                                <td class="p-3">C001</td>
-                                <td class="p-3">John Doe</td>
-                                <td class="p-3">john@gmail.com</td>
-                                <td class="p-3">012345678</td>
-                                <td class="p-3 text-blue-600 font-medium">5</td>
+                            <?php foreach ($return as $email) { ?>
+                            <tr class="hover:bg-gray-50 transition">
 
-                                <td class="p-3 space-x-2">
-                                    <button class="bg-blue-500 text-white px-3 py-1 rounded text-xs">
-                                        View
-                                    </button>
-
-                                    <button class="bg-red-500 text-white px-3 py-1 rounded text-xs">
-                                        Delete
-                                    </button>
+                                <td class="px-6 py-4 text-sm text-gray-700">
+                                    <?php echo $email['id']; ?>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-700">
+                                    <?php echo $email['full_name']; ?>
                                 </td>
 
+                                <td class="px-6 py-4 text-sm text-gray-700">
+                                    <?php echo $email['email']; ?>
+                                </td>
+
+                                <td class="px-6 py-4 text-sm text-gray-700">
+                                    <?php echo $email['phone']; ?>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-700">
+                                    <?php echo $email['address']; ?>
+                                </td>
+
+
                             </tr>
-
+                            <?php } ?>
                         </tbody>
-
                     </table>
 
                 </div>
