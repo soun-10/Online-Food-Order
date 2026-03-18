@@ -1,3 +1,36 @@
+<?php
+    session_start();
+    require_once __DIR__ . "/../../Controllers/admin/DriverController.php";
+    $Driver = new DriversController($con);
+    $result = $Driver->show();
+    $msg = "";
+    if (isset($_POST['driver_name'])) {
+        $driver_name = $_POST["driver_name"];
+        $phone = $_POST["phone"];
+        $dob = $_POST["date_of_birth"];
+        $address = $_POST["address"];
+        $vehicle = $_POST["vehicle"];
+        $join_date = $_POST["join_date"];
+    
+       if ($driver_name && $phone) {
+    
+        $Driver->store (
+            $id,
+            $driver_name,
+            $phone,
+            $dob,
+            $address,
+            $vehicle,
+            $join_date
+        );
+    
+            header("Location: drivers.php");
+        } else {
+        $msg = "<div>Driver insert failed.</div>";
+    }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -67,9 +100,11 @@
                         class="border p-2 rounded focus:ring-2 focus:ring-blue-400 outline-none">
 
                     <input type="text" name="phone" placeholder="Phone"
-                        class="border p-2 rounded focus:ring-2 focus:ring-blue-400 outline-none">
+                        class="border p-2 rounded focus:ring-2 focus:ring-blue-400 outline-none"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10)" required>
                     <input type="date" name="date_of_birth" placeholder="Date of Birth"
-                        class="border p-2 rounded focus:ring-2 focus:ring-blue-400 outline-none">
+                        class="border p-2 rounded focus:ring-2 focus:ring-blue-400 outline-none"
+                        onfocus="this.type='date'" onblur="if(!this.value)this.type='text'">
                     <input type="text" name="address" placeholder="Address"
                         class="border p-2 rounded focus:ring-2 focus:ring-blue-400 outline-none">
 
@@ -103,18 +138,20 @@
                         </thead>
 
                         <tbody class="divide-y">
+                            <?php
+                                foreach ($result as $drivery) {
 
+                                
+                            ?>
                             <tr class="hover:bg-gray-50">
-                                <td class="p-3">D001</td>
-                                <td class="p-3">David</td>
-                                <td class="p-3">012345678</td>
-                                <td class="p-3">Motorbike</td>
-
-                                <td class="p-3">
-                                    <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs">
-                                        Available
-                                    </span>
-                                </td>
+                                <td class="p-3"><?php
+                                    echo $drivery['id'];?></td>
+                                <td class="p-3"><?php echo $drivery['driver_name']; ?></td>
+                                <td class="p-3"><?php echo $drivery['phone']; ?></td>
+                                <td class="p-3"><?php echo $drivery['date_of_birth']; ?></td>
+                                <td class="p-3"><?php echo $drivery['address']; ?></td>
+                                <td class="p-3"><?php echo $drivery['vehicle']; ?></td>
+                                <td class="p-3"><?php echo $drivery['join_date']; ?></td>
 
                                 <td class="p-3 space-x-2">
                                     <button class="bg-blue-500 text-white px-3 py-1 rounded text-xs">
@@ -128,7 +165,9 @@
 
                             </tr>
 
+                            <?php } ?>
                         </tbody>
+
 
                     </table>
 
