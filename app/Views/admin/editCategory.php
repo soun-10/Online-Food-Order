@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-if (!isset($_SESSION["username"])) {
-    header("Location: ../../public");
-}
+// if (!isset($_SESSION["username"])) {
+//     header("Location: ../../public");
+// }
 
 require_once __DIR__ . "/../../Controllers/admin/CategoriesController.php";
 
