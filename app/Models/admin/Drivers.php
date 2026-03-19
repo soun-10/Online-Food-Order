@@ -6,22 +6,24 @@
     {
         $this->db = $con;
     }
-    public function createDriver($id,$driver_name, $phone, $dob, $address , $vehicle , $join_date)
-    {
-        $stmt = $this->db->prepare("INSERT INTO drivers(id,driver_name, phone, dob, address, join_date) VALUES(:id, :fn, :em, :ph, :ad, :jd)");
-        $stmt->bindParam(':id', $id);
-        $stmt->bindParam(':fn', $driver_name);
-        $stmt->bindParam(':ph', $phone);
-        $stmt->bindParam(':em', $dob);
-        $stmt->bindParam(':ad', $address);
-        $stmt->bindParam(':ve', $vehicle);
-        $stmt->bindParam(':jd', $join_date);
+   public function createDriver($id,$driver_name, $phone, $dob, $address , $vehicle , $join_date)
+{
+    $stmt = $this->db->prepare("
+        INSERT INTO drivers (id,driver_name, phone, dob, address, vehicle, join_date)
+        VALUES ( :id,:fn, :ph, :dob, :ad, :ve, :jd)");
+    $stmt->bindParam(':id', $id);
+    $stmt->bindParam(':fn', $driver_name);
+    $stmt->bindParam(':ph', $phone);
+    $stmt->bindParam(':dob', $dob);
+    $stmt->bindParam(':ad', $address);
+    $stmt->bindParam(':ve', $vehicle);
+    $stmt->bindParam(':jd', $join_date);
 
-        $stmt->execute();
-    }
+    return $stmt->execute();
+}
      public function getAllDrivers()
     {
-        $stmt = $this->db->prepare("SELECT * FROM drivers ");
+        $stmt = $this->db->prepare("SELECT * FROM drivers ORDER BY id ASC");
         $stmt->execute();
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC); 
         return $rows;

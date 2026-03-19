@@ -7,9 +7,9 @@
         {
             $this->driverModel = new Driver($db);
         }
-        public function store ($id, $driver_name, $phone, $dob, $address, $vehicle, $join_date)
+        public function store ($id,$driver_name, $phone, $dob, $address, $vehicle, $join_date)
         {
-            $this->driverModel->createDriver($id, $driver_name, $phone, $dob, $address, $vehicle, $join_date);
+            $this->driverModel->createDriver($id,$driver_name, $phone, $dob, $address, $vehicle, $join_date);
         }
         public function show(){
             return $this->driverModel->getAllDrivers();
