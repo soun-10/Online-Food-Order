@@ -18,13 +18,13 @@
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
 
             <!-- Logo -->
-            <div class="text-xl font-bold mr-[16px]">
+            <div class="text-xl font-bold mr-auto">
                 <img src="" alt="">
                 USEA FOOD ONLINE
             </div>
 
             <!-- Menu -->
-            <ul class="hidden md:flex space-x-6">
+            <ul class="hidden md:flex space-x-6 ml-auto">
                 <li><a href="#" class="hover:text-gray-200">Home</a></li>
                 <li><a href="#" class="hover:text-gray-200">About</a></li>
                 <li><a href="#" class="hover:text-gray-200">Services</a></li>
@@ -32,8 +32,9 @@
             </ul>
 
             <!-- Button -->
-            <div class="hidden md:block">
-                <a href="#" class="bg-white text-blue-600 px-4 py-2 rounded hover:bg-gray-200">
+            <div class="hidden md:block ml-12">
+                <a href="../../../public/user/index.php"
+                    class="bg-white text-blue-600 px-4 py-2 rounded hover:bg-gray-200">
                     Login
                 </a>
             </div>

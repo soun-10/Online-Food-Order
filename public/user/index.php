@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $userlogin->register($id, $full_name, $email, $phone, $address);
 
-    header("Location: ../../app/Views/user/homepage.php");
+    header("Location: ../../app/Views/user/home.php");
 }
 ?>
 <!DOCTYPE html>
@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <?php include __DIR__. "../../../app/Views/components/cdns.php"; ?>
     <title>User Login</title>
 </head>
 
