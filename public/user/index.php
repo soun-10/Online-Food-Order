@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once __DIR__."/../../config/database.php";
 require_once __DIR__."/../../app/Controllers/user/UserLoginController.php";
 
@@ -9,6 +10,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email    = $_POST['email'];
     $phone    = $_POST['phone'];
     $address  = $_POST['address'];
+    //save name when login success 
+    $_SESSION['full_name'] = $full_name;
 
     $userlogin->register($id, $full_name, $email, $phone, $address);
 

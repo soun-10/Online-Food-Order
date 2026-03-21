@@ -1,6 +1,8 @@
-<?php
-    require_once __DIR__."/../../Controllers/user/UserLoginController.php";
-    $userLoginController = new UserLoginController($con);    
+<?php 
+session_start();
+   require_once __DIR__."/../../../app/Controllers/user/UserLoginController.php";
+
+$userlogin = new UserLoginController($con);   
 ?>
 
 <!DOCTYPE html>
@@ -32,12 +34,21 @@
             </ul>
 
             <!-- Button -->
-            <div class="hidden md:block ml-12">
-                <a href="../../../public/user/index.php"
-                    class="bg-white text-blue-600 px-4 py-2 rounded hover:bg-gray-200">
+            <div class="ml-auto">
+                <?php if (isset($_SESSION['full_name'])): ?>
+                <span class="mr-4 ">
+                    Hello, <?php echo $_SESSION['full_name']; ?>
+                </span>
+                <!-- <a href="home.php" class="bg-white text-blue-600 px-3 py-1 rounded">
+                    Logout
+                </a> -->
+                <?php else: ?>
+                <a href="../../../public/user/index.php" class="bg-white text-blue-600 px-3 py-1 rounded">
                     Login
                 </a>
+                <?php endif; ?>
             </div>
+
     </nav>
 </body>
 
