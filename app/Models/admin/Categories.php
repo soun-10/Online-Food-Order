@@ -19,7 +19,7 @@
     }
     public function getAllCategories()
     {
-        $stmt = $this->db->prepare("SELECT * FROM categories ");
+        $stmt = $this->db->prepare("SELECT * FROM categories");
         $stmt->execute();
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC); 
         return $rows;
