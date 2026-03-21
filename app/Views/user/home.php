@@ -34,7 +34,7 @@ $userlogin = new UserLoginController($con);
             </ul>
 
             <!-- Button -->
-            <div class="ml-auto">
+            <div class="ml-auto text-center">
                 <?php if (isset($_SESSION['full_name'])): ?>
                 <span class="mr-4 text-lg hover:text-green-500">
                     Hello, <?php echo $_SESSION['full_name']; ?>
@@ -44,7 +44,8 @@ $userlogin = new UserLoginController($con);
                     Logout
                 </a>
                 <?php else: ?>
-                <a href="../../../public/user/index.php" class="bg-white text-blue-600 px-3 py-1 rounded">
+                <a href="../../../public/user/index.php"
+                    class="bg-white text-blue-600 px-3 py-1 rounded hover:bg-red-500 hover:text-white transition text-center">
                     Login
                 </a>
                 <?php endif; ?>
