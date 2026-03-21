@@ -16,9 +16,9 @@
     <div>
         <h1>My App</h1>
         <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/menu">Menu</a></li>
-            <li><a href="/cart">Cart</a></li>
+            <li><a href="home.php">Home</a></li>
+            <li><a href="menu.php">Menu</a></li>
+            <li><a href="cart.php">Cart</a></li>
         </ul>
     </div>
 </body>
