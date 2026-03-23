@@ -1,12 +1,10 @@
-    /* ── toggle password visibility ── */
-    function togglePw(id, btn) {
+function togglePw(id, btn) {
       const input = document.getElementById(id);
       const isText = input.type === 'text';
       input.type = isText ? 'password' : 'text';
       btn.querySelector('svg').style.opacity = isText ? '1' : '0.5';
     }
 
-    /* ── helpers ── */
     function setError(wrapId, errId, show) {
       const wrap = document.getElementById(wrapId);
       const err  = document.getElementById(errId);
@@ -21,7 +19,6 @@
       }
     }
 
-    /* ── live validation ── */
     document.getElementById('fullName').addEventListener('blur', () => {
       const v = document.getElementById('fullName').value.trim();
       setError('wrap-name', 'err-name', v.length < 2);
@@ -48,7 +45,6 @@
       setError('wrap-confirm', 'err-confirm', p !== cp);
     });
 
-    /* ── submit ── */
     document.getElementById('signupForm').addEventListener('submit', (e) => {
       e.preventDefault();
 
@@ -67,9 +63,6 @@
       if (pw !== cpw)                                 { setError('wrap-confirm',  'err-confirm',  true); valid = false; }
 
       if (valid) {
-        const btn = document.querySelector('.btn-create');
-        btn.textContent = '✓ Account Created!';
-        btn.style.background = 'linear-gradient(90deg,#38a169,#2f855a)';
-        btn.disabled = true;
+        e.target.submit(); // ✅ actually submits the form to PHP
       }
     });
