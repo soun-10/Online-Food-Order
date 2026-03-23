@@ -77,13 +77,46 @@
         <div class="p-8 space-y-6">
 
         </div>
-        <div class="grid grid-cols-4 gap-4">
-            <div class="bg-white p-5 rounded-lg shadow">
-                <h3 class="text-gray-500 text-sm">Total Customer</h3>
-                <p class="text-2xl font-bold text-blue-600">
-                    <?=  $totalCustomers ?>
-                </p>
+
+        <div class="p-6">
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 ">
+
+                <!-- Total Orders -->
+                <div class="bg-white p-5 rounded-xl shadow border-l-4 border-blue-500">
+                    <h3 class="text-gray-500 text-sm">Total Orders</h3>
+                    <p class="text-2xl font-bold text-blue-600">
+                        <?= $totalCustomers ?>
+                    </p>
+                </div>
+
+                <!-- Revenue -->
+                <div class="bg-white p-5 rounded-xl shadow border-l-4 border-green-500">
+                    <h3 class="text-gray-500 text-sm">Total Revenue</h3>
+                    <p class="text-2xl font-bold text-green-600">
+                        $<?= $totalCustomers ?>
+                    </p>
+                </div>
+
+                <!-- Customers -->
+                <div class="bg-white p-5 rounded-xl shadow border-l-4 border-purple-500">
+                    <h3 class="text-gray-500 text-sm">Customers</h3>
+                    <p class="text-2xl font-bold text-purple-600">
+                        <?= $totalCustomers ?>
+                    </p>
+                </div>
+
+                <!-- Delivered Orders -->
+                <div class="bg-white p-5 rounded-xl shadow border-l-4 border-orange-500">
+                    <h3 class="text-gray-500 text-sm">Delivered Orders</h3>
+                    <p class="text-2xl font-bold text-orange-600">
+                        <?= $totalCustomers ?>
+                    </p>
+                </div>
+
             </div>
+
+        </div>
     </main>
 
 </body>
