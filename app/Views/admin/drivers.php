@@ -132,7 +132,7 @@
 
                         <thead class="bg-gray-100 text-gray-600">
                             <tr>
-                                <th class="p-3">ID</th>
+                                <th class="p-3">DID</th>
                                 <th class="p-3">Name</th>
                                 <th class="p-3">Phone</th>
                                 <th class="p-3">Date of Birth</th>
