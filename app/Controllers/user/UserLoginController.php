@@ -20,5 +20,8 @@
         public function show(){
             return $this->userloginModel->selectUserlogin();
         }
+        public function countOrders(){
+            return $this->userloginModel->getCount();
+        }
     }
 ?>

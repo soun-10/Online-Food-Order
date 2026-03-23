@@ -1,3 +1,10 @@
+<?php
+    require_once __DIR__."/../../Controllers/user/UserLoginController.php";
+    require_once __DIR__ . "/../../../config/database.php";
+    $userLoginController = new UserLoginController($con);
+    $totalCustomers = $userLoginController -> countOrders ();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -68,8 +75,15 @@
         </header>
         <!-- Content -->
         <div class="p-8 space-y-6">
-            
+
         </div>
+        <div class="grid grid-cols-4 gap-4">
+            <div class="bg-white p-5 rounded-lg shadow">
+                <h3 class="text-gray-500 text-sm">Total Customer</h3>
+                <p class="text-2xl font-bold text-blue-600">
+                    <?=  $totalCustomers ?>
+                </p>
+            </div>
     </main>
 
 </body>

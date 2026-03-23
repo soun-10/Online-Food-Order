@@ -22,5 +22,11 @@
                 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC); 
                 return $rows;
             }
+            public function getCount(){
+            $stmt = $this->db->prepare("SELECT COUNT(*) AS total FROM userlogin");
+            $stmt->execute();
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $row['total'] ?? 0;
+}
     }
 ?>
