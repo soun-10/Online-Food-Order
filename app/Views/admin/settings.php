@@ -8,8 +8,8 @@
     <?php include __DIR__. "/../components/cdns.php"; ?>
 </head>
 
-<body class="bg-gray-100 font-sans flex min-h-screen">
-    <nav class="w-64 bg-blue-700 text-white flex flex-col">
+<body class="bg-gray-100 font-sans flex min-h-screen overflow-hidden">
+    <nav class="w-64 bg-blue-700 text-white flex flex-col sticky top-0 h-screen">
         <!-- Logo -->
         <div class="px-6 py-5 border-b border-blue-600 text-center">
             <p class="text-xl font-bold"><i class="fas fa-store"></i>Online Food Order</p>
@@ -48,7 +48,7 @@
             </a>
         </div>
     </nav>
-    <main class="flex-1 p-6 space-y-6">
+    <main class="flex-1 p-6 space-y-6 overflow-y-auto h-screen">
 
         <h1 class="text-2xl font-bold text-gray-700">Settings</h1>
 

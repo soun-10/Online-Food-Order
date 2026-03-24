@@ -41,8 +41,8 @@
     <?php include __DIR__. "/../components/cdns.php"; ?>
 </head>
 
-<body class="bg-gray-100 font-sans flex min-h-screen">
-    <nav class="w-64 bg-blue-700 text-white flex flex-col">
+<body class="bg-gray-100 font-sans flex min-h-screen overflow-hidden">
+    <nav class="w-64 bg-blue-700 text-white flex flex-col sticky top-0 h-screen">
         <!-- Logo -->
         <div class="px-6 py-5 border-b border-blue-600 text-center">
             <p class="text-xl font-bold"><i class="fas fa-store"></i>Online Food Order</p>
@@ -82,7 +82,7 @@
         </div>
     </nav>
     <!-- // admin header -->
-    <main class=" flex-1 flex flex-col">
+    <main class=" flex-1 flex flex-col overflow-y-auto h-screen">
 
         <!-- Topbar -->
         <header class="bg-white shadow px-8 py-4 flex justify-end items-center gap-3">
