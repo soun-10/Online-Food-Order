@@ -78,7 +78,7 @@
                     <div class="w-32 h-32 rounded-xl overflow-hidden border-2 border-blue-300 mb-4">
                         <img src="public/image/profile/Samet.jpg" alt="Samet" class="w-full h-full object-cover object-top">
                     </div>
-                    <p class="text-pink-500 font-semibold text-lg">Te Samet</p>
+                    <p class="text-blue-500 font-semibold text-lg">Te Samet</p>
                 </div>
             </div>
             <br> <br> <br> <br>
