@@ -28,7 +28,7 @@
             </div>
         </nav>
         <div class="banner">
-            <img src="public/image/Banner.jpg" alt="Banner" class="w-full h-auto block object-contain">
+            <img src="public/image/Banner.jpg" alt="Banner" class="w-full block object-contain">
         </div>
     </main>
 </body>
