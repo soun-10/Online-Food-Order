@@ -27,9 +27,11 @@
                 </ul>
             </div>
         </nav>
-        <div class="banner" id="home">
-            <img src="public/image/Banner.jpg" alt="Banner" class="w-full block object-contain">
-        </div>
+        <section>
+            <div class="banner" id="home">
+                <img src="public/image/Banner.jpg" alt="Banner" class="w-full block object-contain">
+            </div>
+        </section>
     </main>
 </body>
 </html>
