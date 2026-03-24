@@ -8,25 +8,28 @@
     <link rel="stylesheet" href="public/css/style.css">
 </head>
 <body>
-    <main>
+    <main class="min-h-screen">
         <nav class="bg-blue-600 text-white">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
 
-            <!-- Logo -->
-            <div class="text-xl font-bold mr-auto">
-                <i class="fa-solid fa-utensils"></i>
-                ONLINE FOOD ORDER
+                <!-- Logo -->
+                <div class="text-xl font-bold mr-auto">
+                    <i class="fa-solid fa-utensils"></i>
+                    ONLINE FOOD ORDER
+                </div>
+
+                <!-- Menu -->
+                <ul class="hidden md:flex space-x-6 ml-auto text-xl">
+                    <li><a href="#" class="nav-link text-white font-semibold text-sm tracking-wide pb-1">Home</a></li>
+                    <li><a href="#" class="nav-link text-white font-semibold text-sm tracking-wide pb-1">About</a></li>
+                    <li><a href="#" class="nav-link text-white font-semibold text-sm tracking-wide pb-1">Services</a></li>
+                    <li><a href="#" class="nav-link text-white font-semibold text-sm tracking-wide pb-1">Contact</a></li>
+                </ul>
             </div>
-
-            <!-- Menu -->
-            <ul class="hidden md:flex space-x-6 ml-auto text-xl">
-                <li><a href="#" class="nav-link text-white font-semibold text-sm tracking-wide pb-1">Home</a></li>
-                <li><a href="#" class="nav-link text-white font-semibold text-sm tracking-wide pb-1">About</a></li>
-                <li><a href="#" class="nav-link text-white font-semibold text-sm tracking-wide pb-1">Services</a></li>
-                <li><a href="#" class="nav-link text-white font-semibold text-sm tracking-wide pb-1">Contact</a></li>
-            </ul>
+        </nav>
+        <div class="banner">
+            <img src="public/image/Banner.jpg" alt="Banner" class="w-full h-auto block object-contain">
         </div>
-    </nav>
     </main>
 </body>
 </html>
