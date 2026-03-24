@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="public/css/style.css">
 </head>
 <body>
-    <nav class="bg-blue-600 text-white">
+    <main>
+        <nav class="bg-blue-600 text-white">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
 
             <!-- Logo -->
@@ -26,5 +27,6 @@
             </ul>
         </div>
     </nav>
+    </main>
 </body>
 </html>
