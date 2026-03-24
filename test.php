@@ -23,7 +23,7 @@
                 <!-- Menu -->
                 <ul class="hidden md:flex space-x-6 ml-auto text-xl">
                     <li><a href="#home" class="nav-link text-white font-semibold text-sm tracking-wide pb-1">Home</a></li>
-                    <li><a href="#" class="nav-link text-white font-semibold text-sm tracking-wide pb-1">About Us</a></li>
+                    <li><a href="#about us" class="nav-link text-white font-semibold text-sm tracking-wide pb-1">About Us</a></li>
                     <li><a href="#users" class="nav-link text-white font-semibold text-sm tracking-wide pb-1">Users</a></li>
                     <li><a href="#" class="nav-link text-white font-semibold text-sm tracking-wide pb-1">Contact</a></li>
                 </ul>
@@ -32,50 +32,56 @@
         <section>
             <div class="banner" id="home">
                 <img src="public/image/Banner.jpg" alt="Banner" class="w-full block object-contain">
-            </div> <br> <br> <br> <br>
+            </div>
             <!-- Title -->
-            <div class="text-center mb-10" id="users">
+            <div id="about us"><br> <br> <br> <br> </div>
+            <div class="text-center mb-10">
                 <h1 class="text-3xl font-bold text-pink-500">About Us</h1>
                 <p class="text-gray-500 mt-2 text-sm">Developer Profile</p>
             </div>
             <!-- Cards Grid -->
             <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
                 <!-- Soun -->
-                <div class="card bg-white rounded-xl border-t-4 border-blue-500 p-6 flex flex-col">
-                    <div class="text-3xl mb-4">
-                        <img src="public/image/profile/Soun.jpg" alt="Soun" class="">
-                        <p>Pril Soun</p>
+                <div class="card bg-white rounded-2xl shadow-md border-t-4 border-blue-400 p-6 flex flex-col items-center">
+                    <div class="w-32 h-32 rounded-xl overflow-hidden border-2 border-blue-300 mb-4">
+                        <img src="public/image/profile/Soun.jpg" alt="Soun" class="w-full h-full object-cover object-top">
                     </div>
+                    <p class="text-blue-500 font-semibold text-lg">Pril Soun</p>
                 </div>
-                <div>
-                    <!-- Vireak -->
-                    <div class="text-3xl mb-4">
-                        <img src="public/image/profile" alt="Vireak" class="">
-                        <p>Sorn Vireak</p>
+
+                <!-- Vireak -->
+                <div class="card bg-white rounded-2xl shadow-md border-t-4 border-blue-400 p-6 flex flex-col items-center">
+                    <div class="w-32 h-32 rounded-xl overflow-hidden border-2 border-blue-300 mb-4">
+                        <img src="public/image/profile/Vireak.jpg" alt="Vireak" class="w-full h-full object-cover object-top">
                     </div>
+                    <p class="text-blue-500 font-semibold text-lg">Sorn Vireak</p>
                 </div>
-                <div>
-                    <!-- Makara -->
-                    <div class="text-3xl mb-4">
-                        <img src="public/image/profile" alt="Makara" class="">
-                        <p>Kheav Chanmakara</p>
+
+                <!-- Makara -->
+                <div class="card bg-white rounded-2xl shadow-md border-t-4 border-blue-400 p-6 flex flex-col items-center">
+                    <div class="w-32 h-32 rounded-xl overflow-hidden border-2 border-blue-300 mb-4">
+                        <img src="public/image/profile/Makara.jpg" alt="Makara" class="w-full h-full object-cover object-top">
                     </div>
+                    <p class="text-blue-500 font-semibold text-lg">Kheav Chanmakara</p>
                 </div>
-                <div>
-                    <!-- Sally -->
-                    <div class="text-3xl mb-4">
-                        <img src="public/image/profile" alt="Sally" class="">
-                        <p>Kan Visally</p>
+
+                <!-- Sally -->
+                <div class="card bg-white rounded-2xl shadow-md border-t-4 border-blue-400 p-6 flex flex-col items-center">
+                    <div class="w-32 h-32 rounded-xl overflow-hidden border-2 border-blue-300 mb-4">
+                        <img src="public/image/profile/Sally.jpg" alt="Sally" class="w-full h-full object-cover object-top">
                     </div>
+                    <p class="text-blue-500 font-semibold text-lg">Kan Visally</p>
                 </div>
-                <div>
-                    <!-- Samet -->
-                    <div class="text-3xl mb-4">
-                        <img src="public/image/profile" alt="Samet" class="">
-                        <p>Te Samet</p>
+
+                <!-- Samet -->
+                <div class="card bg-white rounded-2xl shadow-md border-t-4 border-blue-400 p-6 flex flex-col items-center">
+                    <div class="w-32 h-32 rounded-xl overflow-hidden border-2 border-blue-300 mb-4">
+                        <img src="public/image/profile/Samet.jpg" alt="Samet" class="w-full h-full object-cover object-top">
                     </div>
+                    <p class="text-pink-500 font-semibold text-lg">Te Samet</p>
                 </div>
             </div>
+            <br> <br> <br> <br>
             <!-- Title -->
             <div class="text-center mb-10" id="users">
                 <h1 class="text-3xl font-bold text-pink-500">Access Your Users</h1>

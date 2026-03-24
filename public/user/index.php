@@ -22,7 +22,7 @@
         <path d="M3 9l1-5h16l1 5"/><path d="M3 9h18v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9z"/>
         <path d="M9 9v6"/><path d="M15 9v6"/><path d="M9 15h6"/>
       </svg>
-      Khmer Food Delivery
+      ONLINE FOOD ORDER
     </a>
 
     <ul class="nav-links">
