@@ -20,14 +20,14 @@
 
                 <!-- Menu -->
                 <ul class="hidden md:flex space-x-6 ml-auto text-xl">
-                    <li><a href="#" class="nav-link text-white font-semibold text-sm tracking-wide pb-1">Home</a></li>
+                    <li><a href="#home" class="nav-link text-white font-semibold text-sm tracking-wide pb-1">Home</a></li>
                     <li><a href="#" class="nav-link text-white font-semibold text-sm tracking-wide pb-1">About</a></li>
                     <li><a href="#" class="nav-link text-white font-semibold text-sm tracking-wide pb-1">Services</a></li>
                     <li><a href="#" class="nav-link text-white font-semibold text-sm tracking-wide pb-1">Contact</a></li>
                 </ul>
             </div>
         </nav>
-        <div class="banner">
+        <div class="banner" id="home">
             <img src="public/image/Banner.jpg" alt="Banner" class="w-full block object-contain">
         </div>
     </main>
