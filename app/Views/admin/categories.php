@@ -47,7 +47,7 @@ if (isset($_POST['food_name'])) {
     <?php include __DIR__ . "/../components/cdns.php"; ?>
 </head>
 
-<body class="bg-gray-100 font-sans flex min-h-screen">
+<body class="bg-gray-100 font-sans flex h-screen overflow-hidden">
 
     <!-- SIDEBAR -->
     <nav class="w-64 bg-blue-700 text-white flex flex-col fixed h-full">
@@ -112,7 +112,7 @@ if (isset($_POST['food_name'])) {
 
     </nav>
     <!-- // admin header -->
-    <main class=" w-full ml-64 flex-1 flex flex-col">
+    <main class=" w-full ml-64 flex-1 flex flex-col overflow-y-auto">
 
         <!-- Topbar -->
         <header class="bg-white shadow px-8 py-4 flex justify-end items-center gap-3">
