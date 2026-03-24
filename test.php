@@ -55,7 +55,7 @@
                         <li><i class="fa-solid fa-check text-pink-400 mr-2"></i>Reviews & Ratings</li>
                     </ul>
                     <div class="mt-auto">
-                        <a href="">
+                        <a href="public/user/index.php">
                             <button class="w-full bg-gradient-to-r from-pink-500 to-rose-400 text-white py-2 rounded-lg font-semibold hover:opacity-90 transition">
                                 View Website
                             </button>
