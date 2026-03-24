@@ -31,6 +31,9 @@
             <div class="banner" id="home">
                 <img src="public/image/Banner.jpg" alt="Banner" class="w-full block object-contain">
             </div>
+            <div>
+                
+            </div>
         </section>
     </main>
 </body>
