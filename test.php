@@ -35,13 +35,54 @@
             </div> <br> <br> <br> <br>
             <!-- Title -->
             <div class="text-center mb-10" id="users">
+                <h1 class="text-3xl font-bold text-pink-500">About Us</h1>
+                <p class="text-gray-500 mt-2 text-sm">Developer Profile</p>
+            </div>
+            <!-- Cards Grid -->
+            <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                <!-- Soun -->
+                <div class="card bg-white rounded-xl border-t-4 border-blue-500 p-6 flex flex-col">
+                    <div class="text-3xl mb-4">
+                        <img src="public/image/profile/Soun.jpg" alt="Soun" class="">
+                        <p>Pril Soun</p>
+                    </div>
+                </div>
+                <div>
+                    <!-- Vireak -->
+                    <div class="text-3xl mb-4">
+                        <img src="public/image/profile" alt="Vireak" class="">
+                        <p>Sorn Vireak</p>
+                    </div>
+                </div>
+                <div>
+                    <!-- Makara -->
+                    <div class="text-3xl mb-4">
+                        <img src="public/image/profile" alt="Makara" class="">
+                        <p>Kheav Chanmakara</p>
+                    </div>
+                </div>
+                <div>
+                    <!-- Sally -->
+                    <div class="text-3xl mb-4">
+                        <img src="public/image/profile" alt="Sally" class="">
+                        <p>Kan Visally</p>
+                    </div>
+                </div>
+                <div>
+                    <!-- Samet -->
+                    <div class="text-3xl mb-4">
+                        <img src="public/image/profile" alt="Samet" class="">
+                        <p>Te Samet</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Title -->
+            <div class="text-center mb-10" id="users">
                 <h1 class="text-3xl font-bold text-pink-500">Access Your Users</h1>
                 <p class="text-gray-500 mt-2 text-sm">Choose your role and access your personalized users</p>
             </div>
-
             <!-- Cards Grid -->
             <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-
                 <!-- Customer Card -->
                 <div class="card bg-white rounded-xl border-t-4 border-pink-500 p-6 flex flex-col">
                     <div class="text-pink-500 text-3xl mb-4">
@@ -82,7 +123,6 @@
                         </a>
                     </div>
                 </div>
-
             </div>
         </section>
     </main>
