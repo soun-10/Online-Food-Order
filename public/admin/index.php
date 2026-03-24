@@ -63,13 +63,14 @@
                         class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
                 <!-- Button -->
-                <button type="submit" name="login"
-                    class="w-full py-2.5 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition duration-300"><i
-                        class="fa-solid fa-unlock"></i>Log In</button>
+                <button type="submit" name="login" class="w-full py-2.5 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition duration-300"><i class="fa-solid fa-unlock"></i>Log In</button>
+                <?php
+                    echo $err;
+                ?>
+                <div class="text-center">
+                    <p>Username: admin / Password: 123</p>
+                </div>
             </form>
-            <?php
-                echo $err;
-            ?>
         </div>
     </main>
 </body>
