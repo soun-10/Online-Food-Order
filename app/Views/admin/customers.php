@@ -1,4 +1,10 @@
 <?php
+    session_start();
+
+    if (!isset($_SESSION["username"])) {
+        header("Location: ../../../public/admin");
+    }
+    
     require_once __DIR__."/../../Controllers/user/UserLoginController.php";
     
     $userLoginController = new UserLoginController($con);
