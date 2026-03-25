@@ -14,7 +14,7 @@
             $stmt->bindParam(":pn", $phonenumber);
             $stmt->bindParam(":pw", $hashedPassword);
 
-            $stmt->execute();
+            return $stmt->execute();
         }
 
         public function FindUser($input){
