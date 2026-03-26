@@ -48,11 +48,6 @@
             <a href="customers.php" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-600 transition">
                 <i class="fas fa-users w-5 text-center"></i> Customers
             </a>
-
-            <a href="drivers.php" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-600 transition">
-                <i class="fas fa-person-biking w-5 text-center"></i> Drivers
-            </a>
-
             <a href="reports.php" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-600 transition">
                 <i class="fas fa-chart-line w-5 text-center"></i> Reports
             </a>
