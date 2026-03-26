@@ -1,15 +1,15 @@
 <?php
-    session_start();
+session_start();
 
-    if (!isset($_SESSION["username"])) {
-        header("Location: ../../../public/admin");
-    }
-    
-    require_once __DIR__."/../../Controllers/user/CustomerController.php";
-    
-    $CustomerController = new CustomerController($con);
-    $return = $CustomerController->show();
-    $totalCustomers = $CustomerController -> countOrders ();
+if (!isset($_SESSION["username"])) {
+    header("Location: ../../../public/admin");
+}
+
+require_once __DIR__ . "/../../Controllers/user/CustomerController.php";
+
+$CustomerController = new CustomerController($con);
+$return = $CustomerController->show();
+$totalCustomers = $CustomerController->countOrders();
 
 ?>
 
@@ -20,7 +20,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customers</title>
-    <?php include __DIR__. "/../components/cdns.php"; ?>
+    <?php include __DIR__ . "/../components/cdns.php"; ?>
 </head>
 
 <body class="bg-gray-100 font-sans flex min-h-screen overflow-hidden">
@@ -92,7 +92,7 @@
                         <?php echo (int)$totalCustomers; ?>
                     </p>
                 </div>
-                <div class="bg-white rounded-lg shadow-sm border-l-4 border-green-500 px-5 py-4">
+                <!-- <div class="bg-white rounded-lg shadow-sm border-l-4 border-green-500 px-5 py-4">
                     <p class="text-sm font-semibold text-green-500 mb-1">Search Results</p>
                     <p class="text-3xl font-bold text-gray-800">
                         <?php echo (int)$totalCustomers; ?>
@@ -101,9 +101,9 @@
                 <div class="bg-white rounded-lg shadow-sm border-l-4 border-cyan-500 px-5 py-4">
                     <p class="text-sm font-semibold text-cyan-500 mb-1">Today's Registrations</p>
                     <p class="text-3xl font-bold text-gray-800">
-                        <?php echo (int)$totalCustomers ; ?>
+                        <?php echo (int)$totalCustomers; ?>
                     </p>
-                </div>
+                </div> -->
             </div>
 
             <!-- Search Bar -->
@@ -151,7 +151,7 @@
                         <tbody class="divide-y divide-gray-100">
 
                             <?php foreach ($return as $customer): ?>
-                            <?php
+                                <?php
                                 // Avatar initials from fullname
                                 $nameParts  = explode(' ', trim($customer['fullname']));
                                 $initials   = strtoupper(substr($nameParts[0], 0, 1));
@@ -159,87 +159,85 @@
                                     $initials .= strtoupper(substr(end($nameParts), 0, 1));
                                 }
                                 $colors = [
-                                    'bg-purple-500', 'bg-blue-500',  'bg-green-500',
-                                    'bg-yellow-500', 'bg-red-500',   'bg-pink-500',
-                                    'bg-indigo-500', 'bg-teal-500',  'bg-orange-500',
+                                    'bg-purple-500',
+                                    'bg-blue-500',
+                                    'bg-green-500',
+                                    'bg-yellow-500',
+                                    'bg-red-500',
+                                    'bg-pink-500',
+                                    'bg-indigo-500',
+                                    'bg-teal-500',
+                                    'bg-orange-500',
                                 ];
                                 $colorClass = $colors[$customer['id'] % count($colors)];
-                            ?>
-                            <tr class="hover:bg-gray-50 transition">
+                                ?>
+                                <tr class="hover:bg-gray-50 transition">
 
-                                <td class="px-5 py-4 text-gray-500 font-medium">
-                                    <?php echo (int)$customer['id']; ?>
-                                </td>
+                                    <td class="px-5 py-4 text-gray-500 font-medium">
+                                        <?php echo (int)$customer['id']; ?>
+                                    </td>
 
-                                <td class="px-5 py-4">
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-9 h-9 rounded-full <?php echo $colorClass; ?>
+                                    <td class="px-5 py-4">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-9 h-9 rounded-full <?php echo $colorClass; ?>
                                                     text-white flex items-center justify-center
                                                     text-xs font-bold flex-shrink-0">
-                                            <?php echo htmlspecialchars($initials, ENT_QUOTES, 'UTF-8'); ?>
+                                                <?php echo htmlspecialchars($initials, ENT_QUOTES, 'UTF-8'); ?>
+                                            </div>
+                                            <span class="font-medium text-gray-800">
+                                                <?php echo htmlspecialchars($customer['fullname'], ENT_QUOTES, 'UTF-8'); ?>
+                                            </span>
                                         </div>
-                                        <span class="font-medium text-gray-800">
-                                            <?php echo htmlspecialchars($customer['fullname'], ENT_QUOTES, 'UTF-8'); ?>
-                                        </span>
-                                    </div>
-                                </td>
+                                    </td>
 
-                                <td class="px-5 py-4 text-gray-600">
-                                    <div class="flex items-center gap-1">
-                                        <i class="fas fa-envelope text-gray-400 text-xs w-4"></i>
-                                        <?php echo htmlspecialchars($customer['email'], ENT_QUOTES, 'UTF-8'); ?>
-                                    </div>
-                                </td>
+                                    <td class="px-5 py-4 text-gray-600">
+                                        <div class="flex items-center gap-1">
+                                            <i class="fas fa-envelope text-gray-400 text-xs w-4"></i>
+                                            <?php echo htmlspecialchars($customer['email'], ENT_QUOTES, 'UTF-8'); ?>
+                                        </div>
+                                    </td>
 
-                                <td class="px-5 py-4 text-gray-600">
-                                    <div class="flex items-center gap-1">
-                                        <i class="fas fa-phone text-gray-400 text-xs w-4"></i>
-                                        <?php echo htmlspecialchars($customer['phonenumber'], ENT_QUOTES, 'UTF-8'); ?>
-                                    </div>
-                                </td>
+                                    <td class="px-5 py-4 text-gray-600">
+                                        <div class="flex items-center gap-1">
+                                            <i class="fas fa-phone text-gray-400 text-xs w-4"></i>
+                                            <?php echo htmlspecialchars($customer['phonenumber'], ENT_QUOTES, 'UTF-8'); ?>
+                                        </div>
+                                    </td>
 
-                                <td class="px-5 py-4 text-gray-500">
-                                    <?php echo $customer['created_at']
-                                        ? date('M d, Y', strtotime($customer['created_at']))
-                                        : '—'; ?>
-                                </td>
+                                    <td class="px-5 py-4 text-gray-500">
+                                        <?php echo $customer['created_at']
+                                            ? date('M d, Y', strtotime($customer['created_at']))
+                                            : '—'; ?>
+                                    </td>
 
-                                <td class="px-5 py-4">
-                                    <div class="flex items-center gap-2">
-                                        <!-- View -->
-                                        <a href="customer_detail.php?id=<?php echo (int)$customer['id']; ?>"
-                                            class="w-8 h-8 flex items-center justify-center
+                                    <td class="px-5 py-4">
+                                        <div class="flex items-center gap-2">
+                                            <!-- View -->
+                                            <a href="customer_detail.php?id=<?php echo (int)$customer['id']; ?>"
+                                                class="w-8 h-8 flex items-center justify-center
                                                    rounded-lg bg-cyan-100 text-cyan-600
                                                    hover:bg-cyan-200 transition" title="View">
-                                            <i class="fas fa-eye text-xs"></i>
-                                        </a>
-                                        <!-- Delete (POST form + CSRF) -->
-                                        <form method="POST" action="customer_delete.php"
-                                              onsubmit="return confirm('Delete this customer?')">
-                                            <input type="hidden" name="id"
-                                                   value="<?php echo (int)$customer['id']; ?>">
-                                            <input type="hidden" name="token"
-                                                   value="<?php echo $_SESSION['csrf_token']; ?>">
-                                            <button type="submit"
-                                                class="w-8 h-8 flex items-center justify-center
-                                                       rounded-lg bg-red-100 text-red-500
-                                                       hover:bg-red-200 transition" title="Delete">
+                                                <i class="fas fa-eye text-xs"></i>
+                                            </a>
+                                            <!-- Delete (POST form + CSRF) -->
+                                            <a href="deleteCustomers.php?delete_id=<?php echo $customer['id']; ?>"
+                                                onclick="return confirm('Are you sure you want to delete this item?');"
+                                                class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md">
                                                 <i class="fas fa-trash text-xs"></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                </td>
+                                            </a>
+                                        </div>
+                                    </td>
 
-                            </tr>
+                                </tr>
                             <?php endforeach; ?>
 
                             <?php if (empty($customers)): ?>
-                            <tr>
-                                <td colspan="6" class="px-5 py-12 text-center text-gray-400">
-                                    <i class="fas fa-users text-4xl mb-3 block"></i>
-                                    No customers found.
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td colspan="6" class="px-5 py-12 text-center text-gray-400">
+                                        <i class="fas fa-users text-4xl mb-3 block"></i>
+                                        No customers found.
+                                    </td>
+                                </tr>
                             <?php endif; ?>
 
                         </tbody>
