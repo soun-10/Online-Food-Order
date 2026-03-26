@@ -53,7 +53,7 @@
                 <p class="text-gray-500 mt-2 text-sm">Developer Profile</p>
             </div>
             <!-- Cards Grid -->
-            <div class="max-w-4xl mx-auto flex flex-wrap justify-center gap-6 text-center">
+            <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
                 <!-- Soun -->
                 <div class="card bg-white rounded-2xl shadow-md border-t-4 border-blue-400 p-6 flex flex-col items-center w-full md:w-72">
                     <div class="w-32 h-32 rounded-xl overflow-hidden border-2 border-blue-300 mb-4">
