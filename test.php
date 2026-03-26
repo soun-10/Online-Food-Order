@@ -20,7 +20,12 @@
                     ONLINE FOOD ORDER
                 </div>
 
-                <!-- Menu -->
+                <!-- Hamburger Button (mobile only) -->
+                <button id="menu-toggle" class="md:hidden text-white text-2xl focus:outline-none">
+                    <i class="fa-solid fa-bars" id="menu-icon"></i>
+                </button>
+
+                <!-- Menu Desktop -->
                 <ul class="hidden md:flex space-x-6 ml-auto text-xl">
                     <li><a href="#home" class="nav-link text-white font-semibold text-sm tracking-wide pb-1">Home</a></li>
                     <li><a href="#about us" class="nav-link text-white font-semibold text-sm tracking-wide pb-1">About Us</a></li>
@@ -28,6 +33,14 @@
                     <li><a href="#" class="nav-link text-white font-semibold text-sm tracking-wide pb-1">Contact</a></li>
                 </ul>
             </div>
+
+            <!-- Menu Mobile (dropdown) -->
+            <ul id="mobile-menu" class="hidden flex-col bg-blue-700 px-6 py-3 space-y-3 md:hidden">
+                <li><a href="#home" class="text-white font-semibold text-sm tracking-wide">Home</a></li>
+                <li><a href="#about us" class="text-white font-semibold text-sm tracking-wide">About Us</a></li>
+                <li><a href="#users" class="text-white font-semibold text-sm tracking-wide">Users</a></li>
+                <li><a href="#" class="text-white font-semibold text-sm tracking-wide">Contact</a></li>
+            </ul>
         </nav>
         <section>
             <div class="banner" id="home">
@@ -40,9 +53,9 @@
                 <p class="text-gray-500 mt-2 text-sm">Developer Profile</p>
             </div>
             <!-- Cards Grid -->
-            <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+            <div class="max-w-4xl mx-auto flex flex-wrap justify-center gap-6 text-center">
                 <!-- Soun -->
-                <div class="card bg-white rounded-2xl shadow-md border-t-4 border-blue-400 p-6 flex flex-col items-center">
+                <div class="card bg-white rounded-2xl shadow-md border-t-4 border-blue-400 p-6 flex flex-col items-center w-full md:w-72">
                     <div class="w-32 h-32 rounded-xl overflow-hidden border-2 border-blue-300 mb-4">
                         <img src="public/image/profile/Soun.jpg" alt="Soun" class="w-full h-full object-cover object-top">
                     </div>
@@ -50,7 +63,7 @@
                 </div>
 
                 <!-- Vireak -->
-                <div class="card bg-white rounded-2xl shadow-md border-t-4 border-blue-400 p-6 flex flex-col items-center">
+                <div class="card bg-white rounded-2xl shadow-md border-t-4 border-blue-400 p-6 flex flex-col items-center w-full md:w-72">
                     <div class="w-32 h-32 rounded-xl overflow-hidden border-2 border-blue-300 mb-4">
                         <img src="public/image/profile/Vireak.jpg" alt="Vireak" class="w-full h-full object-cover object-top">
                     </div>
@@ -58,7 +71,7 @@
                 </div>
 
                 <!-- Makara -->
-                <div class="card bg-white rounded-2xl shadow-md border-t-4 border-blue-400 p-6 flex flex-col items-center">
+                <div class="card bg-white rounded-2xl shadow-md border-t-4 border-blue-400 p-6 flex flex-col items-center w-full md:w-72">
                     <div class="w-32 h-32 rounded-xl overflow-hidden border-2 border-blue-300 mb-4">
                         <img src="public/image/profile/Makara.jpg" alt="Makara" class="w-full h-full object-cover object-top">
                     </div>
@@ -66,7 +79,7 @@
                 </div>
 
                 <!-- Sally -->
-                <div class="card bg-white rounded-2xl shadow-md border-t-4 border-blue-400 p-6 flex flex-col items-center">
+                <div class="card bg-white rounded-2xl shadow-md border-t-4 border-blue-400 p-6 flex flex-col items-center w-full md:w-72">
                     <div class="w-32 h-32 rounded-xl overflow-hidden border-2 border-blue-300 mb-4">
                         <img src="public/image/profile/Sally.jpg" alt="Sally" class="w-full h-full object-cover object-top">
                     </div>
@@ -74,7 +87,7 @@
                 </div>
 
                 <!-- Samet -->
-                <div class="card bg-white rounded-2xl shadow-md border-t-4 border-blue-400 p-6 flex flex-col items-center">
+                <div class="card bg-white rounded-2xl shadow-md border-t-4 border-blue-400 p-6 flex flex-col items-center w-full md:w-72">
                     <div class="w-32 h-32 rounded-xl overflow-hidden border-2 border-blue-300 mb-4">
                         <img src="public/image/profile/Samet.jpg" alt="Samet" class="w-full h-full object-cover object-top">
                     </div>
@@ -132,6 +145,6 @@
             </div>
         </section>
     </main>
+    <script src="public/js/index.js"></script>
 </body>
-
 </html>
