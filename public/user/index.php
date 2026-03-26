@@ -167,7 +167,7 @@
 
     <!-- ═══ FEATURES STRIP ═══ -->
     <div class="features-strip">
-        <div class="features-inner">
+        <!-- <div class="features-inner">
             <div class="feature-item">
                 <div class="fi-icon">🛵</div>
                 <div>
@@ -196,8 +196,9 @@
                     <div style="font-size:0.8rem;opacity:0.75">Know where your food is</div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
+
 
 
 </body>

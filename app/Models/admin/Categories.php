@@ -45,5 +45,11 @@
         $stmt->bindParam(':id', $id);
         $stmt->execute();
     }
+    public function getCount(){
+            $stmt = $this->db->prepare("SELECT COUNT(*) AS total FROM categories");
+            $stmt->execute();
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $row['total'] ?? 0;
+}
 }
 ?>

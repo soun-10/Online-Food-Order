@@ -23,5 +23,8 @@
         public function deleteCategory($id){
             $this->categoryModel->deleteCategory($id);
         }
+        public function countOrders(){
+            return $this->categoryModel->getCount();
+        }
     }
 ?>
