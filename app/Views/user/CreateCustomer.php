@@ -10,7 +10,7 @@
         $confirm_password = $_POST['confirmPw'];
         if($confirm_password === $password){
             $Customer->Create($fullname, $email, $phonenumber, $password);
-            header("Location: ../admin/dashboard.php");
+            header("Location: menu.php");
             exit();
         } else {
             $msg = "Please input confirm password again";

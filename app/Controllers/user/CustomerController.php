@@ -12,5 +12,11 @@
         public function Login($input){
             return $this->CustomerModel->FindUser($input);
         }
+        public function show(){
+            return $this->CustomerModel->selectCustomers();
+        }
+        public function countOrders(){
+            return $this->CustomerModel->getCount();
+        }
     }
 ?>

@@ -5,10 +5,11 @@
         header("Location: ../../../public/admin");
     }
     
-    require_once __DIR__."/../../Controllers/user/UserLoginController.php";
+    require_once __DIR__."/../../Controllers/user/CustomerController.php";
     
-    $userLoginController = new UserLoginController($con);
-    $return = $userLoginController->show();
+    $CustomerController = new CustomerController($con);
+    $return = $CustomerController->show();
+    $totalCustomers = $CustomerController -> countOrders ();
 
 ?>
 
@@ -60,67 +61,195 @@
         </div>
     </nav>
     <!-- // admin header -->
-    <main class=" flex-1 flex flex-col overflow-y-auto h-screen">
+    <main class="flex-1 flex flex-col overflow-y-auto h-screen">
 
         <!-- Topbar -->
-        <header class="bg-white shadow px-8 py-4 flex justify-end items-center gap-3">
-            <span class="text-gray-600"> <strong>Admin</strong></span>
-            <i class="fas fa-circle-user text-2xl text-gray-500"></i>
+        <header class="bg-white shadow-sm px-8 py-4 flex justify-end items-center gap-3 sticky top-0 z-10">
+            <span class="text-gray-500 text-sm">Welcome,
+                <span class="font-semibold text-gray-700">
+                    <?php echo htmlspecialchars($_SESSION['username'], ENT_QUOTES, 'UTF-8'); ?>
+                </span>
+            </span>
+            <div class="flex items-center gap-1 cursor-pointer text-gray-500 hover:text-gray-700">
+                <i class="fas fa-circle-user text-2xl"></i>
+                <i class="fas fa-caret-down text-xs"></i>
+            </div>
         </header>
-        <div class="p-4">
 
-            <div class="w-full bg-white p-6 rounded-lg shadow mb-6">
+        <div class="p-6 flex flex-col gap-6">
 
-                <h2 class="text-lg font-semibold mb-4">View Customer</h2>
-                <div class="bg-white rounded-lg  overflow-hidden">
+            <!-- Page Title -->
+            <div class="flex items-center gap-3">
+                <i class="fas fa-users text-2xl text-gray-700"></i>
+                <h1 class="text-2xl font-bold text-gray-800">Manage Customers</h1>
+            </div>
 
-                    <h2 class="text-xl font-semibold p-4 border-b">Customers</h2>
-
-                    <table class="w-full text-sm text-left">
-
-                        <thead class=" bg-gray-100 text-gray-600">
-                            <tr>
-                                <th class="px-6 py-3 font-medium">ID</th>
-                                <th class="px-6 py-3 font-medium">Name</th>
-                                <th class="px-6 py-3 font-medium">Email</th>
-                                <th class="px-6 py-3 font-medium">Phone</th>
-                                <th class="px-6 py-3 font-medium">Address</th>
-                            </tr>
-                        </thead>
-
-                        <tbody class="divide-y divide-gray-200">
-
-                            <?php foreach ($return as $email) { ?>
-                            <tr class="hover:bg-gray-50 transition">
-
-                                <td class="px-6 py-4 text-sm text-gray-700">
-                                    <?php echo $email['id']; ?>
-                                </td>
-                                <td class="px-6 py-4 text-sm text-gray-700">
-                                    <?php echo $email['full_name']; ?>
-                                </td>
-
-                                <td class="px-6 py-4 text-sm text-gray-700">
-                                    <?php echo $email['email']; ?>
-                                </td>
-
-                                <td class="px-6 py-4 text-sm text-gray-700">
-                                    <?php echo $email['phone']; ?>
-                                </td>
-                                <td class="px-6 py-4 text-sm text-gray-700">
-                                    <?php echo $email['address']; ?>
-                                </td>
-
-
-                            </tr>
-                            <?php } ?>
-                        </tbody>
-                    </table>
-
+            <!-- Stat Cards — only what DB supports -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div class="bg-white rounded-lg shadow-sm border-l-4 border-blue-500 px-5 py-4">
+                    <p class="text-sm font-semibold text-blue-500 mb-1">Total Customers</p>
+                    <p class="text-3xl font-bold text-gray-800">
+                        <?php echo (int)$totalCustomers; ?>
+                    </p>
+                </div>
+                <div class="bg-white rounded-lg shadow-sm border-l-4 border-green-500 px-5 py-4">
+                    <p class="text-sm font-semibold text-green-500 mb-1">Search Results</p>
+                    <p class="text-3xl font-bold text-gray-800">
+                        <?php echo (int)$totalCustomers; ?>
+                    </p>
+                </div>
+                <div class="bg-white rounded-lg shadow-sm border-l-4 border-cyan-500 px-5 py-4">
+                    <p class="text-sm font-semibold text-cyan-500 mb-1">Today's Registrations</p>
+                    <p class="text-3xl font-bold text-gray-800">
+                        <?php echo (int)$totalCustomers ; ?>
+                    </p>
                 </div>
             </div>
+
+            <!-- Search Bar -->
+            <div class="bg-white rounded-lg shadow-sm p-4">
+                <form method="GET" action="customers.php" class="flex flex-wrap gap-3 items-center">
+                    <div class="flex-1 min-w-[200px]">
+                        <input
+                            type="text"
+                            name="search"
+                            value="<?php echo htmlspecialchars($_GET['search'] ?? '', ENT_QUOTES, 'UTF-8'); ?>"
+                            placeholder="Search by name, email or phone..."
+                            class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm
+                                   focus:outline-none focus:ring-2 focus:ring-blue-400">
+                    </div>
+                    <button type="submit"
+                        class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white
+                               text-sm font-medium px-5 py-2 rounded-lg transition">
+                        <i class="fas fa-magnifying-glass"></i> Search
+                    </button>
+                    <a href="customers.php"
+                        class="flex items-center justify-center bg-gray-200 hover:bg-gray-300
+                               text-gray-600 text-sm font-medium px-4 py-2 rounded-lg transition">
+                        <i class="fas fa-xmark"></i>
+                    </a>
+                </form>
+            </div>
+
+            <!-- Customers Table -->
+            <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                <div class="px-6 py-4 border-b border-gray-100">
+                    <h2 class="text-base font-semibold text-gray-700">Customers</h2>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left">
+                        <thead class="bg-gray-50 border-b border-gray-200">
+                            <tr>
+                                <th class="px-5 py-3 text-xs font-semibold text-gray-500 uppercase">ID</th>
+                                <th class="px-5 py-3 text-xs font-semibold text-gray-500 uppercase">Customer</th>
+                                <th class="px-5 py-3 text-xs font-semibold text-gray-500 uppercase">Email</th>
+                                <th class="px-5 py-3 text-xs font-semibold text-gray-500 uppercase">Phone</th>
+                                <th class="px-5 py-3 text-xs font-semibold text-gray-500 uppercase">Registered</th>
+                                <th class="px-5 py-3 text-xs font-semibold text-gray-500 uppercase">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100">
+
+                            <?php foreach ($return as $customer): ?>
+                            <?php
+                                // Avatar initials from fullname
+                                $nameParts  = explode(' ', trim($customer['fullname']));
+                                $initials   = strtoupper(substr($nameParts[0], 0, 1));
+                                if (count($nameParts) > 1) {
+                                    $initials .= strtoupper(substr(end($nameParts), 0, 1));
+                                }
+                                $colors = [
+                                    'bg-purple-500', 'bg-blue-500',  'bg-green-500',
+                                    'bg-yellow-500', 'bg-red-500',   'bg-pink-500',
+                                    'bg-indigo-500', 'bg-teal-500',  'bg-orange-500',
+                                ];
+                                $colorClass = $colors[$customer['id'] % count($colors)];
+                            ?>
+                            <tr class="hover:bg-gray-50 transition">
+
+                                <td class="px-5 py-4 text-gray-500 font-medium">
+                                    <?php echo (int)$customer['id']; ?>
+                                </td>
+
+                                <td class="px-5 py-4">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-9 h-9 rounded-full <?php echo $colorClass; ?>
+                                                    text-white flex items-center justify-center
+                                                    text-xs font-bold flex-shrink-0">
+                                            <?php echo htmlspecialchars($initials, ENT_QUOTES, 'UTF-8'); ?>
+                                        </div>
+                                        <span class="font-medium text-gray-800">
+                                            <?php echo htmlspecialchars($customer['fullname'], ENT_QUOTES, 'UTF-8'); ?>
+                                        </span>
+                                    </div>
+                                </td>
+
+                                <td class="px-5 py-4 text-gray-600">
+                                    <div class="flex items-center gap-1">
+                                        <i class="fas fa-envelope text-gray-400 text-xs w-4"></i>
+                                        <?php echo htmlspecialchars($customer['email'], ENT_QUOTES, 'UTF-8'); ?>
+                                    </div>
+                                </td>
+
+                                <td class="px-5 py-4 text-gray-600">
+                                    <div class="flex items-center gap-1">
+                                        <i class="fas fa-phone text-gray-400 text-xs w-4"></i>
+                                        <?php echo htmlspecialchars($customer['phonenumber'], ENT_QUOTES, 'UTF-8'); ?>
+                                    </div>
+                                </td>
+
+                                <td class="px-5 py-4 text-gray-500">
+                                    <?php echo $customer['created_at']
+                                        ? date('M d, Y', strtotime($customer['created_at']))
+                                        : '—'; ?>
+                                </td>
+
+                                <td class="px-5 py-4">
+                                    <div class="flex items-center gap-2">
+                                        <!-- View -->
+                                        <a href="customer_detail.php?id=<?php echo (int)$customer['id']; ?>"
+                                            class="w-8 h-8 flex items-center justify-center
+                                                   rounded-lg bg-cyan-100 text-cyan-600
+                                                   hover:bg-cyan-200 transition" title="View">
+                                            <i class="fas fa-eye text-xs"></i>
+                                        </a>
+                                        <!-- Delete (POST form + CSRF) -->
+                                        <form method="POST" action="customer_delete.php"
+                                              onsubmit="return confirm('Delete this customer?')">
+                                            <input type="hidden" name="id"
+                                                   value="<?php echo (int)$customer['id']; ?>">
+                                            <input type="hidden" name="token"
+                                                   value="<?php echo $_SESSION['csrf_token']; ?>">
+                                            <button type="submit"
+                                                class="w-8 h-8 flex items-center justify-center
+                                                       rounded-lg bg-red-100 text-red-500
+                                                       hover:bg-red-200 transition" title="Delete">
+                                                <i class="fas fa-trash text-xs"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+
+                            </tr>
+                            <?php endforeach; ?>
+
+                            <?php if (empty($customers)): ?>
+                            <tr>
+                                <td colspan="6" class="px-5 py-12 text-center text-gray-400">
+                                    <i class="fas fa-users text-4xl mb-3 block"></i>
+                                    No customers found.
+                                </td>
+                            </tr>
+                            <?php endif; ?>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
         </div>
     </main>
+
 </body>
 
 </html>
