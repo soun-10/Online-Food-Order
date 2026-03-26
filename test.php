@@ -149,7 +149,7 @@
                 <div>
                     <h3 class="text-blue-400 font-bold text-xl mb-4">About Us</h3>
                     <p class="text-gray-300 text-sm leading-relaxed">
-                        Khmer Food Delivery brings authentic Cambodian cuisine to your doorstep with fast, reliable delivery service.
+                        Online Food Order brings authentic Cambodian cuisine to your doorstep with fast, reliable delivery service.
                     </p>
                 </div>
 
