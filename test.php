@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="public/css/style.css">
 </head>
 
-<body class="bg-gray-100 min-h-screen">
+<body class="bg-gray-100 min-h-screen flex flex-col" id="home">
     <main class="min-h-screen">
         <nav class="bg-blue-600 text-white sticky top-0 z-50">
             <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
@@ -30,7 +30,6 @@
                     <li><a href="#home" class="nav-link text-white font-semibold text-sm tracking-wide pb-1">Home</a></li>
                     <li><a href="#about us" class="nav-link text-white font-semibold text-sm tracking-wide pb-1">About Us</a></li>
                     <li><a href="#users" class="nav-link text-white font-semibold text-sm tracking-wide pb-1">Users</a></li>
-                    <li><a href="#" class="nav-link text-white font-semibold text-sm tracking-wide pb-1">Contact</a></li>
                 </ul>
             </div>
 
@@ -39,7 +38,6 @@
                 <li><a href="#home" class="text-white font-semibold text-sm tracking-wide">Home</a></li>
                 <li><a href="#about us" class="text-white font-semibold text-sm tracking-wide">About Us</a></li>
                 <li><a href="#users" class="text-white font-semibold text-sm tracking-wide">Users</a></li>
-                <li><a href="#" class="text-white font-semibold text-sm tracking-wide">Contact</a></li>
             </ul>
         </nav>
         <section>
@@ -47,7 +45,7 @@
                 <img src="public/image/Banner.jpg" alt="Banner" class="w-full block object-contain">
             </div>
             <!-- Title -->
-            <div id="about us"><br> <br> <br> <br> </div>
+            <div id="about us" class="scroll-mt-20 py-6"></div>
             <div class="text-center mb-10">
                 <h1 class="text-3xl font-bold text-pink-500">About Us</h1>
                 <p class="text-gray-500 mt-2 text-sm">Developer Profile</p>
@@ -96,7 +94,7 @@
             </div>
             <br> <br> <br> <br>
             <!-- Title -->
-            <div class="text-center mb-10" id="users">
+            <div class="text-center mb-10 scroll-mt-20" id="users">
                 <h1 class="text-3xl font-bold text-Blue-500">Access Your Users</h1>
                 <p class="text-gray-500 mt-2 text-sm">Choose your role and access your personalized users</p>
             </div>
@@ -144,7 +142,55 @@
                 </div>
             </div>
         </section>
+        <br> <br> <br> <br>
+        <footer class="bg-slate-700 text-white mt-auto">
+            <div class="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- About Us -->
+                <div>
+                    <h3 class="text-blue-400 font-bold text-xl mb-4">About Us</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed">
+                        Khmer Food Delivery brings authentic Cambodian cuisine to your doorstep with fast, reliable delivery service.
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-blue-400 font-bold text-xl mb-4">Quick Links</h3>
+                    <ul class="space-y-3 text-gray-300 text-sm">
+                        <li><a href="#home" class="hover:text-blue-400 transition">Home</a></li>
+                        <li><a href="#about us" class="hover:text-blue-400 transition">About Us</a></li>
+                        <li><a href="#users" class="hover:text-blue-400 transition">User</a></li>
+                    </ul>
+                </div>
+
+                <!-- Follow Us -->
+                <div>
+                    <h3 class="text-blue-400 font-bold text-xl mb-4">Follow Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="https://web.facebook.com/soun.pril.2025/" class="bg-blue-500 hover:bg-pink-600 transition w-10 h-10 rounded-full flex items-center justify-center">
+                            <i class="fa-brands fa-facebook-f text-white"></i>
+                        </a>
+                        <a href="https://t.me/SounPril" class="bg-blue-500 hover:bg-pink-600 transition w-10 h-10 rounded-full flex items-center justify-center">
+                            <i class="fa-brands fa-telegram"></i>
+                        </a>
+                        <a href="https://www.instagram.com/sounpril?igsh=bW91NjZzczlxcHpk" class="bg-blue-500 hover:bg-pink-600 transition w-10 h-10 rounded-full flex items-center justify-center">
+                            <i class="fa-brands fa-instagram text-white"></i>
+                        </a>
+                        <a href="https://wa.me/qr/AKQTQ2J6D4QVN1" class="bg-blue-500 hover:bg-pink-600 transition w-10 h-10 rounded-full flex items-center justify-center">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="border-t border-slate-600 py-4 text-center text-gray-400 text-sm">
+                © 2026 Online Food Order. All rights reserved.
+            </div>
+        </footer>
     </main>
     <script src="public/js/index.js"></script>
 </body>
+
 </html>
