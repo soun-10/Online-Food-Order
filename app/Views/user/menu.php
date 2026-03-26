@@ -27,7 +27,7 @@
 
     </div>
     <div>
-        <?php require_once __DIR__ . "../cart.php" ?>
+        <?php require_once __DIR__ . "../foodorder.php" ?>
     </div>
 </body>
 
