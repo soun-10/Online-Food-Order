@@ -141,9 +141,9 @@ $totalCustomers = $CustomerController->countOrders();
                         <thead class="bg-gray-50 border-b border-gray-200">
                             <tr>
                                 <th class="px-5 py-3 text-xs font-semibold text-gray-500 uppercase">ID</th>
-                                <th class="px-5 py-3 text-xs font-semibold text-gray-500 uppercase">Customer</th>
+                                <th class="px-5 py-3 text-xs font-semibold text-gray-500 uppercase">Customer Name</th>
                                 <th class="px-5 py-3 text-xs font-semibold text-gray-500 uppercase">Email</th>
-                                <th class="px-5 py-3 text-xs font-semibold text-gray-500 uppercase">Phone</th>
+                                <th class="px-5 py-3 text-xs font-semibold text-gray-500 uppercase">Phone Number</th>
                                 <th class="px-5 py-3 text-xs font-semibold text-gray-500 uppercase">Registered</th>
                                 <th class="px-5 py-3 text-xs font-semibold text-gray-500 uppercase">Actions</th>
                             </tr>
@@ -213,12 +213,12 @@ $totalCustomers = $CustomerController->countOrders();
                                     <td class="px-5 py-4">
                                         <div class="flex items-center gap-2">
                                             <!-- View -->
-                                            <a href="customer_detail.php?id=<?php echo (int)$customer['id']; ?>"
-                                                class="w-8 h-8 flex items-center justify-center
-                                                   rounded-lg bg-cyan-100 text-cyan-600
-                                                   hover:bg-cyan-200 transition" title="View">
+                                            <button
+                                                class="w-8 h-8 flex items-center justify-center rounded-lg bg-cyan-100 text-cyan-600 hover:bg-cyan-200 transition"
+                                                title="View"
+                                                onclick="my_modal_3.showModal()">
                                                 <i class="fas fa-eye text-xs"></i>
-                                            </a>
+                                            </button>
                                             <!-- Delete (POST form + CSRF) -->
                                             <a href="deleteCustomers.php?delete_id=<?php echo $customer['id']; ?>"
                                                 onclick="return confirm('Are you sure you want to delete this item?');"
@@ -243,11 +243,33 @@ $totalCustomers = $CustomerController->countOrders();
                         </tbody>
                     </table>
                 </div>
+                <dialog id="my_modal_3" class="modal">
+                    <div class="modal-box max-w-md p-0 overflow-hidden !rounded-md">
+
+                        <!-- Header -->
+                        <div class="flex items-center justify-between px-4 py-4 border-b border-gray-100">
+                            <h3 class="text-base font-semibold text-gray-900">Customer details</h3>
+                            <form method="dialog">
+                                <button class="w-8 h-8 flex items-center justify-center rounded-md text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition">
+                                    ✕
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Body -->
+                        <div class="px-6 py-5">
+                            <p><b>Customer Name: </b> <span id="name"></span></p>
+                            <p><b>Email: </b> <span id="email"></span></p>
+                            <p><b>Phone Number: </b> <span id="phone"></span></p>
+                            <p><b>Registered: </b> <span id="registered"></span></p>
+                        </div>
+
+                    </div>
+                </dialog>
             </div>
 
         </div>
     </main>
-
 </body>
 
 </html>

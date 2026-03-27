@@ -114,9 +114,7 @@
                         <?= $totalCustomers ?>
                     </p>
                 </div>
-
             </div>
-
         </div>
     </main>
 
