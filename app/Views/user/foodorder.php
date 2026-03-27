@@ -67,6 +67,12 @@
                         $<?= $food['price'] ?>
                     </span>
                 </div>
+                <td class="px-6 py-4 text-sm text-gray-700">
+                    <img src="../../../public/Image/category/<?= $food['image']; ?>" width="80">
+                </td>
+                <td class="px-6 py-4 text-sm text-gray-700">
+                    <?php echo $food['rating']; ?>
+                </td>
 
                 <!-- Button -->
                 <button class="mt-4 w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600">

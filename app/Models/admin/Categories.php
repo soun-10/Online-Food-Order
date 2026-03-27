@@ -7,19 +7,18 @@
     {
         $this->db = $con;
     }
-    public function createCategories( $food_name, $category, $price ,$image ,$rating , $description)
-    {
-        $stmt = $this->db->prepare("INSERT INTO categories(food_name, category, price,image,rating,description) VALUES( :fn, :cat, :pr,:img,:rt,:dc)");
-        // $stmt->bindParam(':id', $id);
-        $stmt->bindParam(':fn', $food_name);
-        $stmt->bindParam(':cat', $category);
-        $stmt->bindParam(':pr', $price);
-        // $stmt->bindParam(':ac', $action);
-        $stmt->bindParam(':img', $image);
-        $stmt->bindParam(':rt', $rating);
-        $stmt->bindParam(':dc', $description);
-        $stmt->execute();
-    }
+   public function createCategories($food_name, $category, $price, $image, $rating)
+{
+    $stmt = $this->db->prepare("INSERT INTO categories(food_name, category, price, image, rating) VALUES(:fn, :cat, :pr, :img, :rt)");
+    
+    $stmt->bindParam(':fn', $food_name);
+    $stmt->bindParam(':cat', $category);
+    $stmt->bindParam(':pr', $price);
+    $stmt->bindParam(':img', $image);
+    $stmt->bindParam(':rt', $rating);
+
+    $stmt->execute();
+}
     public function getAllCategories()
     {
         $stmt = $this->db->prepare("SELECT * FROM categories");
@@ -34,8 +33,8 @@
         $row = $stmt->fetch(PDO::FETCH_ASSOC); 
         return $row;
     }
-    public function updateCategory($id, $food_name, $category, $price, $action ,$image ,$rating , $decription ){
-        $stmt = $this->db->prepare("UPDATE categories SET food_name = :fn, category = :cat, price = :pr, action = :ac ,image = :img , rating = :rt , decription = :dc WHERE id = :id");
+    public function updateCategory($id, $food_name, $category, $price, $action ,$image ,$rating  ){
+        $stmt = $this->db->prepare("UPDATE categories SET food_name = :fn, category = :cat, price = :pr, action = :ac ,image = :img , rating = :rt  WHERE id = :id");
         $stmt->bindParam(':id', $id);
         $stmt->bindParam(':fn', $food_name);
         $stmt->bindParam(':cat', $category);
@@ -43,12 +42,14 @@
         $stmt->bindParam(':ac', $action);
         $stmt->bindParam(':img', $image);
         $stmt->bindParam(':rt', $rating);
-        $stmt->bindParam(':dc', $decription);
     }
-     public function deleteCategory($id){
-        $stmt = $this->db->prepare("DELETE FROM categories WHERE id = :id");
-        $stmt->bindParam(':id', $id);
-        $stmt->execute();
+    public function deleteCategory ($id){
+        $stmt = $this->db->prepare ("DELETE FROM categories WHERE id = :id");
+        $stmt -> bindParam (':id' , $id);
+        if ($stmt->execute()){
+            return $stmt->rowCOunt() > 0 ;
+        }
+        return false ;
     }
     public function getCount(){
             $stmt = $this->db->prepare("SELECT COUNT(*) AS total FROM categories");

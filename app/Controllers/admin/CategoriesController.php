@@ -7,9 +7,9 @@
         {
             $this->categoryModel = new Category($db);
         }
-        public function store ( $food_name, $category, $price ,$image ,$rating , $description)
+        public function store ( $food_name, $category, $price ,$image ,$rating )
         {
-            $this->categoryModel->createCategories($food_name, $category, $price, $image ,$rating , $description);
+            $this->categoryModel->createCategories($food_name, $category, $price, $image ,$rating );
         }
         public function show(){
             return $this->categoryModel->getAllCategories();
@@ -17,14 +17,17 @@
         public function getCategoryById($id){
             return $this->categoryModel->getCategoryById($id);
         }
-        public function updateCategory($id, $food_name, $category, $price, $action ,$image ,$rating , $decription){
-            $this->categoryModel->updateCategory($id, $food_name, $category, $price, $action ,$image ,$rating,$decription);
+        public function updateCategory($id, $food_name, $category, $price, $action ,$image ,$rating ){
+            $this->categoryModel->updateCategory($id, $food_name, $category, $price, $action ,$image ,$rating);
         }
         public function deleteCategory($id){
             $this->categoryModel->deleteCategory($id);
         }
         public function countOrders(){
             return $this->categoryModel->getCount();
+        }
+        public function destroy ($id){
+            return $this->categoryModel->deleteCategory($id);
         }
     }
 ?>
