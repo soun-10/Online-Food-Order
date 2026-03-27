@@ -26,7 +26,10 @@ if (isset($_POST['food_name'])) {
         $food_name,
         $categorye,
         $price,
-        $action
+        $action,
+        $image,
+        $rating,
+        $description
     );
 
         header("Location: categories.php");

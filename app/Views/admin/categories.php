@@ -9,32 +9,41 @@ require_once __DIR__ . "/../../Controllers/admin/CategoriesController.php";
 
 $Category = new CategoriesController($con);
 $result = $Category->show();
+$totalcategory = $Category -> countOrders();
 
 $msg = "";
+var_dump($_FILES);
 
 if (isset($_POST['food_name'])) {
 
     $food_name = $_POST["food_name"];
     $categorye = $_POST["categorye"];
     $price = $_POST["price"];
-    $action = $_POST["action"];
+    $rating = $_POST["rating"];
+    $description = $_POST["description"];
 
-    
-   if ($food_name && $categorye) {
+    $fileName = basename($_FILES["image"]["name"]);
+    $temp = $_FILES["image"]["tmp_name"];
 
-    $Category->store (
-        $id,
-        $food_name,
-        $categorye,
-        $price,
-        $action
-    );
+    $photoDirectory = "../../../public/Image/category/" . $fileName;
+
+    if (move_uploaded_file($temp, $photoDirectory)) {
+
+        $Category->store(
+            $food_name,
+            $categorye,
+            $price,
+            $rating,
+            $image,
+            $description,
+            $photoDirectory
+        );
 
         header("Location: categories.php");
         exit();
     } else {
-    $msg = "<div>Student insert failed.</div>";
-}
+        $msg = "<div>Upload failed.</div>";
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -114,18 +123,30 @@ if (isset($_POST['food_name'])) {
             <span class="text-gray-600"> <strong>Admin</strong></span>
             <i class="fas fa-circle-user text-2xl text-gray-500"></i>
         </header>
+        <div class="p-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Total Category -->
+                <div
+                    class="bg-white rounded-xl shadow-md border-l-4 border-blue-500 px-5 py-4 hover:shadow-lg transition">
+                    <p class="text-sm font-medium text-blue-500 mb-1">Total Category</p>
+
+                    <p class="text-3xl font-bold text-gray-800">
+                        <?= $totalcategory ?>
+                    </p>
+                </div>
+
+            </div>
+        </div>
         <!-- MAIN CONTENT -->
         <div class="p-4">
-
-            <h1 class="text-2xl font-bold mb-6">Category Management</h1>
 
             <!-- ADD FOOD FORM -->
             <div class="bg-white p-6 rounded-lg shadow-md mb-8">
 
                 <h3 class="text-lg font-semibold mb-4">Add New Food</h3>
 
-                <form method="POST" action="" class="space-y-3">
-
+                <form method="POST" action="" class="space-y-3" enctype="multipart/form-data">
                     <input type="text" name="food_name" placeholder="Food Name"
                         class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
 
@@ -138,9 +159,20 @@ if (isset($_POST['food_name'])) {
                         <option>Burger</option>
                         <option>Drink</option>
                     </select>
+                    <input type="text" name="description" placeholder="Description" class="border p-2 w-full mb-2">
+
+                    <select name="rating" class="border p-2 w-full mb-2">
+                        <option value="1">⭐</option>
+                        <option value="2">⭐⭐</option>
+                        <option value="3">⭐⭐⭐</option>
+                        <option value="4">⭐⭐⭐⭐</option>
+                        <option value="5">⭐⭐⭐⭐⭐</option>
+                    </select>
+
+                    <input type="file" name="image" class="border p-2 w-full mb-2" id="photoUpload ">
 
                     <button type="submit" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md">
-                        Add Food
+                        Add Category
                     </button>
 
                 </form>
@@ -154,6 +186,9 @@ if (isset($_POST['food_name'])) {
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Food Name</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Category</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Price</th>
+                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Image</th>
+                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Rating</th>
+                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Description</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Action</th>
                             </tr>
                         </thead>
@@ -178,6 +213,15 @@ if (isset($_POST['food_name'])) {
 
                                 <td class="px-6 py-4 text-sm text-gray-700">
                                     $<?php echo $food['price']; ?>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-700">
+                                    <img src=" <?= $food['image']; ?>" width="80">
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-700">
+                                    <?php echo $food['rating']; ?>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-700">
+                                    <?php echo $food['description']; ?>
                                 </td>
 
                                 <td class="px-6 py-4 text-sm text-gray-700 flex gap-2">
