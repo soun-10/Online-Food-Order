@@ -140,7 +140,7 @@ $totalCustomers = $CustomerController->countOrders();
                     <table class="w-full text-sm text-left">
                         <thead class="bg-gray-50 border-b border-gray-200">
                             <tr>
-                                <th class="px-5 py-3 text-xs font-semibold text-gray-500 uppercase">ID</th>
+                                <th class="px-5 py-3 text-xs font-semibold text-gray-500 uppercase">No</th>
                                 <th class="px-5 py-3 text-xs font-semibold text-gray-500 uppercase">Customer Name</th>
                                 <th class="px-5 py-3 text-xs font-semibold text-gray-500 uppercase">Email</th>
                                 <th class="px-5 py-3 text-xs font-semibold text-gray-500 uppercase">Phone Number</th>
@@ -149,97 +149,44 @@ $totalCustomers = $CustomerController->countOrders();
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-100">
-
-                            <?php foreach ($return as $customer): ?>
-                                <?php
-                                // Avatar initials from fullname
-                                $nameParts  = explode(' ', trim($customer['fullname']));
-                                $initials   = strtoupper(substr($nameParts[0], 0, 1));
-                                if (count($nameParts) > 1) {
-                                    $initials .= strtoupper(substr(end($nameParts), 0, 1));
-                                }
-                                $colors = [
-                                    'bg-purple-500',
-                                    'bg-blue-500',
-                                    'bg-green-500',
-                                    'bg-yellow-500',
-                                    'bg-red-500',
-                                    'bg-pink-500',
-                                    'bg-indigo-500',
-                                    'bg-teal-500',
-                                    'bg-orange-500',
-                                ];
-                                $colorClass = $colors[$customer['id'] % count($colors)];
-                                ?>
-                                <tr class="hover:bg-gray-50 transition">
-
-                                    <td class="px-5 py-4 text-gray-500 font-medium">
-                                        <?php echo (int)$customer['id']; ?>
+                            <?php
+                            $no = 1;
+                            foreach ($return as $cusomter) {
+                            ?>
+                                <tr>
+                                    <td class="px-5 py-3 text-xs font-semibold">
+                                        <?php echo $no++  ?>
                                     </td>
-
-                                    <td class="px-5 py-4">
-                                        <div class="flex items-center gap-3">
-                                            <div class="w-9 h-9 rounded-full <?php echo $colorClass; ?>
-                                                    text-white flex items-center justify-center
-                                                    text-xs font-bold flex-shrink-0">
-                                                <?php echo htmlspecialchars($initials, ENT_QUOTES, 'UTF-8'); ?>
-                                            </div>
-                                            <span class="font-medium text-gray-800">
-                                                <?php echo htmlspecialchars($customer['fullname'], ENT_QUOTES, 'UTF-8'); ?>
-                                            </span>
-                                        </div>
+                                    <td class="px-5 py-3 text-xs font-semibold">
+                                        <?php echo $cusomter["fullname"] ?>
                                     </td>
-
-                                    <td class="px-5 py-4 text-gray-600">
-                                        <div class="flex items-center gap-1">
-                                            <i class="fas fa-envelope text-gray-400 text-xs w-4"></i>
-                                            <?php echo htmlspecialchars($customer['email'], ENT_QUOTES, 'UTF-8'); ?>
-                                        </div>
+                                    <td class="px-5 py-3 text-xs font-semibold">
+                                        <?php echo $cusomter["email"] ?>
                                     </td>
-
-                                    <td class="px-5 py-4 text-gray-600">
-                                        <div class="flex items-center gap-1">
-                                            <i class="fas fa-phone text-gray-400 text-xs w-4"></i>
-                                            <?php echo htmlspecialchars($customer['phonenumber'], ENT_QUOTES, 'UTF-8'); ?>
-                                        </div>
+                                    <td class="px-5 py-3 text-xs font-semibold">
+                                        <?php echo $cusomter["phonenumber"] ?>
                                     </td>
-
-                                    <td class="px-5 py-4 text-gray-500">
-                                        <?php echo $customer['created_at']
-                                            ? date('M d, Y', strtotime($customer['created_at']))
-                                            : '—'; ?>
+                                    <td class="px-5 py-3 text-xs font-semibold">
+                                        <?php 
+                                        echo !empty($cusomter['created_at'])? date('d-M-Y g:iA', strtotime($cusomter['created_at'])): '—'; 
+                                        ?>
                                     </td>
-
                                     <td class="px-5 py-4">
                                         <div class="flex items-center gap-2">
                                             <!-- View -->
-                                            <button
-                                                class="w-8 h-8 flex items-center justify-center rounded-lg bg-cyan-100 text-cyan-600 hover:bg-cyan-200 transition"
-                                                title="View"
-                                                onclick="my_modal_3.showModal()">
+                                            <a href="" class="w-8 h-8 flex items-center justify-center rounded-lg bg-cyan-100 text-cyan-600 hover:bg-cyan-200 transition">
                                                 <i class="fas fa-eye text-xs"></i>
-                                            </button>
+                                            </a>
                                             <!-- Delete (POST form + CSRF) -->
-                                            <a href="deleteCustomers.php?delete_id=<?php echo $customer['id']; ?>"
-                                                onclick="return confirm('Are you sure you want to delete this item?');"
-                                                class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md">
+                                            <a href="deleteCustomers.php" onclick="return confirm('Are you sure you want to delete this item?');" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md">
                                                 <i class="fas fa-trash text-xs"></i>
                                             </a>
                                         </div>
                                     </td>
-
                                 </tr>
-                            <?php endforeach; ?>
-
-                            <?php if (empty($customers)): ?>
-                                <tr>
-                                    <td colspan="6" class="px-5 py-12 text-center text-gray-400">
-                                        <i class="fas fa-users text-4xl mb-3 block"></i>
-                                        No customers found.
-                                    </td>
-                                </tr>
-                            <?php endif; ?>
-
+                            <?php
+                            }
+                            ?>
                         </tbody>
                     </table>
                 </div>
