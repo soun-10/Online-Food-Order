@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (password_verify($Password, $row['password'])) { // ✅ correct way to use with hashes password
             $_SESSION['email'] = $row['email'];
             $_SESSION['fullname'] = $row['fullname'];
-            header("Location: ../admin/dashboard.php");
+            header("Location: home.php");
             exit();
         } else {
             $err = "Invalid Email or Password";
