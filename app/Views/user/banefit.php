@@ -24,12 +24,12 @@
         <h1 class="text-2xl font-bold text-gray-800 text-center mb-6">Food Category</h1>
 
         <!-- Food Grid -->
-        <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 ">
             <?php foreach($result as $food): ?>
             <div class="bg-white rounded-2xl shadow p-4 hover:shadow-lg transition-shadow duration-300">
 
                 <!-- Image -->
-                <div class="flex justify-center mb-3">
+                <div class="flex justify-center mb-3 ">
                     <img src="/Online-Food-Order/public/image/category/<?= $food['photo_url'] ?>"
                         alt="<?= $food['food_name'] ?>" class="w-16 h-16 object-cover rounded-md">
                 </div>
