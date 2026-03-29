@@ -24,24 +24,6 @@
 
     <div class="p-6 bg-gray-100 min-h-screen">
 
-        <!-- Category -->
-        <div class="flex gap-4 mb-6 overflow-x-auto">
-            <div class="bg-green-200 p-4 rounded-xl min-w-[120px] text-center">
-                <p class="font-bold">All</p>
-                <span class="text-sm text-gray-500">
-                    <?= $totalitem ?> Item
-                </span>
-            </div>
-            <div class="bg-white p-4 rounded-xl min-w-[120px] text-center shadow">
-                Burger
-            </div>
-            <div class="bg-white p-4 rounded-xl min-w-[120px] text-center shadow">
-                Pizza
-            </div>
-            <div class="bg-white p-4 rounded-xl min-w-[120px] text-center shadow">
-                Coffee
-            </div>
-        </div>
 
         <!-- Food Grid -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -70,14 +52,10 @@
                 <td class="px-6 py-4 text-sm text-gray-700">
                     <img src="../../../public/Image/category/<?= $food['image']; ?>" width="80">
                 </td>
-                <td class="px-6 py-4 text-sm text-gray-700">
-                    <?php echo $food['rating']; ?>
-                </td>
 
-                <!-- Button -->
-                <button class="mt-4 w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600">
+                <!-- <button class="mt-4 w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600">
                     Add to Dish
-                </button>
+                </button> -->
 
             </div>
             <?php endforeach; ?>

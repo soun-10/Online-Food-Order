@@ -12,37 +12,28 @@ $totalcategory = $Category -> countOrders();
 // var_dump($_FILES['photo']);
     $msg = "";
 
-if (
-    isset($_POST['food_name']) &&
-    isset($_FILES['photo']) &&
-    $_FILES['photo']['error'] === 0
-) {
+if (isset($_POST['food_name'])) {
 
     $food_name = $_POST["food_name"];
-    $categorye = $_POST["categorye"];
-    $price = $_POST["price"];
+    $category = $_POST["categorye"] ?? '';
+    $status = $_POST["status"];
 
-    $image = $_FILES['photo']['name'];
-    $temp  = $_FILES['photo']['tmp_name'];
+    $photo_url = basename($_FILES["photo"]["name"]);
 
-    $uploadPath = "../../../public/Image/category/";
+    $photoDirectory = "../../../public/image/category/" . $photo_url;
+    $temp = $_FILES['photo']['tmp_name'];
 
-    // IMPORTANT: add slash correctly
-    $photoDirectory = $uploadPath . basename($image);
-
-    if (move_uploaded_file($temp, $photoDirectory,$image)) {
+    if (move_uploaded_file($temp, $photoDirectory)) {
 
         $Category->store(
             $food_name,
-            $categorye,
-            $price,
-            $image
+            $category,
+            $status,
+            $photo_url
         );
 
         header("Location: categories.php");
         exit();
-    } else {
-        $msg = "<div>Upload failed.</div>";
     }
 }
 ?>
@@ -149,15 +140,13 @@ if (
                 <form method="POST" action="" class="space-y-3" enctype="multipart/form-data">
                     <input type="text" name="food_name" placeholder="Food Name"
                         class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
-
-                    <input type="number" name="price" placeholder="Price"
+                    <input type="text" name="categorye" placeholder="Category"
                         class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
 
-                    <select name="categorye"
+                    <select name="status"
                         class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
-                        <option>FastFood</option>
-                        <option>Burger</option>
-                        <option>Drink</option>
+                        <option value="Active">Active</option>
+                        <option value="InActive">InActive</option>
                     </select>
 
                     <input type="file" name="photo" class="border p-2 w-full mb-2" id="photoUpload">
@@ -167,69 +156,80 @@ if (
                     </button>
 
                 </form>
-                <div class="overflow-hidden ">
-                    <table class="w-full bg-white rounded-lg mt-6 overflow-hidden">
+                <div class="overflow-hidden">
+                    <table class="w-full table-fixed bg-white rounded-lg mt-6">
 
-                        <!-- Table Header -->
+                        <!-- Header -->
                         <thead class="bg-gray-100">
-                            <tr>
-                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">No</th>
-                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Food Name</th>
-                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Category</th>
-                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Price</th>
-                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Image</th>
-                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Action</th>
+                            <tr class="text-center">
+                                <th class="px-4 py-3 w-16 text-sm font-semibold text-gray-600">No</th>
+                                <th class="px-4 py-3 w-28 text-sm font-semibold text-gray-600">Image</th>
+                                <th class="px-4 py-3 text-sm font-semibold text-gray-600">Food Name</th>
+                                <th class="px-4 py-3 text-sm font-semibold text-gray-600">Category</th>
+                                <th class="px-4 py-3 w-28 text-sm font-semibold text-gray-600">Status</th>
+                                <th class="px-4 py-3 w-40 text-sm font-semibold text-gray-600">Action</th>
                             </tr>
                         </thead>
 
-                        <!-- Table Body -->
+                        <!-- Body -->
                         <tbody class="divide-y divide-gray-200">
-
                             <?php foreach ($result as $food) { ?>
-                            <tr class="hover:bg-gray-50 transition">
+                            <tr class="hover:bg-gray-50 transition text-center">
 
-                                <td class="px-6 py-4 text-sm text-gray-700">
+                                <!-- ID -->
+                                <td class="py-4 text-sm text-gray-700">
                                     <?php echo $food['id']; ?>
                                 </td>
 
-                                <td class="px-6 py-4 text-sm text-gray-700">
+                                <!-- Image -->
+                                <td class="py-4">
+                                    <div class="flex justify-center">
+                                        <img src="/Online-Food-Order/public/image/category/<?php echo $food['photo_url']; ?>"
+                                            class="w-16 h-16 object-cover rounded-md">
+                                    </div>
+                                </td>
+
+                                <!-- Food Name -->
+                                <td class="py-4 text-sm text-gray-700 truncate">
                                     <?php echo $food['food_name']; ?>
                                 </td>
 
-                                <td class="px-6 py-4 text-sm text-gray-700">
+                                <!-- Category -->
+                                <td class="py-4 text-sm text-gray-700">
                                     <?php echo $food['category']; ?>
                                 </td>
 
-                                <td class="px-6 py-4 text-sm text-gray-700">
-                                    $<?php echo $food['price']; ?>
+                                <!-- Status -->
+                                <td class="py-4">
+                                    <span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-600">
+                                        <?php echo $food['status']; ?>
+                                    </span>
                                 </td>
-                                <td class="px-6 py-4 text-sm text-gray-700">
-                                    <img src="../../../public/Image/category/<?php echo $food['image']; ?>" width="80">
-                                </td>
 
-                                <td class="px-6 py-4 text-sm text-gray-700 flex gap-2">
+                                <!-- Action -->
+                                <td class="py-4">
+                                    <div class="flex justify-center items-center gap-2">
 
-                                    <!-- Edit -->
-                                    <a href="editCategory.php ?id=<?php echo $food['id']; ?>"
-                                        class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-md">
-                                        Edit
-                                    </a>
+                                        <!-- Edit -->
+                                        <a href="editCategory.php?id=<?php echo $food['id']; ?>"
+                                            class="h-8 px-3 flex items-center bg-blue-500 hover:bg-blue-600 text-white text-sm rounded-md transition">
+                                            Edit
+                                        </a>
 
-                                    <!-- Delete -->
-                                    <a href="deleteCategory.php?delete_id=<?php echo $food['id']; ?>"
-                                        onclick="return confirm('Are you sure you want to delete this item?');"
-                                        class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md">
-                                        Delete
-                                    </a>
+                                        <!-- Delete -->
+                                        <a href="deleteCategory.php?delete_id=<?php echo $food['id']; ?>"
+                                            onclick="return confirm('Are you sure you want to delete this item?');"
+                                            class="h-8 w-8 flex items-center justify-center bg-red-500 hover:bg-red-600 text-white rounded-md transition">
+                                            <i class="fas fa-trash text-xs"></i>
+                                        </a>
 
+                                    </div>
                                 </td>
 
                             </tr>
                             <?php } ?>
-
                         </tbody>
                     </table>
-
                 </div>
             </div>
 

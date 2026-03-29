@@ -7,14 +7,14 @@
     {
         $this->db = $con;
     }
-   public function createCategories($food_name, $category, $price, $image)
+   public function createCategories($food_name, $category, $status, $photo_url )
 {
-    $stmt = $this->db->prepare("INSERT INTO categories(food_name, category, price, image) VALUES(:fn, :cat, :pr, :img)");
+    $stmt = $this->db->prepare("INSERT INTO categories(food_name, category, status, photo_url) VALUES(:fn, :cat, :status, :photo_url)");
     
     $stmt->bindParam(':fn', $food_name);
     $stmt->bindParam(':cat', $category);
-    $stmt->bindParam(':pr', $price);
-    $stmt->bindParam(':img', $image);
+    $stmt->bindParam(':status', $status);
+    $stmt->bindParam(':photo_url', $photo_url);
 
     $stmt->execute();
 }
@@ -32,14 +32,14 @@
         $row = $stmt->fetch(PDO::FETCH_ASSOC); 
         return $row;
     }
-    public function updateCategory($id, $food_name, $category, $price, $action ,$image   ){
-        $stmt = $this->db->prepare("UPDATE categories SET food_name = :fn, category = :cat, price = :pr, action = :ac ,image = :img   WHERE id = :id");
+    public function updateCategory($id, $food_name, $category, $status ,$photo_url   ){
+        $stmt = $this->db->prepare("UPDATE categories SET food_name = :fn, category = :cat, status = :status, photo_url = :photo_url WHERE id = :id");
         $stmt->bindParam(':id', $id);
         $stmt->bindParam(':fn', $food_name);
         $stmt->bindParam(':cat', $category);
-        $stmt->bindParam(':pr', $price);
-        $stmt->bindParam(':ac', $action);
-        $stmt->bindParam(':img', $image);
+        $stmt->bindParam(':status', $status);
+        $stmt->bindParam(':photo_url', $photo_url);
+        $stmt->execute();
     }
     public function deleteCategory ($id){
         $stmt = $this->db->prepare ("DELETE FROM categories WHERE id = :id");
