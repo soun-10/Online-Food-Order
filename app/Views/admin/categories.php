@@ -9,29 +9,33 @@ require_once __DIR__ . "/../../Controllers/admin/CategoriesController.php";
 $Category = new CategoriesController($con);
 $result = $Category->show();
 $totalcategory = $Category -> countOrders();
+// var_dump($_FILES['photo']);
+    $msg = "";
 
-$msg = "";
-
-if (isset($_POST['food_name'])) {
+if (
+    isset($_POST['food_name']) &&
+    isset($_FILES['photo']) &&
+    $_FILES['photo']['error'] === 0
+) {
 
     $food_name = $_POST["food_name"];
     $categorye = $_POST["categorye"];
     $price = $_POST["price"];
-    $rating = $_POST["rating"];
 
-    $image = $_FILES['image']['name'];
-    $temp = $_FILES["image"]["tmp_name"];
+    $image = $_FILES['photo']['name'];
+    $temp  = $_FILES['photo']['tmp_name'];
 
     $uploadPath = "../../../public/Image/category/";
-    $photoDirectory = $uploadPath . $image;
 
-    if (move_uploaded_file($temp, $photoDirectory)) {
+    // IMPORTANT: add slash correctly
+    $photoDirectory = $uploadPath . basename($image);
+
+    if (move_uploaded_file($temp, $photoDirectory,$image)) {
 
         $Category->store(
             $food_name,
             $categorye,
             $price,
-            $rating,
             $image
         );
 
@@ -156,15 +160,7 @@ if (isset($_POST['food_name'])) {
                         <option>Drink</option>
                     </select>
 
-                    <select name="rating" class="border p-2 w-full mb-2">
-                        <option value="1">⭐</option>
-                        <option value="2">⭐⭐</option>
-                        <option value="3">⭐⭐⭐</option>
-                        <option value="4">⭐⭐⭐⭐</option>
-                        <option value="5">⭐⭐⭐⭐⭐</option>
-                    </select>
-
-                    <input type="file" name="image" class="border p-2 w-full mb-2" id="photoUpload">
+                    <input type="file" name="photo" class="border p-2 w-full mb-2" id="photoUpload">
 
                     <button type="submit" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md">
                         Add Category
@@ -182,7 +178,6 @@ if (isset($_POST['food_name'])) {
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Category</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Price</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Image</th>
-                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Rating</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Action</th>
                             </tr>
                         </thead>
@@ -209,10 +204,7 @@ if (isset($_POST['food_name'])) {
                                     $<?php echo $food['price']; ?>
                                 </td>
                                 <td class="px-6 py-4 text-sm text-gray-700">
-                                    <img src="../../../public/Image/category/<?= $food['image']; ?>" width="80">
-                                </td>
-                                <td class="px-6 py-4 text-sm text-gray-700">
-                                    <?php echo $food['rating']; ?>
+                                    <img src="../../../public/Image/category/<?php echo $food['image']; ?>" width="80">
                                 </td>
 
                                 <td class="px-6 py-4 text-sm text-gray-700 flex gap-2">

@@ -7,10 +7,10 @@ $id = $_GET['delete_id'];
 $categoryData = $Category->getCategoryById($id);
 // Delete photo if it exists
 if (
-    !empty($categoryData["image"]) &&
-    file_exists($categoryData["image"])
+    !empty($categoryData["photo"]) &&
+    file_exists($categoryData["photo"])
 ) {
-    unlink($categoryData["image"]);
+    unlink($categoryData["photo"]);
 }
 // Delete student record
 $result = $Category->destroy($id);
