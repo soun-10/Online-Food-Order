@@ -38,13 +38,6 @@ $userlogin = new UserLoginController($con);
                     <i class="fas fa-cart-shopping text-xs"></i>
                     Cart
                 </a>
-
-                <a href="loginCustomer.php"
-                    class="flex items-center gap-1.5 text-sm font-medium text-blue-100 hover:text-white hover:bg-blue-700 px-4 py-2 rounded-lg transition duration-200">
-                    <i class="fas fa-right-to-bracket text-xs"></i>
-                    Login
-                </a>
-
                 <?php if (isset($_SESSION['id'])): ?>
                     <!-- ✅ Logged in: Profile Dropdown -->
                     <div class="relative" id="profileWrapper">
