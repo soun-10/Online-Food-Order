@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         //     $_SESSION['email'] = $Email;//ចាប់ Email user
         //     header("Location: ../admin/dashboard.php");
         // exit(); Not hashed password
-        if (password_verify($Password, $row['password'])) { // ✅ correct way to use with hashes password
+        if (password_verify($Password, $row['password'])) {
             $_SESSION['id'] = $row['id'];
             $_SESSION['email'] = $row['email'];
             $_SESSION['fullname'] = $row['fullname'];
