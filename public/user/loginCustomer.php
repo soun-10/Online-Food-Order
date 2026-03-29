@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once __DIR__ . "../../../Controllers/user/CustomerController.php";
+require_once __DIR__ . "/../../app/Controllers/user/CustomerController.php";
 $Customer = new CustomerController($con);
 $msg = "";
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -36,9 +36,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login – Khmer Food Delivery</title>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="../../../public/css/CustomerLogin.css">
+    <link rel="stylesheet" href="../css/CustomerLogin.css">
     <?php
-    include __DIR__ . "../../components/cdns.php";
+    include __DIR__ . "/../../app/Views/components/cdns.php";
     ?>
 </head>
 
@@ -117,20 +117,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <!-- Register link -->
         <p class="register-link">
-            Don't have an account? <a href="CreateCustomer.php">Register here</a>
+            Don't have an account? <a href="createCustomer.php">Register here</a>
         </p>
 
     </div>
 
     <!-- Back to Home -->
-    <a href="../../../public/user/index.php" class="back-link">
+    <a href="../../test.php" class="back-link">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="19" y1="12" x2="5" y2="12" />
             <polyline points="12 19 5 12 12 5" />
         </svg>
         Back to Home
     </a>
-    <script src="../../../public/js/LoginCustomer.js"></script>
+    <script src="../js/LoginCustomer.js"></script>
 </body>
 
 </html>

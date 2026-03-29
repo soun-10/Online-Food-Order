@@ -112,10 +112,15 @@
                         <li><i class="fa-solid fa-check text-blue-400 mr-2"></i>Track Orders</li>
                         <li><i class="fa-solid fa-check text-blue-400 mr-2"></i>Reviews & Ratings</li>
                     </ul>
-                    <div class="mt-auto">
-                        <a href="public/user/index.php">
+                    <div class="mt-auto flex flex-row gap-2">
+                        <a href="public/user/loginCustomer.php" class="flex-1">
                             <button class="w-full bg-gradient-to-r from-blue-500 to-blue-400 text-white py-2 rounded-lg font-semibold hover:opacity-90 transition">
-                                View Website
+                                Login
+                            </button>
+                        </a>
+                        <a href="public/user/createCustomer.php" class="flex-1">
+                            <button class="w-full border border-blue-400 text-blue-400 bg-gray-100 py-2 rounded-lg font-semibold hover:bg-pink-50 transition">
+                                Register
                             </button>
                         </a>
                     </div>
