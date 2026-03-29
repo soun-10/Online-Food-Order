@@ -14,6 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         //     header("Location: ../admin/dashboard.php");
         // exit(); Not hashed password
         if (password_verify($Password, $row['password'])) { // ✅ correct way to use with hashes password
+            $_SESSION['id'] = $row['id'];
             $_SESSION['email'] = $row['email'];
             $_SESSION['fullname'] = $row['fullname'];
             header("Location: ../../app/Views/user/home.php");
@@ -63,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <h1 class="card-title">Welcome Back!</h1>
         <p class="card-sub">ចូលប្រើប្រាស់ – Login to your account</p>
         <?php if (!empty($err)): ?>
-        <p style="color:red; text-align:center;"><?= htmlspecialchars($err) ?></p>
+            <p style="color:red; text-align:center;"><?= htmlspecialchars($err) ?></p>
         <?php endif; ?>
 
         <form id="loginForm" novalidate method="POST">
