@@ -1,5 +1,5 @@
 <?php
-    require_once __DIR__ . "../../../Models/user/Customer.php";
+    require_once __DIR__ . "/../../Models/user/Customer.php";
     class CustomerController{
         private $CustomerModel;
         public function __construct($customer)

@@ -13,7 +13,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         //     $_SESSION['email'] = $Email;//ចាប់ Email user
         //     header("Location: ../admin/dashboard.php");
         // exit(); Not hashed password
-        if (password_verify($Password, $row['password'])) { // ✅ correct way to use with hashes password
+        if (password_verify($Password, $row['password'])) {
+            $_SESSION['id'] = $row['id'];
             $_SESSION['email'] = $row['email'];
             $_SESSION['fullname'] = $row['fullname'];
             header("Location: ../../app/Views/user/home.php");
@@ -63,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <h1 class="card-title">Welcome Back!</h1>
         <p class="card-sub">ចូលប្រើប្រាស់ – Login to your account</p>
         <?php if (!empty($err)): ?>
-        <p style="color:red; text-align:center;"><?= htmlspecialchars($err) ?></p>
+            <p style="color:red; text-align:center;"><?= htmlspecialchars($err) ?></p>
         <?php endif; ?>
 
         <form id="loginForm" novalidate method="POST">
@@ -128,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <!-- Back to Home -->
-    <a href="../../test.php" class="back-link">
+    <a href="../../" class="back-link">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
             stroke-linecap="round" stroke-linejoin="round">
             <line x1="19" y1="12" x2="5" y2="12" />
