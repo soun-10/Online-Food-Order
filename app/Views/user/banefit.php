@@ -1,8 +1,22 @@
 <?php
 
     require_once __DIR__ . "../../../Controllers/admin/CategoriesController.php";
+    require_once __DIR__ . "/../../Controllers/admin/NewFoodController.php";
+
+    $category_id = $_GET['category_id'] ?? null;
+
+$newFoodController = new NewFoodController($con);
+
+// if category selected → filter
+if ($category_id) {
+    $newFood = $newFoodController->getByCategory($category_id);
+} else {
+    $newFood = $newFoodController->show();
+}
+
     $Category = new CategoriesController($con);
     $result = $Category->show();
+    
     $totalitem = $Category -> countOrders();
     
     
@@ -29,7 +43,7 @@
         <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             <?php foreach($result as $food): ?>
 
-            <a href="foodorder_page.php?id=<?= $food['id']; ?>"
+            <a href="foodorder_page.php?category_id=<?= $food['id']; ?>"
                 class="bg-white rounded-2xl shadow p-4 hover:shadow-lg transition-shadow duration-300 block">
 
                 <!-- Image -->

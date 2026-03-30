@@ -6,8 +6,13 @@ if (!isset($_SESSION["username"])) {
     exit;
 }
 require_once __DIR__ . "/../../Controllers/admin/NewFoodController.php";
+require_once __DIR__ . "/../../Controllers/admin/CategoriesController.php";
 $newFoodController = new NewFoodController($con);
 $newFoods = $newFoodController->show();
+
+$Category = new CategoriesController($con);
+$result = $Category->show();
+
 
 if (isset($_POST['food_name_english'])) {
 
@@ -16,6 +21,7 @@ if (isset($_POST['food_name_english'])) {
     $price = $_POST["price"];
     $food_type = $_POST["food_type"];
     $descrip= $_POST["descrip"];
+    $category_id = $_POST["category_id"];
 
     $photo = basename($_FILES["photo"]["name"]);
 
@@ -31,6 +37,7 @@ if (isset($_POST['food_name_english'])) {
             $photoDirectory,
             $food_type,
             $descrip,
+            $category_id
         );
 
         header("Location: newfood.php");
@@ -102,7 +109,8 @@ if (isset($_POST['food_name_english'])) {
                                 <th class="p-4">Food Name (English)</th>
                                 <th class="p-4">Food Name (Khmer)</th>
                                 <th class="p-4">Price</th>
-                                <th class="p-4">Status</th>
+                                <th class="p-4">Food IDCode</th>
+                                <th class="p-4">Food Type</th>
                                 <th class="p-4">Description</th>
                                 <th class="p-4 text-center">Action</th>
                             </tr>
@@ -137,8 +145,10 @@ if (isset($_POST['food_name_english'])) {
                                 <td class="py-4 text-sm text-gray-700">
                                     <?php echo $newfood['price']; ?>
                                 </td>
+                                <td class="py-4 text-sm text-gray-700">
+                                    <?php echo $newfood['category_id']; ?>
 
-                                <!-- Status -->
+                                    <!-- Status -->
                                 <td class="py-4">
                                     <span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-600">
                                         <?php echo $newfood['food_type']; ?>
@@ -203,6 +213,14 @@ if (isset($_POST['food_name_english'])) {
                 <input type="text" name="food_name_khmer" placeholder="Food Name"
                     class="w-full border p-2 rounded mb-3">
                 <input type="text" name="price" placeholder="Price" class="w-full border p-2 rounded mb-3">
+
+                <select name="category_id" class="w-full border p-2 rounded mb-3">
+                    <?php foreach ($result as $category): ?>
+                    <option value="<?= $category['id']; ?>">
+                        <?= $category['category']; ?>
+                    </option>
+                    <?php endforeach; ?>
+                </select>
 
                 <input type="file" name="photo" class="w-full border p-2 rounded mb-3">
 

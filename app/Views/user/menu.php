@@ -1,8 +1,10 @@
 <?php
     session_start();
     require_once __DIR__ . "/../../Controllers/admin/NewFoodController.php";
+
 $newFoodController = new NewFoodController($con);
 $newFoods = $newFoodController->show();
+
 ?>
 
 <!DOCTYPE html>
@@ -25,57 +27,111 @@ $newFoods = $newFoodController->show();
 </head>
 
 <body>
+    <div>
+        <?php include __DIR__ . "/homenewbar.php"; ?>
+    </div>
 
+    <div class="w-full max-w-[1400px] mx-auto px-4 py-6">
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <!-- Page Title -->
+        <div class="mb-6">
+            <h1 class="text-3xl font-bold text-blue-800 text-left">
+                <i class="fa-solid fa-dumpster-fire"></i>
+                Our Delicious Foods
+            </h1>
+            <p class="text-gray-500 text-sm mt-1 text-left">
+                Search your favorite food and enjoy
+            </p>
+        </div>
 
-        <?php foreach ($newFoods as $newfood): ?>
+        <!-- Search Box -->
+        <form method="GET" class="mb-8 flex justify-center">
+            <div class="relative w-full ">
 
-        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300">
+                <input type="text" name="search" placeholder="Search food..."
+                    class="w-full pl-10 pr-4 py-3 border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    value="<?= $_GET['search'] ?? '' ?>">
 
-            <img src="/Online-Food-Order/public/image/newfood/<?php echo $newfood['photo']; ?>"
-                class="w-full h-40 object-cover" alt="Food image">
-
-            <div class="p-4 space-y-1">
-
-                <h3 class="text-lg font-semibold text-gray-800">
-                    <?php echo $newfood['food_name_english']; ?>
-                </h3>
-
-                <p class="text-sm text-gray-500">
-                    <?php echo $newfood['food_name_khmer']; ?>
-                </p>
-
-                <p class="text-green-600 font-bold">
-                    $<?php echo $newfood['price']; ?>
-                </p>
-
-                <p class="text-sm text-gray-600 line-clamp-2">
-                    <?php echo $newfood['descrip']; ?>
-                </p>
-
-                <?php $type = $newfood['food_type'];
-                    $badgeClass = match ($type) {
-                    'Vegetarian' => 'bg-green-100 text-green-700',
-                    'Non-Vegetarian' => 'bg-blue-100 text-blue-700',
-                    'Mind' => 'bg-red-100 text-red-700',
-                    default => 'bg-gray-100 text-gray-700'
-                };
-                    ?>
-
-                <span class="inline-block mt-2 px-2 py-1 text-xs font-medium rounded-full <?= $badgeClass ?>">
-                    <?= $type ?>
+                <!-- Icon -->
+                <span class="absolute left-3 top-3.5 text-gray-400">
+                    🔍
                 </span>
 
-                <button class="w-full mt-3 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg transition">
-                    Add to Cart
-                </button>
+            </div>
+        </form>
+
+        <div class="max-w-8xl mx-auto px-4 py-6">
+
+            <!-- Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+
+                <?php foreach ($newFoods as $newfood): ?>
+
+                <div
+                    class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition duration-300 overflow-hidden group flex flex-col border border-gray-100">
+
+                    <!-- Image -->
+                    <div class="relative h-44 overflow-hidden">
+                        <img src="/Online-Food-Order/public/image/newfood/<?php echo $newfood['photo']; ?>"
+                            class="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                            alt="Food image">
+
+                        <!-- Price badge on image -->
+                        <div class="absolute top-3 right-3 bg-black/70 text-white text-xs px-3 py-1 rounded-full">
+                            $<?php echo $newfood['price']; ?>
+                        </div>
+                    </div>
+
+                    <!-- Content -->
+                    <div class="p-4 flex flex-col flex-1">
+
+                        <!-- Title -->
+                        <h3 class="text-lg font-bold text-gray-900">
+                            <?php echo $newfood['food_name_english']; ?>
+                        </h3>
+
+                        <p class="text-sm text-gray-500 mb-2">
+                            <?php echo $newfood['food_name_khmer']; ?>
+                        </p>
+
+                        <!-- Description -->
+                        <p class="text-sm text-gray-600 line-clamp-2 mb-3">
+                            <?php echo $newfood['descrip']; ?>
+                        </p>
+
+                        <!-- Type badge -->
+                        <?php 
+                    $type = $newfood['food_type'];
+                    $badgeClass = match ($type) {
+                        'Vegetarian' => 'bg-green-100 text-green-700',
+                        'Non-Vegetarian' => 'bg-blue-100 text-blue-700',
+                        default => 'bg-gray-100 text-gray-700'
+                    };
+                ?>
+
+                        <div class="mb-4">
+                            <span
+                                class="inline-flex items-center px-3 py-1 text-xs font-semibold rounded-full <?= $badgeClass ?>">
+                                <?= $type ?>
+                            </span>
+                        </div>
+
+                        <!-- Button -->
+                        <button
+                            class="mt-auto w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium py-2.5 rounded-xl transition duration-300 active:scale-95 shadow-md">
+                            Add to Cart
+                        </button>
+
+                    </div>
+                </div>
+
+                <?php endforeach; ?>
 
             </div>
         </div>
-
-        <?php endforeach; ?>
-
+    </div>
+    <div>
+        <?php include __DIR__ . "/footer.php"; ?>
     </div>
 </body>
 

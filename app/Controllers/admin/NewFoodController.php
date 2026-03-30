@@ -7,16 +7,16 @@ class NewFoodController
         {
             $this->newFoodModel = new NewFood($db);
         }
-        public function store ( $food_name_english, $food_name_khmer, $price, $photo, $food_type, $description, )
+        public function store ( $food_name_english, $food_name_khmer, $price, $photo, $food_type, $descrip, $category_id )
         {
-            $this->newFoodModel->createNewFood($food_name_english, $food_name_khmer, $price, $photo, $food_type, $description);
+            $this->newFoodModel->createNewFood($food_name_english, $food_name_khmer, $price, $photo, $food_type, $descrip, $category_id);
         }
         public function show(){
             return $this->newFoodModel->getAllNewFoods();
         }
-        public function getNewFoodById($id){
-            return $this->newFoodModel->getNewFoodById($id);
-        }
+        public function getByCategory($category_id){
+    return $this->newFoodModel->getFoodsByCategory($category_id);
+}
         public function updateNewFood($id, $food_name_english, $food_name_khmer, $price, $photo, $food_type, $description, $category_id){
             $this->newFoodModel->updateNewFood($food_name_english, $food_name_khmer, $price, $photo, $food_type, $description, $category_id, $id);
         }

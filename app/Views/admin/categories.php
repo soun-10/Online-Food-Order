@@ -15,7 +15,7 @@ $totalcategory = $Category -> countOrders();
 if (isset($_POST['food_name'])) {
 
     $food_name = $_POST["food_name"];
-    $category = $_POST["categorye"] ?? '';
+    $category = $_POST["category"] ?? '';
     $status = $_POST["status"];
 
     $photo_url = basename($_FILES["photo"]["name"]);
@@ -86,8 +86,13 @@ if (isset($_POST['food_name'])) {
                 <form method="POST" action="" class="space-y-3" enctype="multipart/form-data">
                     <input type="text" name="food_name" placeholder="Food Name"
                         class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
-                    <input type="text" name="categorye" placeholder="Category"
+                    <select name="category"
                         class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
+                        <option value="FastFoods">FastFoods</option>
+                        <option value="KhmerFoods">KhmerFoods</option>
+                        <option value="Drinks">Drinks</option>
+                        <option value="Dessert">Dessert</option>
+                    </select>
 
                     <select name="status"
                         class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
