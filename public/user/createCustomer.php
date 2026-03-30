@@ -171,7 +171,7 @@ if (isset($_POST["fullname"])) {
         <p class="login-link">Already have an account? <a href="loginCustomer.php">Login here</a></p>
     </div>
 
-    <a href="../../test.php" class="back-link">
+    <a href="../../" class="back-link">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
             stroke-linecap="round" stroke-linejoin="round">
             <line x1="19" y1="12" x2="5" y2="12" />
