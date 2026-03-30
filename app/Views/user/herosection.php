@@ -35,12 +35,6 @@ $userlogin = new UserLoginController($con);
                         class="bg-blue-800 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-800 transition duration-300">
                         Order Now
                     </a>
-
-                    <!-- Signup -->
-                    <a href="../../../public/user/createCustomer.php"
-                        class="border border-blue-500 text-purple-800 px-6 py-3 rounded-lg font-semibold hover:bg-blue-800 hover:text-white transition">
-                        Sign Up
-                    </a>
                 </div>
             </div>
 
