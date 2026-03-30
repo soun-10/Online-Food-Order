@@ -25,56 +25,12 @@ $totalCustomers = $CustomerController->countOrders();
 
 <body class="bg-gray-100 font-sans flex min-h-screen overflow-hidden">
     <nav class="w-64 bg-blue-700 text-white flex flex-col sticky top-0 h-screen">
-        <!-- Logo -->
-        <div class="px-6 py-5 border-b border-blue-600 text-center">
-            <p class="text-xl font-bold"><i class="fas fa-store"></i>Online Food Order</p>
-            <p class="text-xs text-blue-200 mt-1">Admin Panel</p>
-        </div>
-        <!-- Links -->
-        <div class="flex-1 px-2 py-4 space-y-1">
-            <a href="dashboard.php"
-                class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-600 font-semibold">
-                <i class="fas fa-gauge-high w-5 text-center"></i> Dashboard
-            </a>
-            <a href="categories.php" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-600 transition">
-                <i class="fas fa-tag w-5 text-center"></i> Categories
-            </a>
-            <a href="orders.php" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-600 transition">
-                <i class="fas fa-cart-shopping w-5 text-center"></i> Orders
-            </a>
-            <a href="customers.php" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-blue-600 transition">
-                <i class="fas fa-users w-5 text-center"></i> Customers
-            </a>
-            <a href="reports.php" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-600 transition">
-                <i class="fas fa-chart-line w-5 text-center"></i> Reports
-            </a>
-            <a href="settings.php" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-600 transition">
-                <i class="fas fa-gear w-5 text-center"></i> Settings
-            </a>
-        </div>
-        <!-- Logout -->
-        <div class="px-2 py-4 border-t border-blue-600">
-            <a href="../../../public/admin/index.php"
-                class="flex items-center gap-3 px-4 py-3 rounded-lg text-red-300 hover:bg-blue-600 transition">
-                <i class="fas fa-right-from-bracket w-5 text-center"></i> Logout
-            </a>
-        </div>
+        <?php include __DIR__ . "/menubar.php"; ?>
     </nav>
     <!-- // admin header -->
     <main class="flex-1 flex flex-col overflow-y-auto h-screen">
 
-        <!-- Topbar -->
-        <header class="bg-white shadow-sm px-8 py-4 flex justify-end items-center gap-3 sticky top-0 z-10">
-            <span class="text-gray-500 text-sm">Welcome,
-                <span class="font-semibold text-gray-700">
-                    <?php echo htmlspecialchars($_SESSION['username'], ENT_QUOTES, 'UTF-8'); ?>
-                </span>
-            </span>
-            <div class="flex items-center gap-1 cursor-pointer text-gray-500 hover:text-gray-700">
-                <i class="fas fa-circle-user text-2xl"></i>
-                <i class="fas fa-caret-down text-xs"></i>
-            </div>
-        </header>
+
 
         <div class="p-6 flex flex-col gap-6">
 
@@ -110,21 +66,16 @@ $totalCustomers = $CustomerController->countOrders();
             <div class="bg-white rounded-lg shadow-sm p-4">
                 <form method="GET" action="customers.php" class="flex flex-wrap gap-3 items-center">
                     <div class="flex-1 min-w-[200px]">
-                        <input
-                            type="text"
-                            name="search"
+                        <input type="text" name="search"
                             value="<?php echo htmlspecialchars($_GET['search'] ?? '', ENT_QUOTES, 'UTF-8'); ?>"
-                            placeholder="Search by name, email or phone..."
-                            class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm
+                            placeholder="Search by name, email or phone..." class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm
                                    focus:outline-none focus:ring-2 focus:ring-blue-400">
                     </div>
-                    <button type="submit"
-                        class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white
+                    <button type="submit" class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white
                                text-sm font-medium px-5 py-2 rounded-lg transition">
                         <i class="fas fa-magnifying-glass"></i> Search
                     </button>
-                    <a href="customers.php"
-                        class="flex items-center justify-center bg-gray-200 hover:bg-gray-300
+                    <a href="customers.php" class="flex items-center justify-center bg-gray-200 hover:bg-gray-300
                                text-gray-600 text-sm font-medium px-4 py-2 rounded-lg transition">
                         <i class="fas fa-xmark"></i>
                     </a>
@@ -153,33 +104,35 @@ $totalCustomers = $CustomerController->countOrders();
                             $no = 1;
                             foreach ($return as $cusomter) {
                             ?>
-                                <tr>
-                                    <td class="px-5 py-3 text-xs font-semibold">
-                                        <?php echo $no++  ?>
-                                    </td>
-                                    <td class="px-5 py-3 text-xs font-semibold">
-                                        <?php echo $cusomter["fullname"] ?>
-                                    </td>
-                                    <td class="px-5 py-3 text-xs font-semibold">
-                                        <?php echo $cusomter["email"] ?>
-                                    </td>
-                                    <td class="px-5 py-3 text-xs font-semibold">
-                                        <?php echo $cusomter["phonenumber"] ?>
-                                    </td>
-                                    <td class="px-5 py-3 text-xs font-semibold">
-                                        <?php 
+                            <tr>
+                                <td class="px-5 py-3 text-xs font-semibold">
+                                    <?php echo $no++  ?>
+                                </td>
+                                <td class="px-5 py-3 text-xs font-semibold">
+                                    <?php echo $cusomter["fullname"] ?>
+                                </td>
+                                <td class="px-5 py-3 text-xs font-semibold">
+                                    <?php echo $cusomter["email"] ?>
+                                </td>
+                                <td class="px-5 py-3 text-xs font-semibold">
+                                    <?php echo $cusomter["phonenumber"] ?>
+                                </td>
+                                <td class="px-5 py-3 text-xs font-semibold">
+                                    <?php 
                                         echo !empty($cusomter['created_at'])? date('d-M-Y g:iA', strtotime($cusomter['created_at'])): '—'; 
                                         ?>
-                                    </td>
-                                    <td class="px-5 py-4">
-                                        <div class="flex items-center gap-2">
-                                            <!-- Delete -->
-                                            <a href="deleteCustomers.php?id=<?php echo $cusomter["id"]; ?>" onclick="return confirm('Are you sure you want to delete this item?');" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md">
-                                                <i class="fas fa-trash text-xs"></i>
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
+                                </td>
+                                <td class="px-5 py-4">
+                                    <div class="flex items-center gap-2">
+                                        <!-- Delete -->
+                                        <a href="deleteCustomers.php?id=<?php echo $cusomter["id"]; ?>"
+                                            onclick="return confirm('Are you sure you want to delete this item?');"
+                                            class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md">
+                                            <i class="fas fa-trash text-xs"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
                             <?php
                             }
                             ?>

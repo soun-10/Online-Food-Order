@@ -28,7 +28,9 @@
         <!-- Food Grid -->
         <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             <?php foreach($result as $food): ?>
-            <div class="bg-white rounded-2xl shadow p-4 hover:shadow-lg transition-shadow duration-300">
+
+            <a href="foodorder_page.php?id=<?= $food['id']; ?>"
+                class="bg-white rounded-2xl shadow p-4 hover:shadow-lg transition-shadow duration-300 block">
 
                 <!-- Image -->
                 <div class="flex justify-center mb-3">
@@ -37,14 +39,19 @@
                 </div>
 
                 <!-- Name -->
-                <h3 class="text-gray-800 font-semibold text-center"><?= $food['food_name'] ?></h3>
+                <h3 class="text-gray-800 font-semibold text-center">
+                    <?= $food['food_name'] ?>
+                </h3>
 
                 <!-- Category -->
                 <div class="mt-2 flex justify-center">
-                    <span class="text-green-600 font-bold"><?= $food['category'] ?></span>
+                    <span class="text-green-600 font-bold">
+                        <?= $food['category'] ?>
+                    </span>
                 </div>
 
-            </div>
+            </a>
+
             <?php endforeach; ?>
         </div>
     </div>
