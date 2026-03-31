@@ -5,4 +5,4 @@
 2. ត្រូវ download WampServer (សម្រាប់ Windows: https://sourceforge.net/projects/wampserver/files/WampServer%203/WampServer%203.0.0/wampserver3.4.0_x64.exe/download) copy link នេះដូចគ្នា ហើយរងចាំវានឹង5វិនាទី វានឹង Download មក
 3. បើក Command Prompt រូចវាយ (cd C:\wamp64\www) រួច Enter បន្ទាប់មក វាយ (git clone https://github.com/soun-10/Online-Food-Order.git) ហើយ Enter រង់ចាំវាដើរឲ្យពេញ
 4. Import MySQL ចូលដោយដាក់ឈ្មោះ onine_food_order_app រូចយក file online_food_order_app.sql យកទៅ import
-4. បើក Brower ណាមួយ រូចវាយ (http://localhost/Online-Food-Order/) យើងអាចប្រើប្រាស់ App បានជាការស្រច។
+5. បើក Brower ណាមួយ រូចវាយ (http://localhost/Online-Food-Order/) យើងអាចប្រើប្រាស់ App បានជាការស្រច។
