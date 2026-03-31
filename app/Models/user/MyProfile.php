@@ -15,28 +15,26 @@ class MyProfile
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
-
-    // public function updateProfile($id, $fullname, $phonenumber, $password = null, $profile_image = null)
-    // {
-    //     if ($password && $profile_image) {
-    //         $hashed = password_hash($password, PASSWORD_BCRYPT);
-    //         $stmt = $this->con->prepare("UPDATE customers SET fullname=:fn, phonenumber=:pn, password=:pw, profile_image=:img WHERE id=:id");
-    //         $stmt->bindParam(":pw",  $hashed);
-    //         $stmt->bindParam(":img", $profile_image);
-    //     } elseif ($password) {
-    //         $hashed = password_hash($password, PASSWORD_BCRYPT);
-    //         $stmt = $this->con->prepare("UPDATE customers SET fullname=:fn, phonenumber=:pn, password=:pw WHERE id=:id");
-    //         $stmt->bindParam(":pw", $hashed);
-    //     } elseif ($profile_image) {
-    //         $stmt = $this->con->prepare("UPDATE customers SET fullname=:fn, phonenumber=:pn, profile_image=:img WHERE id=:id");
-    //         $stmt->bindParam(":img", $profile_image);
-    //     } else {
-    //         $stmt = $this->con->prepare("UPDATE customers SET fullname=:fn, phonenumber=:pn WHERE id=:id");
-    //     }
-    //     $stmt->bindParam(":fn", $fullname);
-    //     $stmt->bindParam(":pn", $phonenumber);
-    //     $stmt->bindParam(":id", $id);
-    //     return $stmt->execute();
-    // }
+    public function updateProfile($id, $fullname, $phonenumber, $password = null, $photo_url = null){
+        if ($password && $photo_url) {
+            $hashed = password_hash($password, PASSWORD_BCRYPT);
+            $stmt = $this->con->prepare("UPDATE customers SET fullname=:fn, phonenumber=:pn, password=:pw, photo_url=:pu WHERE id=:id");
+            $stmt->bindParam(":pw", $hashed);
+            $stmt->bindParam(":pu", $photo_url);
+        } elseif ($password) {
+            $hashed = password_hash($password, PASSWORD_BCRYPT);
+            $stmt = $this->con->prepare("UPDATE customers SET fullname=:fn, phonenumber=:pn, password=:pw WHERE id=:id");
+            $stmt->bindParam(":pw", $hashed);
+        } elseif ($photo_url) {
+            $stmt = $this->con->prepare("UPDATE customers SET fullname=:fn, phonenumber=:pn, photo_url=:pu WHERE id=:id");
+            $stmt->bindParam(":pu", $photo_url);
+        } else {
+            $stmt = $this->con->prepare("UPDATE customers SET fullname=:fn, phonenumber=:pn WHERE id=:id");
+        }
+        $stmt->bindParam(":fn", $fullname);
+        $stmt->bindParam(":pn", $phonenumber);
+        $stmt->bindParam(":id", $id);
+        return $stmt->execute();
+    }
 }
 ?>

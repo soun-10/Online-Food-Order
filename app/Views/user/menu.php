@@ -27,9 +27,73 @@ $newFoods = $newFoodController->show();
 </head>
 
 <body>
-    <div>
-        <?php include __DIR__ . "/homenewbar.php"; ?>
-    </div>
+    <nav class="bg-blue-800 px-8 py-4 flex items-center justify-between sticky top-0 z-50 shadow-lg">
+            <!-- Logo -->
+            <div class="flex items-center gap-2 text-white font-bold text-xl tracking-wide">
+                <i class="fas fa-store text-blue-300"></i>
+                <span>Khmer Food Delivery</span>
+            </div>
+            <!-- Nav Links -->
+            <div class="flex items-center gap-2">
+                <a href="home.php" class="flex items-center gap-1.5 text-sm font-medium text-white bg-blue-500 px-4 py-2 rounded-lg transition duration-200">
+                    <i class="fas fa-home text-xs"></i>
+                    Home
+                </a>
+                <a href="menu.php" class="flex items-center gap-1.5 text-sm font-medium text-white hover:bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded-lg transition duration-200">
+                    <i class="fa-solid fa-bowl-food"></i>
+                    Food Menu
+                </a>
+                <a href="cart.php"
+                    class="flex items-center gap-1.5 text-sm font-medium text-blue-100 hover:text-white hover:bg-blue-700 px-4 py-2 rounded-lg transition duration-200">
+                    <i class="fas fa-cart-shopping text-xs"></i>
+                    Cart
+                </a>
+
+                <?php if (isset($_SESSION['id'])): ?>
+                    <div class="relative" id="profileWrapper">
+                        <button onclick="toggleProfileDropdown()"
+                            class="flex items-center gap-2 text-sm font-medium text-white bg-blue-700 hover:bg-blue-600 px-4 py-2 rounded-lg transition duration-200">
+                            <?php if (!empty($customer['photo_url'])): ?>
+                                <img src="../../../public/Image/customerProfile/<?= htmlspecialchars($customer['photo_url']) ?>"
+                                    class="w-7 h-7 rounded-full object-cover" />
+                            <?php else: ?>
+                                <span class="w-7 h-7 rounded-full bg-white text-blue-800 font-bold flex items-center justify-center text-xs uppercase">
+                                    <?= htmlspecialchars(mb_substr($_SESSION['fullname'], 0, 1)) ?>
+                                </span>
+                            <?php endif; ?>
+                            <span><?= htmlspecialchars($_SESSION['fullname']) ?></span>
+                            <i class="fas fa-chevron-down text-xs"></i>
+                        </button>
+                        <div id="profileDropdownMenu"
+                            class="hidden absolute right-0 mt-2 w-44 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
+                            <a href="myProfile.php"
+                                class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 rounded-t-lg">
+                                <i class="fas fa-user text-blue-600 text-xs"></i>
+                                My Profile
+                            </a>
+                            <hr class="border-gray-100">
+                            <a href="logout.php"
+                                class="flex items-center gap-2 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 rounded-b-lg">
+                                <i class="fas fa-right-from-bracket text-xs"></i>
+                                Logout
+                            </a>
+                        </div>
+                    </div>
+
+                <?php else: ?>
+                    <a href="loginCustomer.php"
+                        class="flex items-center gap-1.5 text-sm font-medium text-blue-100 hover:text-white hover:bg-blue-700 px-4 py-2 rounded-lg transition duration-200">
+                        <i class="fas fa-right-to-bracket text-xs"></i>
+                        Login
+                    </a>
+                    <a href="../../../public/user/createCustomer.php"
+                        class="flex items-center gap-1.5 text-sm font-medium text-blue-800 bg-white hover:bg-blue-50 px-4 py-2 rounded-lg transition duration-200">
+                        <i class="fas fa-user-plus text-xs"></i>
+                        Sign Up
+                    </a>
+                <?php endif; ?>
+            </div>
+        </nav>
 
     <div class="w-full max-w-[1400px] mx-auto px-4 py-6">
 

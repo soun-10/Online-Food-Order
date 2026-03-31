@@ -1,21 +1,33 @@
 <?php
-Session_start();
+session_start();
 require_once __DIR__ . "/../../app/Controllers/user/CustomerController.php";
+
 $Customer = new CustomerController($con);
 $msg = "";
+
 if (isset($_POST["fullname"])) {
-  $fullname         = $_POST['fullname'];
-  $email            = $_POST['email'];
-  $phonenumber      = $_POST['phone'];
-  $password         = $_POST['password'];
-  $confirm_password = $_POST['confirmPw'];
-  if ($confirm_password === $password) {
-    $Customer->Create($fullname, $email, $phonenumber, $password);
-    header("Location: ../../Views/user/home.php");
-    exit();
-  } else {
-    $msg = "Please input confirm password again";
-  }
+    $fullname         = $_POST['fullname'];
+    $email            = $_POST['email'];
+    $phonenumber      = $_POST['phone'];
+    $password         = $_POST['password'];
+    $confirm_password = $_POST['confirmPw'];
+
+    if ($confirm_password === $password) {
+        $Customer->Create($fullname, $email, $phonenumber, $password);
+
+        // ✅ Set session ភ្លាមបន្ទាប់ Create
+        $newUser = $Customer->Login($email);
+        if ($newUser) {
+            $row = $newUser[0];
+            $_SESSION['id']       = $row['id'];
+            $_SESSION['fullname'] = $row['fullname'];
+        }
+
+        header("Location: ../../app/Views/user/home.php");
+        exit();
+    } else {
+        $msg = "Please input confirm password again";
+    }
 }
 ?>
 
@@ -52,7 +64,7 @@ if (isset($_POST["fullname"])) {
         <p class="card-sub">បង្កើតគណនី – <span>Join us today!</span></p>
 
         <?php if ($msg): ?>
-        <p style="color:red; text-align:center;"><?= htmlspecialchars($msg) ?></p>
+            <p style="color:red; text-align:center;"><?= htmlspecialchars($msg) ?></p>
         <?php endif; ?>
 
         <form id="signupForm" novalidate method="post">

@@ -13,33 +13,39 @@ $customer  = $MyProfile->getById($_SESSION['id']);
 $msg       = "";
 $msgType   = "";
 
-// Handle POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $fullname    = $_POST['fullname']          ?? '';
-  $phonenumber = $_POST['phonenumber']       ?? '';
-  $newPassword = $_POST['new_password']      ?? '';
-  $confirmPw   = $_POST['confirm_password']  ?? '';
+  $fullname    = $_POST['fullname']         ?? '';
+  $phonenumber = $_POST['phonenumber']      ?? '';
+  $newPassword = $_POST['new_password']     ?? '';
+  $confirmPw   = $_POST['confirm_password'] ?? '';
 
   if ($newPassword && $newPassword !== $confirmPw) {
     $msg     = "Password and Confirm Password do not match!";
     $msgType = "error";
   } else {
-    // Handle image upload
-    $profile_image = null;
-    if (!empty($_FILES['profile_image']['name'])) {
-      $uploadDir  = __DIR__ . "/../../../public/Image/profile/";
-      $fileName   = time() . "_" . basename($_FILES['profile_image']['name']);
-      if (move_uploaded_file($_FILES['profile_image']['tmp_name'], $uploadDir . $fileName)) {
-        $profile_image = $fileName;
+    $photo_url = null;
+    if (!empty($_FILES['photo_url']['name'])) {
+      $uploadDir = __DIR__ . "/../../../public/Image/customerProfile/";
+      $fileName  = time() . "_" . basename($_FILES['photo_url']['name']);
+      if (move_uploaded_file($_FILES['photo_url']['tmp_name'], $uploadDir . $fileName)) {
+
+        // ✅ លុបរូបចាស់ចោល ប្រសិន មានរូបចាស់
+        if (!empty($customer['photo_url'])) {
+          $oldFile = $uploadDir . $customer['photo_url'];
+          if (file_exists($oldFile)) {
+            unlink($oldFile); // លុប file ចាស់
+          }
+        }
+
+        $photo_url = $fileName;
       }
     }
 
     $password = $newPassword ?: null;
-    $MyProfile->updateProfile($_SESSION['id'], $fullname, $phonenumber, $password, $profile_image);
+    $MyProfile->updateProfile($_SESSION['id'], $fullname, $phonenumber, $password, $photo_url);
 
-    // Update session
     $_SESSION['fullname'] = $fullname;
-    $customer = $MyProfile->getById($_SESSION['id']); // reload
+    $customer = $MyProfile->getById($_SESSION['id']);
 
     $msg     = "Profile updated successfully!";
     $msgType = "success";
@@ -66,34 +72,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </div>
       <!-- Nav Links -->
       <div class="flex items-center gap-2">
-        <a href="home.php"
-          class="flex items-center gap-1.5 text-sm font-medium text-white hover:bg-blue-500 px-4 py-2 rounded-lg transition duration-200">
+        <a href="home.php" class="flex items-center gap-1.5 text-sm font-medium text-white hover:bg-blue-500 px-4 py-2 rounded-lg transition duration-200">
           <i class="fas fa-home text-xs"></i>
           Home
+        </a>
+        <a href="menu.php" class="flex items-center gap-1.5 text-sm font-medium text-white hover:bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded-lg transition duration-200">
+          <i class="fa-solid fa-bowl-food"></i>
+          Food Menu
         </a>
         <a href="cart.php"
           class="flex items-center gap-1.5 text-sm font-medium text-blue-100 hover:text-white hover:bg-blue-700 px-4 py-2 rounded-lg transition duration-200">
           <i class="fas fa-cart-shopping text-xs"></i>
           Cart
         </a>
+
         <?php if (isset($_SESSION['id'])): ?>
-          <!-- ✅ Logged in: Profile Dropdown -->
           <div class="relative" id="profileWrapper">
-            <button
-              onclick="toggleProfileDropdown()"
+            <button onclick="toggleProfileDropdown()"
               class="flex items-center gap-2 text-sm font-medium text-white bg-blue-700 hover:bg-blue-600 px-4 py-2 rounded-lg transition duration-200">
-              <!-- Initial Circle -->
-              <span class="w-7 h-7 rounded-full bg-white text-blue-800 font-bold flex items-center justify-center text-xs uppercase">
-                <?= htmlspecialchars(mb_substr($_SESSION['fullname'], 0, 1)) ?>
-              </span>
-              <!-- Name -->
+              <?php if (!empty($customer['photo_url'])): ?>
+                <img src="../../../public/Image/customerProfile/<?= htmlspecialchars($customer['photo_url']) ?>"
+                  class="w-7 h-7 rounded-full object-cover" />
+              <?php else: ?>
+                <span class="w-7 h-7 rounded-full bg-white text-blue-800 font-bold flex items-center justify-center text-xs uppercase">
+                  <?= htmlspecialchars(mb_substr($_SESSION['fullname'], 0, 1)) ?>
+                </span>
+              <?php endif; ?>
               <span><?= htmlspecialchars($_SESSION['fullname']) ?></span>
               <i class="fas fa-chevron-down text-xs"></i>
             </button>
-
-            <!-- Dropdown Menu -->
-            <div
-              id="profileDropdownMenu"
+            <div id="profileDropdownMenu"
               class="hidden absolute right-0 mt-2 w-44 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
               <a href="myProfile.php"
                 class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 rounded-t-lg">
@@ -110,7 +118,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           </div>
 
         <?php else: ?>
-          <!-- Not logged in: Sign Up button -->
+          <a href="loginCustomer.php"
+            class="flex items-center gap-1.5 text-sm font-medium text-blue-100 hover:text-white hover:bg-blue-700 px-4 py-2 rounded-lg transition duration-200">
+            <i class="fas fa-right-to-bracket text-xs"></i>
+            Login
+          </a>
           <a href="../../../public/user/createCustomer.php"
             class="flex items-center gap-1.5 text-sm font-medium text-blue-800 bg-white hover:bg-blue-50 px-4 py-2 rounded-lg transition duration-200">
             <i class="fas fa-user-plus text-xs"></i>
@@ -132,7 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <!-- Message -->
       <?php if ($msg): ?>
         <div class="mb-4 px-4 py-3 rounded-lg text-sm font-medium
-                <?= $msgType === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' ?>">
+                    <?= $msgType === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' ?>">
           <?= htmlspecialchars($msg) ?>
         </div>
       <?php endif; ?>
@@ -148,13 +160,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
                 <input type="text" name="fullname"
-                  value="<?= htmlspecialchars($customer['fullname']) ?>"
+                  value="<?= htmlspecialchars($customer['fullname'] ?? '') ?>"
                   class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 focus:outline-none focus:border-purple-500" />
               </div>
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
                 <input type="email" name="email"
-                  value="<?= htmlspecialchars($customer['email']) ?>" readonly
+                  value="<?= htmlspecialchars($customer['email'] ?? '') ?>" readonly
                   class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-400 bg-gray-100 cursor-not-allowed focus:outline-none" />
               </div>
             </div>
@@ -164,24 +176,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Phone *</label>
                 <input type="text" name="phonenumber"
-                  value="<?= htmlspecialchars($customer['phonenumber']) ?>"
+                  value="<?= htmlspecialchars($customer['phonenumber'] ?? '') ?>"
                   class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 focus:outline-none focus:border-purple-500" />
               </div>
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Profile Image</label>
                 <div class="flex border border-gray-300 rounded-lg overflow-hidden">
-                  <label for="profile_image"
+                  <label for="photo_url"
                     class="px-4 py-2 bg-gray-50 border-r border-gray-300 text-sm text-gray-700 cursor-pointer hover:bg-gray-100 whitespace-nowrap">
                     Choose File
                   </label>
                   <span class="px-3 py-2 text-sm text-gray-400" id="file-name">No file chosen</span>
-                  <input id="profile_image" type="file" name="profile_image" accept="image/*" class="hidden"
+                  <input id="photo_url" type="file" name="photo_url" accept="image/*" class="hidden"
                     onchange="document.getElementById('file-name').textContent = this.files[0]?.name || 'No file chosen'" />
                 </div>
-                <!-- Current profile image -->
-                <?php if (!empty($customer['profile_image'])): ?>
+                <!-- Current photo -->
+                <?php if (!empty($customer['photo_url'])): ?>
                   <div class="mt-2">
-                    <img src="../../../public/Image/profile/<?= htmlspecialchars($customer['profile_image']) ?>"
+                    <img src="../../../public/Image/customerProfile/<?= htmlspecialchars($customer['photo_url'] ?? '') ?>"
                       class="w-12 h-12 rounded-full object-cover border border-gray-200" />
                   </div>
                 <?php endif; ?>
@@ -214,6 +226,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <!-- Sidebar -->
         <div class="w-56 bg-white rounded-xl p-5 shadow-sm shrink-0">
+          <!-- Avatar -->
+          <div class="flex justify-center mb-4">
+            <?php if (!empty($customer['photo_url'])): ?>
+              <img src="../../../public/Image/customerProfile/<?= htmlspecialchars($customer['photo_url'] ?? '') ?>"
+                class="w-20 h-20 rounded-full object-cover border-2 border-gray-200" />
+            <?php else: ?>
+              <div class="w-20 h-20 rounded-full bg-blue-700 flex items-center justify-center text-white font-bold text-2xl uppercase">
+                <?= mb_substr($customer['fullname'] ?? '?', 0, 1) ?>
+              </div>
+            <?php endif; ?>
+          </div>
           <p class="text-sm font-bold text-gray-800 mb-0.5">Member since:</p>
           <p class="text-sm text-gray-600 mb-4">
             <?= date("F d, Y", strtotime($customer['created_at'])) ?>
@@ -225,6 +248,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </div>
     </div>
   </main>
+
   <script src="../../../public/js/myProfile.js"></script>
 </body>
 

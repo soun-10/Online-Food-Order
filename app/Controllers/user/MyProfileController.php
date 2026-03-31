@@ -15,9 +15,9 @@ class MyProfileController
         return $this->myProfileModel->getById($id);
     }
 
-    // public function updateProfile($id, $fullname, $phonenumber, $password = null, $profile_image = null)
-    // {
-    //     return $this->myProfileModel->updateProfile($id, $fullname, $phonenumber, $password, $profile_image);
-    // }
+     public function updateProfile($id, $fullname, $phonenumber, $password = null, $photo_url = null)
+    {
+        return $this->myProfileModel->updateProfile($id, $fullname, $phonenumber, $password, $photo_url);
+    }
 }
 ?>
