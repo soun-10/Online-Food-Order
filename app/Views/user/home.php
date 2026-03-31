@@ -25,7 +25,7 @@ if (isset($_SESSION['id'])) {
             <!-- Logo -->
             <div class="flex items-center gap-2 text-white font-bold text-xl tracking-wide">
                 <i class="fas fa-store text-blue-300"></i>
-                <span>Khmer Food Delivery</span>
+                <span>Online Food Order</span>
             </div>
             <!-- Nav Links -->
             <div class="flex items-center gap-2">

@@ -4,6 +4,11 @@ require_once __DIR__ . "/../../../config/database.php";
 require_once __DIR__ . "/../../../app/Controllers/admin/NewFoodController.php";
 require_once __DIR__ . "/../../../app/Controllers/user/MyProfileController.php";
 
+if (!isset($_SESSION['id'])) {
+    header("Location: ../../../public/user/loginCustomer.php");
+    exit();
+}
+
 // Load foods
 $newFoodController = new NewFoodController($con);
 $newFoods = $newFoodController->show();
@@ -34,7 +39,7 @@ if (isset($_SESSION['id'])) {
         <!-- Logo -->
         <div class="flex items-center gap-2 text-white font-bold text-xl tracking-wide">
             <i class="fas fa-store text-blue-300"></i>
-            <span>Khmer Food Delivery</span>
+            <span>Online Food Order</span>
         </div>
         <!-- Nav Links -->
         <div class="flex items-center gap-2">
