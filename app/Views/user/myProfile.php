@@ -23,20 +23,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $msg     = "Password and Confirm Password do not match!";
     $msgType = "error";
   } else {
+    // Handle image upload
     $photo_url = null;
     if (!empty($_FILES['photo_url']['name'])) {
       $uploadDir = __DIR__ . "/../../../public/Image/customerProfile/";
       $fileName  = time() . "_" . basename($_FILES['photo_url']['name']);
       if (move_uploaded_file($_FILES['photo_url']['tmp_name'], $uploadDir . $fileName)) {
-
-        // ✅ លុបរូបចាស់ចោល ប្រសិន មានរូបចាស់
+        // លុបរូបចាស់
         if (!empty($customer['photo_url'])) {
           $oldFile = $uploadDir . $customer['photo_url'];
           if (file_exists($oldFile)) {
-            unlink($oldFile); // លុប file ចាស់
+            unlink($oldFile);
           }
         }
-
         $photo_url = $fileName;
       }
     }
@@ -68,15 +67,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <!-- Logo -->
       <div class="flex items-center gap-2 text-white font-bold text-xl tracking-wide">
         <i class="fas fa-store text-blue-300"></i>
-        <span>Online Food Order</span>
+        <span>Khmer Food Delivery</span>
       </div>
       <!-- Nav Links -->
       <div class="flex items-center gap-2">
-        <a href="home.php" class="flex items-center gap-1.5 text-sm font-medium text-white hover:bg-blue-500 px-4 py-2 rounded-lg transition duration-200">
+        <a href="home.php"
+          class="flex items-center gap-1.5 text-sm font-medium text-white hover:bg-blue-500 px-4 py-2 rounded-lg transition duration-200">
           <i class="fas fa-home text-xs"></i>
           Home
         </a>
-        <a href="menu.php" class="flex items-center gap-1.5 text-sm font-medium text-white hover:bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded-lg transition duration-200">
+        <a href="menu.php"
+          class="flex items-center gap-1.5 text-sm font-medium text-white hover:bg-blue-500 px-4 py-2 rounded-lg transition duration-200">
           <i class="fa-solid fa-bowl-food"></i>
           Food Menu
         </a>
@@ -190,7 +191,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                   <input id="photo_url" type="file" name="photo_url" accept="image/*" class="hidden"
                     onchange="document.getElementById('file-name').textContent = this.files[0]?.name || 'No file chosen'" />
                 </div>
-                <!-- Current photo -->
                 <?php if (!empty($customer['photo_url'])): ?>
                   <div class="mt-2">
                     <img src="../../../public/Image/customerProfile/<?= htmlspecialchars($customer['photo_url'] ?? '') ?>"
@@ -226,7 +226,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <!-- Sidebar -->
         <div class="w-56 bg-white rounded-xl p-5 shadow-sm shrink-0">
-          <!-- Avatar -->
           <div class="flex justify-center mb-4">
             <?php if (!empty($customer['photo_url'])): ?>
               <img src="../../../public/Image/customerProfile/<?= htmlspecialchars($customer['photo_url'] ?? '') ?>"
