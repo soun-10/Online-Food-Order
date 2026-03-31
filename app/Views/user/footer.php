@@ -24,9 +24,9 @@
             <div>
                 <h3 class="text-blue-400 font-bold text-xl mb-4">Quick Links</h3>
                 <ul class="space-y-3 text-gray-300 text-sm">
-                    <li><a href="#home" class="hover:text-blue-400 transition">Home</a></li>
-                    <li><a href="#about us" class="hover:text-blue-400 transition">About Us</a></li>
-                    <li><a href="#users" class="hover:text-blue-400 transition">User</a></li>
+                    <li><a href="home.php" class="hover:text-blue-400 transition">Home</a></li>
+                    <li><a href="menu.php" class="hover:text-blue-400 transition">Food Menu</a></li>
+                    <li><a href="cart.php" class="hover:text-blue-400 transition">Cart</a></li>
                 </ul>
             </div>
 

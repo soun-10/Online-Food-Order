@@ -130,6 +130,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?php endif; ?>
             </div>
         </nav>
+        <footer>
+            <?php include __DIR__ . "/footer.php"; ?>
+        </footer>
     </main>
     <script src="../../../public/js/home.js"></script>
 </body>

@@ -1,12 +1,8 @@
 <?php
 session_start();
 require_once __DIR__ . "/../../../config/database.php";
-require_once __DIR__ . "/../../../app/Controllers/user/UserLoginController.php";
-require_once __DIR__ . "/../../../app/Controllers/user/MyProfileController.php"; // ✅ បន្ថែម
+require_once __DIR__ . "/../../../app/Controllers/user/MyProfileController.php";
 
-$userlogin = new UserLoginController($con);
-
-// ✅ Load customer data ប្រសិន login ហើយ
 $customer = [];
 if (isset($_SESSION['id'])) {
     $MyProfile = new MyProfileController($con);
@@ -25,7 +21,7 @@ if (isset($_SESSION['id'])) {
 
 <body>
     <main>
-        <nav>
+        <nav class="bg-blue-800 px-8 py-4 flex items-center justify-between sticky top-0 z-50 shadow-lg">
             <!-- Logo -->
             <div class="flex items-center gap-2 text-white font-bold text-xl tracking-wide">
                 <i class="fas fa-store text-blue-300"></i>
@@ -33,11 +29,13 @@ if (isset($_SESSION['id'])) {
             </div>
             <!-- Nav Links -->
             <div class="flex items-center gap-2">
-                <a href="home.php" class="flex items-center gap-1.5 text-sm font-medium text-white bg-blue-500 px-4 py-2 rounded-lg transition duration-200">
+                <a href="home.php"
+                    class="flex items-center gap-1.5 text-sm font-medium text-white bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded-lg transition duration-200">
                     <i class="fas fa-home text-xs"></i>
                     Home
                 </a>
-                <a href="menu.php" class="flex items-center gap-1.5 text-sm font-medium text-white hover:bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded-lg transition duration-200">
+                <a href="menu.php"
+                    class="flex items-center gap-1.5 text-sm font-medium text-white hover:bg-blue-500 px-4 py-2 rounded-lg transition duration-200">
                     <i class="fa-solid fa-bowl-food"></i>
                     Food Menu
                 </a>
@@ -93,15 +91,18 @@ if (isset($_SESSION['id'])) {
             </div>
         </nav>
     </main>
+
     <div>
         <?php include __DIR__ . "/herosection.php"; ?>
     </div>
     <div>
         <?php include __DIR__ . "/banefit.php"; ?>
     </div>
-    <div>
+    <footer>
         <?php include __DIR__ . "/footer.php"; ?>
-    </div>
+    </footer>
+
+    <script src="../../../public/js/home.js"></script>
 </body>
 
 </html>
