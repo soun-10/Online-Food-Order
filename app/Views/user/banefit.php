@@ -36,7 +36,7 @@ if ($category_id) {
 
 
     <!-- FOOD CATEGORY SECTION (in Benefit file) -->
-    <div id="food-category" class="min-h-screen p-6 bg-gray-100">
+    <div id="food-category" class="min-h-screen p-6 bg-gray-100 scroll-mt-20">
         <h1 class="text-2xl font-bold text-gray-800 text-center mb-6">Food Category</h1>
 
         <!-- Food Grid -->
@@ -73,3 +73,14 @@ if ($category_id) {
 </body>
 
 </html>
+<script>
+document.querySelectorAll("a[href^='#']").forEach(link => {
+    link.addEventListener("click", function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute("href"))
+            .scrollIntoView({
+                behavior: "smooth"
+            });
+    });
+});
+</script>
