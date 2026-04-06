@@ -13,6 +13,14 @@ $customer  = $MyProfile->getById($_SESSION['id']);
 $msg       = "";
 $msgType   = "";
 
+// ✅ បន្ថែម: ពិនិត្យថា Customer នៅមាននៅក្នុង DB ឬទេ
+if (empty($customer)) {
+  session_unset();
+  session_destroy();
+  header("Location: ../../../public/user/loginCustomer.php");
+  exit();
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $fullname    = $_POST['fullname']         ?? '';
   $phonenumber = $_POST['phonenumber']      ?? '';

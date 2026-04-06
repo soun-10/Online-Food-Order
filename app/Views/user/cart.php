@@ -13,6 +13,14 @@ $customer  = $MyProfile->getById($_SESSION['id']);
 $msg       = "";
 $msgType   = "";
 
+// ✅ បន្ថែម: ពិនិត្យថា Customer នៅមាននៅក្នុង DB ឬទេ
+if (empty($customer)) {
+    session_unset();
+    session_destroy();
+    header("Location: ../../../public/user/loginCustomer.php");
+    exit();
+}
+
 // Handle POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $fullname    = $_POST['fullname']          ?? '';
@@ -83,49 +91,49 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     Cart
                 </a>
                 <?php if (isset($_SESSION['id'])): ?>
-                <!-- ✅ Logged in: Profile Dropdown -->
-                <div class="relative" id="profileWrapper">
-                    <button onclick="toggleProfileDropdown()"
-                        class="flex items-center gap-2 text-sm font-medium text-white bg-blue-700 hover:bg-blue-600 px-4 py-2 rounded-lg transition duration-200">
-                        <!-- Initial Circle -->
-                        <?php if (!empty($customer['photo_url'])): ?>
-                        <img src="../../../public/Image/customerProfile/<?= htmlspecialchars($customer['photo_url']) ?>"
-                            class="w-7 h-7 rounded-full object-cover" />
-                        <?php else: ?>
-                        <span
-                            class="w-7 h-7 rounded-full bg-white text-blue-800 font-bold flex items-center justify-center text-xs uppercase">
-                            <?= htmlspecialchars(mb_substr($_SESSION['fullname'], 0, 1)) ?>
-                        </span>
-                        <?php endif; ?>
-                        <!-- Name -->
-                        <span><?= htmlspecialchars($_SESSION['fullname']) ?></span>
-                        <i class="fas fa-chevron-down text-xs"></i>
-                    </button>
+                    <!-- ✅ Logged in: Profile Dropdown -->
+                    <div class="relative" id="profileWrapper">
+                        <button onclick="toggleProfileDropdown()"
+                            class="flex items-center gap-2 text-sm font-medium text-white bg-blue-700 hover:bg-blue-600 px-4 py-2 rounded-lg transition duration-200">
+                            <!-- Initial Circle -->
+                            <?php if (!empty($customer['photo_url'])): ?>
+                                <img src="../../../public/Image/customerProfile/<?= htmlspecialchars($customer['photo_url']) ?>"
+                                    class="w-7 h-7 rounded-full object-cover" />
+                            <?php else: ?>
+                                <span
+                                    class="w-7 h-7 rounded-full bg-white text-blue-800 font-bold flex items-center justify-center text-xs uppercase">
+                                    <?= htmlspecialchars(mb_substr($_SESSION['fullname'], 0, 1)) ?>
+                                </span>
+                            <?php endif; ?>
+                            <!-- Name -->
+                            <span><?= htmlspecialchars($_SESSION['fullname']) ?></span>
+                            <i class="fas fa-chevron-down text-xs"></i>
+                        </button>
 
-                    <!-- Dropdown Menu -->
-                    <div id="profileDropdownMenu"
-                        class="hidden absolute right-0 mt-2 w-44 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
-                        <a href="myProfile.php"
-                            class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 rounded-t-lg">
-                            <i class="fas fa-user text-blue-600 text-xs"></i>
-                            My Profile
-                        </a>
-                        <hr class="border-gray-100">
-                        <a href="logout.php"
-                            class="flex items-center gap-2 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 rounded-b-lg">
-                            <i class="fas fa-right-from-bracket text-xs"></i>
-                            Logout
-                        </a>
+                        <!-- Dropdown Menu -->
+                        <div id="profileDropdownMenu"
+                            class="hidden absolute right-0 mt-2 w-44 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
+                            <a href="myProfile.php"
+                                class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 rounded-t-lg">
+                                <i class="fas fa-user text-blue-600 text-xs"></i>
+                                My Profile
+                            </a>
+                            <hr class="border-gray-100">
+                            <a href="logout.php"
+                                class="flex items-center gap-2 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 rounded-b-lg">
+                                <i class="fas fa-right-from-bracket text-xs"></i>
+                                Logout
+                            </a>
+                        </div>
                     </div>
-                </div>
 
                 <?php else: ?>
-                <!-- Not logged in: Sign Up button -->
-                <a href="../../../public/user/createCustomer.php"
-                    class="flex items-center gap-1.5 text-sm font-medium text-blue-800 bg-white hover:bg-blue-50 px-4 py-2 rounded-lg transition duration-200">
-                    <i class="fas fa-user-plus text-xs"></i>
-                    Sign Up
-                </a>
+                    <!-- Not logged in: Sign Up button -->
+                    <a href="../../../public/user/createCustomer.php"
+                        class="flex items-center gap-1.5 text-sm font-medium text-blue-800 bg-white hover:bg-blue-50 px-4 py-2 rounded-lg transition duration-200">
+                        <i class="fas fa-user-plus text-xs"></i>
+                        Sign Up
+                    </a>
                 <?php endif; ?>
             </div>
         </nav>
