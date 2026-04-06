@@ -3,6 +3,11 @@ session_start();
 require_once __DIR__ . "/../../../config/database.php";
 require_once __DIR__ . "/../../../app/Controllers/user/MyProfileController.php";
 
+if (!isset($_SESSION['id'])) {
+    header("Location: ../../../public/user/loginCustomer.php");
+    exit();
+}
+
 $customer = [];
 if (isset($_SESSION['id'])) {
     $MyProfile = new MyProfileController($con);
