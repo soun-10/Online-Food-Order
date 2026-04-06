@@ -18,6 +18,14 @@ $customer = [];
 if (isset($_SESSION['id'])) {
     $MyProfile = new MyProfileController($con);
     $customer  = $MyProfile->getById($_SESSION['id']);
+
+    // ✅ បន្ថែម: ពិនិត្យថា Customer នៅមាននៅក្នុង DB ឬទេ
+    if (empty($customer)) {
+        session_unset();
+        session_destroy();
+        header("Location: ../../../public/user/loginCustomer.php");
+        exit();
+    }
 }
 ?>
 
