@@ -7,6 +7,11 @@
     <title>Online Food Order</title>
     <?php include __DIR__ . "/app/Views/components/cdns.php"; ?>
     <link rel="stylesheet" href="public/css/style.css">
+    <style>
+        html{
+            scroll-behavior: smooth;
+        }
+    </style>
 </head>
 
 <body class="bg-gray-100 min-h-screen flex flex-col" id="home">
@@ -28,7 +33,7 @@
                 <!-- Menu Desktop -->
                 <ul class="hidden md:flex space-x-6 ml-auto text-xl">
                     <li><a href="#home" class="nav-link text-white font-semibold text-sm tracking-wide pb-1">Home</a></li>
-                    <li><a href="#about us" class="nav-link text-white font-semibold text-sm tracking-wide pb-1">About Us</a></li>
+                    <li><a href="#about-us" class="nav-link text-white font-semibold text-sm tracking-wide pb-1">About Us</a></li>
                     <li><a href="#users" class="nav-link text-white font-semibold text-sm tracking-wide pb-1">Users</a></li>
                 </ul>
             </div>
@@ -36,7 +41,7 @@
             <!-- Menu Mobile (dropdown) -->
             <ul id="mobile-menu" class="hidden flex-col bg-blue-700 px-6 py-3 space-y-3 md:hidden">
                 <li><a href="#home" class="text-white font-semibold text-sm tracking-wide">Home</a></li>
-                <li><a href="#about us" class="text-white font-semibold text-sm tracking-wide">About Us</a></li>
+                <li><a href="#about-us" class="text-white font-semibold text-sm tracking-wide">About Us</a></li>
                 <li><a href="#users" class="text-white font-semibold text-sm tracking-wide">Users</a></li>
             </ul>
         </nav>
@@ -45,7 +50,7 @@
                 <img src="public/image/Banner.jpg" alt="Banner" class="w-full block object-contain">
             </div>
             <!-- Title -->
-            <div id="about us" class="scroll-mt-20 py-6"></div>
+            <div id="about-us" class="scroll-mt-20 py-6"></div>
             <div class="text-center mb-10">
                 <h1 class="text-3xl font-bold text-pink-500">About Us</h1>
                 <p class="text-gray-500 mt-2 text-sm">Developer Profile</p>

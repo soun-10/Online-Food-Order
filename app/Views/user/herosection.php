@@ -32,7 +32,7 @@ $userlogin = new UserLoginController($con);
                 <div class="flex gap-4">
                     <!-- Order -->
                     <a href="#food-category"
-                        class="bg-blue-800 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-800 transition duration-300">
+                        class="bg-blue-800 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-800 transition duration-300 ">
                         Order Now
                     </a>
                 </div>

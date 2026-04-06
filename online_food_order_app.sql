@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Mar 31, 2026 at 04:01 AM
+-- Generation Time: Apr 06, 2026 at 07:23 AM
 -- Server version: 9.1.0
 -- PHP Version: 8.3.14
 
@@ -30,10 +30,10 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `categories`;
 CREATE TABLE IF NOT EXISTS `categories` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `food_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `category` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` enum('Active','InActive') COLLATE utf8mb4_unicode_ci DEFAULT 'Active',
-  `photo_url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `food_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `category` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` enum('Active','InActive') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT 'Active',
+  `photo_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `category` (`category`)
@@ -55,24 +55,22 @@ INSERT INTO `categories` (`id`, `food_name`, `category`, `status`, `photo_url`, 
 DROP TABLE IF EXISTS `customers`;
 CREATE TABLE IF NOT EXISTS `customers` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `fullname` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phonenumber` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fullname` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phonenumber` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `photo_url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `customers`
 --
 
-INSERT INTO `customers` (`id`, `fullname`, `email`, `phonenumber`, `password`, `created_at`) VALUES
-(1, 'Sorn Virak', 'sornvirak0@gmail.com', '098889876', '$2y$10$A6BGxytMxgSiUuNOn6B01OiSo/B45c/ukCthAkzyKyVvkvjt.ZVtW', '2026-03-25 05:35:29'),
-(2, 'Sorn Virak', 'estctrello@gmail.com', '0989888885', '$2y$10$3..rkwOwAKSL.nzWhtA0PeAqMmZmPRpUHFyZDp1zgGLqPqyiuk6Pe', '2026-03-29 10:06:46'),
-(3, 'Sorn Virak', 'sornvirak706@gmail.com', '0989888885', '$2y$10$dLnVeWD9M1tHsWC83tkXtuZsUh7xzhUsnNGZEQH2zbkj9Xbw.z.m6', '2026-03-29 10:09:13'),
-(4, 'Sorn Virak', 'sorn@gmail.com', '0989888885', '$2y$10$n8aXkniaGHduDOVB5fXxCOkgo8jH3KFhBqoypXFBG3mi.lMWwdAka', '2026-03-29 10:10:02');
+INSERT INTO `customers` (`id`, `fullname`, `email`, `phonenumber`, `password`, `created_at`, `photo_url`) VALUES
+(5, 'Pril Soun', 'sounprill68@gmail.com', '016535593', '$2y$10$F1OiUxCVVMOt.DZdCKpWYeDT3KvYkeEF.LX9DwHKNQIqLhEcIv35q', '2026-04-06 07:18:55', '1775460168_Soun.jpg');
 
 -- --------------------------------------------------------
 
@@ -83,11 +81,11 @@ INSERT INTO `customers` (`id`, `fullname`, `email`, `phonenumber`, `password`, `
 DROP TABLE IF EXISTS `drivers`;
 CREATE TABLE IF NOT EXISTS `drivers` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `driver_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `driver_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `dob` date DEFAULT NULL,
-  `address` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `vehicle` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `vehicle` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `join_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -109,14 +107,14 @@ INSERT INTO `drivers` (`id`, `driver_name`, `phone`, `dob`, `address`, `vehicle`
 DROP TABLE IF EXISTS `new_foods`;
 CREATE TABLE IF NOT EXISTS `new_foods` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `food_name_english` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `food_name_khmer` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `food_name_english` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `food_name_khmer` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `price` decimal(10,2) DEFAULT NULL,
-  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `food_type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `food_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `category_id` int DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `descrip` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `descrip` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `category_id` (`category_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -142,7 +140,7 @@ INSERT INTO `new_foods` (`id`, `food_name_english`, `food_name_khmer`, `price`, 
 DROP TABLE IF EXISTS `orders`;
 CREATE TABLE IF NOT EXISTS `orders` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `product_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `product_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `quantity` int DEFAULT NULL,
   `price` decimal(10,2) DEFAULT NULL,
   `total` decimal(10,2) DEFAULT NULL,
@@ -159,10 +157,10 @@ CREATE TABLE IF NOT EXISTS `orders` (
 DROP TABLE IF EXISTS `userlogin`;
 CREATE TABLE IF NOT EXISTS `userlogin` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `full_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `full_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `create_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -195,8 +193,8 @@ INSERT INTO `userlogin` (`id`, `full_name`, `email`, `phone`, `address`, `create
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  `username` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `username` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
