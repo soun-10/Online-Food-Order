@@ -1,35 +1,25 @@
 <?php
 session_start();
 require_once __DIR__ . "/../../../config/database.php";
+require_once __DIR__ . "/../../../app/Controllers/admin/ReportController.php";
 
 if (!isset($_SESSION["username"])) {
     header("Location: ../../../public/admin");
     exit();
 }
 
-// ── Summary Cards ──────────────────────────────
-$totalOrders     = $con->query("SELECT COUNT(*) FROM orders")->fetchColumn();
-$totalRevenue    = $con->query("SELECT COALESCE(SUM(total), 0) FROM orders")->fetchColumn();
-$totalCustomers  = $con->query("SELECT COUNT(*) FROM customers")->fetchColumn();
-$deliveredOrders = $con->query("SELECT COUNT(*) FROM orders")->fetchColumn();
+// ── Load Controller ──
+$report = new ReportController($con);
+$data   = $report->index();
 
-// ── Filter Date ────────────────────────────────
-$from = $_GET['from'] ?? date('Y-m-01');
-$to   = $_GET['to']   ?? date('Y-m-d');
-
-// ── Sales Report Table ─────────────────────────
-$sql = "SELECT 
-            DATE(order_date)   AS date,
-            COUNT(*)           AS total_orders,
-            SUM(total)         AS revenue
-        FROM orders
-        WHERE DATE(order_date) BETWEEN :from AND :to
-        GROUP BY DATE(order_date)
-        ORDER BY date DESC";
-
-$stmt = $con->prepare($sql);
-$stmt->execute([':from' => $from, ':to' => $to]);
-$salesData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// ── Extract variables ──
+$totalOrders     = $data['totalOrders'];
+$totalRevenue    = $data['totalRevenue'];
+$totalCustomers  = $data['totalCustomers'];
+$deliveredOrders = $data['deliveredOrders'];
+$salesData       = $data['salesData'];
+$from            = $data['from'];
+$to              = $data['to'];
 ?>
 
 <!DOCTYPE html>
