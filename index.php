@@ -7,11 +7,6 @@
     <title>Online Food Order</title>
     <?php include __DIR__ . "/app/Views/components/cdns.php"; ?>
     <link rel="stylesheet" href="public/css/style.css">
-    <style>
-        html{
-            scroll-behavior: smooth;
-        }
-    </style>
 </head>
 
 <body class="bg-gray-100 min-h-screen flex flex-col" id="home">
