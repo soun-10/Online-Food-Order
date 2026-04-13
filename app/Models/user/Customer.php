@@ -29,14 +29,15 @@ class Customer
 
     public function FindUser($input)
     {
-        $stmt = $this->con->prepare("SELECT * FROM customers WHERE email = :input OR phonenumber = :input1");
-        $stmt->bindParam(":input", $input);
-        $stmt->bindParam(":input1", $input);
+        $stmt = $this->con->prepare("SELECT id, fullname, email, phonenumber FROM customers WHERE email = :email OR phonenumber = :phone");
+        $stmt->bindParam(":email", $input);
+        $stmt->bindParam(":phone", $input);
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC) ?: false;
+        return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
     }
-    
-    public function getCount() {
+
+    public function getCount()
+    {
         $stmt = $this->con->prepare("SELECT COUNT(*) AS total FROM customers");
         $stmt->execute();
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
