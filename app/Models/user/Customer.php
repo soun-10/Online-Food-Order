@@ -21,7 +21,7 @@ class Customer
 
     public function selectCustomers()
     {
-        $stmt = $this->con->prepare("SELECT * FROM customers ORDER BY id ASC");
+        $stmt = $this->con->prepare("CALL sp_get_users();");
         $stmt->execute();
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $rows;
@@ -35,6 +35,7 @@ class Customer
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC) ?: false;
     }
+    
     public function getCount() {
         $stmt = $this->con->prepare("SELECT COUNT(*) AS total FROM customers");
         $stmt->execute();
