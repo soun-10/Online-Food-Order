@@ -29,7 +29,8 @@ class Customer
 
     public function FindUser($input)
     {
-        $stmt = $this->con->prepare("SELECT id, fullname, email, phonenumber FROM customers WHERE email = :email OR phonenumber = :phone");
+        $stmt = $this->con->prepare("SELECT id, fullname, email, phonenumber, password FROM customers WHERE email = :email OR phonenumber = :phone
+    ");
         $stmt->bindParam(":email", $input);
         $stmt->bindParam(":phone", $input);
         $stmt->execute();

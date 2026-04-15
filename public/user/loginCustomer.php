@@ -4,18 +4,17 @@ require_once __DIR__ . "/../../app/Controllers/user/CustomerController.php";
 $Customer = new CustomerController($con);
 $msg = "";
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $Input = $_POST['input'] ?? '';
+    $Input    = $_POST['input']    ?? '';
     $Password = $_POST['password'] ?? '';
+
     $result = $Customer->Login($Input);
+
     if ($result) {
-        $row = $result[0];
-        // if($Email === $row['email'] && $Password === $row['password']){
-        //     $_SESSION['email'] = $Email;//ចាប់ Email user
-        //     header("Location: ../admin/dashboard.php");
-        // exit(); Not hashed password
+        $row = $result;
+
         if (password_verify($Password, $row['password'])) {
-            $_SESSION['id'] = $row['id'];
-            $_SESSION['email'] = $row['email'];
+            $_SESSION['id']       = $row['id'];
+            $_SESSION['email']    = $row['email'];
             $_SESSION['fullname'] = $row['fullname'];
             header("Location: ../../app/Views/user/home.php");
             exit();
