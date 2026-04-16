@@ -67,9 +67,6 @@
                 <?php
                     echo $err;
                 ?>
-                <div class="text-center">
-                    <p>Username: admin / Password: 123</p>
-                </div>
             </form>
         </div>
     </main>
