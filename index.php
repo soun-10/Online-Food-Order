@@ -7,11 +7,6 @@
     <title>Online Food Order</title>
     <?php include __DIR__ . "/app/Views/components/cdns.php"; ?>
     <link rel="stylesheet" href="public/css/style.css">
-    <style>
-        html{
-            scroll-behavior: smooth;
-        }
-    </style>
 </head>
 
 <body class="bg-gray-100 min-h-screen flex flex-col" id="home">
@@ -105,6 +100,26 @@
             </div>
             <!-- Cards Grid -->
             <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Admin Card -->
+                <div class="card bg-white rounded-xl border-t-4 border-blue-400 p-6 flex flex-col">
+                    <div class="text-blue-500 text-3xl mb-4">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <h2 class="text-xl font-bold text-blue-500 mb-2">Admin</h2>
+                    <p class="text-gray-500 text-sm mb-4">Manage users, restaurants, orders, and platform settings</p>
+                    <ul class="text-sm text-gray-600 space-y-1 mb-6">
+                        <li><i class="fa-solid fa-check text-blue-400 mr-2"></i>User Management</li>
+                        <li><i class="fa-solid fa-check text-blue-400 mr-2"></i>Reports</li>
+                        <li><i class="fa-solid fa-check text-blue-400 mr-2"></i>System Settings</li>
+                    </ul>
+                    <div class="mt-auto">
+                        <a href="public/admin/index.php">
+                            <button class="w-full bg-gradient-to-r from-blue-500 to-blue-400 text-white py-2 rounded-lg font-semibold hover:opacity-90 transition">
+                                Login
+                            </button>
+                        </a>
+                    </div>
+                </div>
                 <!-- Customer Card -->
                 <div class="card bg-white rounded-xl border-t-4 border-blue-500 p-6 flex flex-col">
                     <div class="text-blue-500 text-3xl mb-4">
@@ -126,26 +141,6 @@
                         <a href="public/user/createCustomer.php" class="flex-1">
                             <button class="w-full border border-blue-400 text-blue-400 bg-gray-100 py-2 rounded-lg font-semibold hover:bg-pink-50 transition">
                                 Register
-                            </button>
-                        </a>
-                    </div>
-                </div>
-                <!-- Admin Card -->
-                <div class="card bg-white rounded-xl border-t-4 border-blue-400 p-6 flex flex-col">
-                    <div class="text-blue-500 text-3xl mb-4">
-                        <i class="fa-solid fa-chart-line"></i>
-                    </div>
-                    <h2 class="text-xl font-bold text-blue-500 mb-2">Admin</h2>
-                    <p class="text-gray-500 text-sm mb-4">Manage users, restaurants, orders, and platform settings</p>
-                    <ul class="text-sm text-gray-600 space-y-1 mb-6">
-                        <li><i class="fa-solid fa-check text-blue-400 mr-2"></i>User Management</li>
-                        <li><i class="fa-solid fa-check text-blue-400 mr-2"></i>Reports</li>
-                        <li><i class="fa-solid fa-check text-blue-400 mr-2"></i>System Settings</li>
-                    </ul>
-                    <div class="mt-auto">
-                        <a href="public/admin/index.php">
-                            <button class="w-full bg-gradient-to-r from-blue-500 to-blue-400 text-white py-2 rounded-lg font-semibold hover:opacity-90 transition">
-                                Login
                             </button>
                         </a>
                     </div>
