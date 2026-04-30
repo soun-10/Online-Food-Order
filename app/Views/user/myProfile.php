@@ -225,7 +225,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <!-- Submit -->
             <button type="submit"
               class="inline-flex items-center gap-2 text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:opacity-90 transition-opacity"
-              style="background-color: #4c2473;">
+              style="background-color: green;">
               <i class="fa-solid fa-circle-check"></i> Update Profile
             </button>
 
