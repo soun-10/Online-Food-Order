@@ -125,7 +125,7 @@ $totalCustomers = $CustomerController->countOrders();
                                 <td class="px-5 py-4">
                                     <div class="flex items-center gap-2">
                                         <!-- view -->
-                                         <button data-modal-target="default-modal" data-modal-toggle="default-modal" class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded-md cursor-pointer" type="button">
+                                         <button data-modal-target="default-modal" data-modal-toggle="default-modal" class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded-md cursor-pointer" type="button" data-customer-id="<?php echo $cusomter["id"]; ?>">
                                             <i class="fa-solid fa-eye"></i>
                                          </button>
                                         <!-- Delete -->
@@ -164,7 +164,17 @@ $totalCustomers = $CustomerController->countOrders();
                     <!-- Modal body -->
                     <div class="space-y-4 md:space-y-6 py-4 md:py-6">
                         <div class="grid grid-cols-2 gap-4">
-                           
+                           <div class="col-8 col-sm-6">
+                            <p style="text-align: center;">
+                                <img id="studentPhoto" src="" width="300px">
+                            </p>
+                        </div>
+                        <div class="col-4 col-sm-6">
+                            <p><b>Full Name:</p>
+                            <p><b>Email: </p>
+                            <p><b>Phone Number:</p>
+                            <p><b>Create Date:</p>
+                        </div>
                     </div>
                     <!-- Modal footer -->
                     <div class="flex items-center justify-end border-t border-gray-200 space-x-4 pt-4 md:pt-5">
