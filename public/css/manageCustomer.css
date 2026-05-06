@@ -1,0 +1,41 @@
+#default-modal {
+  transition:
+    opacity 0.3s ease-in-out,
+    visibility 0.3s ease-in-out;
+}
+
+#default-modal:not(.hidden) {
+  opacity: 1;
+  visibility: visible;
+  display: flex;
+}
+
+#default-modal.hidden {
+  opacity: 0;
+  visibility: hidden;
+  display: none;
+}
+
+#default-modal:not(.hidden) .relative {
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px) scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Smooth button transitions */
+button {
+  transition: all 0.2s ease-in-out;
+}
+
+button:active {
+  transform: scale(0.98);
+}
