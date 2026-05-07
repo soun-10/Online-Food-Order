@@ -34,17 +34,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Handle image upload
     $photo_url = null;
     if (!empty($_FILES['photo_url']['name'])) {
-      $uploadDir = __DIR__ . "/../../../public/Image/customerProfile/";
+      $uploadDir = __DIR__ . "/../../../public/image/customerProfile/";
       $fileName  = time() . "_" . basename($_FILES['photo_url']['name']);
-      if (move_uploaded_file($_FILES['photo_url']['tmp_name'], $uploadDir . $fileName)) {
+
+      if (!is_dir($uploadDir)) {
+        mkdir($uploadDir, 0755, true);
+      }
+
+      $targetPath = $uploadDir . $fileName;
+      if (move_uploaded_file($_FILES['photo_url']['tmp_name'], $targetPath)) {
         // លុបរូបចាស់
         if (!empty($customer['photo_url'])) {
           $oldFile = $uploadDir . $customer['photo_url'];
-          if (file_exists($oldFile)) {
-            unlink($oldFile);
+          if (is_file($oldFile)) {
+            @unlink($oldFile);
           }
         }
         $photo_url = $fileName;
+      } else {
+        $msg = "Failed to upload photo.";
+        $msgType = "error";
       }
     }
 
@@ -100,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button onclick="toggleProfileDropdown()"
               class="flex items-center gap-2 text-sm font-medium text-white bg-blue-700 hover:bg-blue-600 px-4 py-2 rounded-lg transition duration-200">
               <?php if (!empty($customer['photo_url'])): ?>
-                <img src="../../../public/Image/customerProfile/<?= htmlspecialchars($customer['photo_url']) ?>"
+                <img src="../../../public/image/customerProfile/<?= htmlspecialchars($customer['photo_url']) ?>"
                   class="w-7 h-7 rounded-full object-cover" />
               <?php else: ?>
                 <span class="w-7 h-7 rounded-full bg-white text-blue-800 font-bold flex items-center justify-center text-xs uppercase">
@@ -201,7 +210,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 <?php if (!empty($customer['photo_url'])): ?>
                   <div class="mt-2">
-                    <img src="../../../public/Image/customerProfile/<?= htmlspecialchars($customer['photo_url'] ?? '') ?>"
+                    <img src="../../../public/image/customerProfile/<?= htmlspecialchars($customer['photo_url'] ?? '') ?>"
                       class="w-12 h-12 rounded-full object-cover border border-gray-200" />
                   </div>
                 <?php endif; ?>
@@ -236,7 +245,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="w-56 bg-white rounded-xl p-5 shadow-sm shrink-0">
           <div class="flex justify-center mb-4">
             <?php if (!empty($customer['photo_url'])): ?>
-              <img src="../../../public/Image/customerProfile/<?= htmlspecialchars($customer['photo_url'] ?? '') ?>"
+              <img src="../../../public/image/customerProfile/<?= htmlspecialchars($customer['photo_url'] ?? '') ?>"
                 class="w-20 h-20 rounded-full object-cover border-2 border-gray-200" />
             <?php else: ?>
               <div class="w-20 h-20 rounded-full bg-blue-700 flex items-center justify-center text-white font-bold text-2xl uppercase">
