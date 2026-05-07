@@ -13,7 +13,6 @@ $customer  = $MyProfile->getById($_SESSION['id']);
 $msg       = "";
 $msgType   = "";
 
-// ✅ បន្ថែម: ពិនិត្យថា Customer នៅមាននៅក្នុង DB ឬទេ
 if (empty($customer)) {
   session_unset();
   session_destroy();
