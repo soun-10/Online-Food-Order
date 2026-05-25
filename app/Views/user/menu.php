@@ -8,12 +8,13 @@ if (!isset($_SESSION['id'])) {
     header("Location: ../../../public/user/loginCustomer.php");
     exit();
 }
+if (!isset($_SESSION['cart'])) {
+    $_SESSION['cart'] = [];
+}
 
-// Load foods
 $newFoodController = new NewFoodController($con);
 $newFoods = $newFoodController->show();
 
-// Load customer
 $customer = [];
 if (isset($_SESSION['id'])) {
     $MyProfile = new MyProfileController($con);
@@ -45,12 +46,10 @@ if (isset($_SESSION['id'])) {
 
 <body>
     <nav class="bg-blue-800 px-8 py-4 flex items-center justify-between sticky top-0 z-50 shadow-lg">
-        <!-- Logo -->
         <div class="flex items-center gap-2 text-white font-bold text-xl tracking-wide">
             <i class="fas fa-store text-blue-300"></i>
             <span>Online Food Order</span>
         </div>
-        <!-- Nav Links -->
         <div class="flex items-center gap-2">
             <a href="home.php"
                 class="flex items-center gap-1.5 text-sm font-medium text-white hover:bg-blue-500 px-4 py-2 rounded-lg transition duration-200">
@@ -115,7 +114,7 @@ if (isset($_SESSION['id'])) {
         </div>
     </nav>
 
-    <div class="w-full max-w-[1400px] mx-auto px-4 py-6">
+    <div class="w-full  mx-auto px-4 py-6">
 
         <!-- Page Title -->
         <div class="mb-6">
@@ -144,67 +143,77 @@ if (isset($_SESSION['id'])) {
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 
             <?php foreach ($newFoods as $newfood): ?>
-            <div
-                class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition duration-300 overflow-hidden group flex flex-col border border-gray-100">
 
-                <!-- Image -->
-                <div class="relative h-44 overflow-hidden">
-                    <img src="/Online-Food-Order/public/image/newfood/<?= htmlspecialchars($newfood['photo']) ?>"
-                        class="w-full h-full object-cover group-hover:scale-110 transition duration-500"
-                        alt="Food image">
-                    <!-- Price badge -->
-                    <div class="absolute top-3 right-3 bg-black/70 text-white text-xs px-3 py-1 rounded-full">
-                        $<?= htmlspecialchars($newfood['price']) ?>
+            <form action="cart.php" method="POST" class="flex">
+
+                <!-- Hidden Inputs -->
+                <input type="hidden" name="food_id" value="<?= htmlspecialchars($newfood['id']) ?>">
+                <input type="hidden" name="food_name" value="<?= htmlspecialchars($newfood['food_name_english']) ?>">
+                <input type="hidden" name="price" value="<?= htmlspecialchars($newfood['price']) ?>">
+                <input type="hidden" name="photo" value="<?= htmlspecialchars($newfood['photo']) ?>">
+
+                <!-- Card -->
+                <div
+                    class="w-full bg-white rounded-2xl shadow-sm hover:shadow-xl transition duration-300 overflow-hidden border border-gray-100 flex flex-col">
+
+                    <!-- Image -->
+                    <div class="relative h-44 overflow-hidden">
+                        <img src="/Online-Food-Order/public/image/newfood/<?= htmlspecialchars($newfood['photo']) ?>"
+                            class="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                            alt="Food image">
+
+
+                        <div class="absolute top-3 right-3 bg-red-500/90 text-white text-xs px-3 py-1 rounded-full">
+                            $<?= htmlspecialchars($newfood['price']) ?>
+                        </div>
+                    </div>
+
+
+                    <div class="p-4 flex flex-col flex-1">
+
+                        <!-- Food Name -->
+                        <h3 class="text-lg font-bold text-gray-900 mb-1">
+                            <?= htmlspecialchars($newfood['food_name_english']) ?>
+                        </h3>
+
+                        <!-- Khmer Name -->
+                        <p class="text-sm text-gray-500 mb-2">
+                            <?= htmlspecialchars($newfood['food_name_khmer']) ?>
+                        </p>
+
+                        <!-- Description -->
+                        <p class="text-sm text-gray-600 h-12 overflow-hidden mb-4">
+                            <?= htmlspecialchars($newfood['descrip'] ?? '') ?>
+                        </p>
+
+                        <!-- Badge -->
+                        <?php
+                    $type = $newfood['food_type'];
+
+                    $badgeClass = match ($type) {
+                        'Vegetarian'     => 'bg-green-100 text-green-700',
+                        'Non-Vegetarian' => 'bg-blue-100 text-blue-700',
+                        default          => 'bg-gray-100 text-gray-700'
+                    };
+                    ?>
+
+                        <button type="submit"
+                            class="mt-auto w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium py-2.5 rounded-xl transition duration-300 active:scale-95 shadow-md">
+                            Add to Cart
+                        </button>
+
                     </div>
                 </div>
 
-                <!-- Content -->
-                <div class="p-4 flex flex-col flex-1">
+            </form>
 
-                    <h3 class="text-lg font-bold text-gray-900">
-                        <?= htmlspecialchars($newfood['food_name_english']) ?>
-                    </h3>
-                    <p class="text-sm text-gray-500 mb-2">
-                        <?= htmlspecialchars($newfood['food_name_khmer']) ?>
-                    </p>
-                    <p class="text-sm text-gray-600 line-clamp-2 mb-3">
-                        <?= htmlspecialchars($newfood['descrip'] ?? '') ?>
-                    </p>
-
-                    <!-- Type badge -->
-                    <?php
-                        $type = $newfood['food_type'];
-                        $badgeClass = match ($type) {
-                            'Vegetarian'     => 'bg-green-100 text-green-700',
-                            'Non-Vegetarian' => 'bg-blue-100 text-blue-700',
-                            default          => 'bg-gray-100 text-gray-700'
-                        };
-                        ?>
-                    <div class="mb-4">
-                        <span
-                            class="inline-flex items-center px-3 py-1 text-xs font-semibold rounded-full <?= $badgeClass ?>">
-                            <?= htmlspecialchars($type) ?>
-                        </span>
-                    </div>
-
-                    <!-- Button -->
-                    <button
-                        class="mt-auto w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium py-2.5 rounded-xl transition duration-300 active:scale-95 shadow-md">
-                        Add to Cart
-                    </button>
-
-                </div>
-            </div>
             <?php endforeach; ?>
 
         </div>
-    </div>
-
-    <footer>
-        <?php include __DIR__ . "/footer.php"; ?>
-    </footer>
-
-    <script src="../../../public/js/menu.js"></script>
+        <footer>
+            <?php include __DIR__ . "/footer.php"; ?>
+        </footer>
+        <script src="../../../public/js/menu.js"></script>
 </body>
 
 </html>
