@@ -2,9 +2,9 @@
 session_start();
 require_once __DIR__ . "/../../../config/database.php";
 require_once __DIR__ . "/../../../app/Controllers/user/MyProfileController.php";
-require_once __DIR__ . "/../../../app/Controllers/admin/NewFoodController.php";
-$newFoodController = new NewFoodController($con);
-$newFoods = $newFoodController->show();
+require_once __DIR__ . "/../../../app/Controllers/user/CartController.php";
+require_once __DIR__ . "/../../../app/Controllers/admin/OrdersController.php";
+
 if (!isset($_SESSION['id'])) {
     header("Location: ../../../public/user/loginCustomer.php");
     exit();
@@ -12,10 +12,10 @@ if (!isset($_SESSION['id'])) {
 
 $MyProfile = new MyProfileController($con);
 $customer  = $MyProfile->getById($_SESSION['id']);
-$msg       = "";
-$msgType   = "";
+$CartController = new CartController($con);
+$OrdersController = new OrdersController($con);
 
-// ✅ បន្ថែម: ពិនិត្យថា Customer នៅមាននៅក្នុង DB ឬទេ
+// Check if customer exists
 if (empty($customer)) {
     session_unset();
     session_destroy();
@@ -23,38 +23,85 @@ if (empty($customer)) {
     exit();
 }
 
-// Handle POST
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $fullname    = $_POST['fullname']          ?? '';
-    $phonenumber = $_POST['phonenumber']       ?? '';
-    $newPassword = $_POST['new_password']      ?? '';
-    $confirmPw   = $_POST['confirm_password']  ?? '';
+$msg       = "";
+$msgType   = "";
 
-    if ($newPassword && $newPassword !== $confirmPw) {
-        $msg     = "Password and Confirm Password do not match!";
-        $msgType = "error";
-    } else {
-        // Handle image upload
-        $profile_image = null;
-        if (!empty($_FILES['profile_image']['name'])) {
-            $uploadDir  = __DIR__ . "/../../../public/Image/profile/";
-            $fileName   = time() . "_" . basename($_FILES['profile_image']['name']);
-            if (move_uploaded_file($_FILES['profile_image']['tmp_name'], $uploadDir . $fileName)) {
-                $profile_image = $fileName;
+// Handle cart actions (remove, update qty, checkout, add item)
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $action = $_POST['action'] ?? '';
+    
+    // If no action specified, treat it as "add to cart" from menu
+    if (empty($action) && !empty($_POST['food_id'])) {
+        $food_id = $_POST['food_id'] ?? 0;
+        $quantity = $_POST['quantity'] ?? 1;
+        
+        if ($CartController->add($_SESSION['id'], $food_id, $quantity)) {
+            $msg = "Item added to cart successfully!";
+            $msgType = "success";
+        } else {
+            $msg = "Failed to add item to cart!";
+            $msgType = "error";
+        }
+    } elseif ($action === 'remove') {
+        $cart_id = $_POST['cart_id'] ?? 0;
+        if ($CartController->remove($cart_id)) {
+            $msg = "Item removed from cart!";
+            $msgType = "success";
+        } else {
+            $msg = "Failed to remove item!";
+            $msgType = "error";
+        }
+    } elseif ($action === 'update_qty') {
+        $cart_id = $_POST['cart_id'] ?? 0;
+        $quantity = $_POST['quantity'] ?? 1;
+        if ($CartController->updateQty($cart_id, $quantity)) {
+            $msg = "Quantity updated!";
+            $msgType = "success";
+        } else {
+            $msg = "Failed to update quantity!";
+            $msgType = "error";
+        }
+    } elseif ($action === 'checkout') {
+        // Get cart items
+        $cartItems = $CartController->show($_SESSION['id']);
+        $cartTotal = $CartController->getTotal($_SESSION['id']);
+        $paymentMethod = $_POST['payment_method'] ?? 'cash';
+        
+        // Check if cart is empty
+        if (empty($cartItems) || $cartTotal <= 0) {
+            $msg = "Your cart is empty!";
+            $msgType = "error";
+        } else {
+            // Create order with cart total (delivery fee is added separately on display)
+            $order_id = $OrdersController->create($_SESSION['id'], $cartTotal, $paymentMethod);
+            
+            if ($order_id) {
+                // Add items to order
+                foreach ($cartItems as $item) {
+                    $OrdersController->addItem($order_id, $item['food_id'], $item['quantity'], $item['price']);
+                }
+                
+                // Clear cart
+                $CartController->clear($_SESSION['id']);
+                
+                // Redirect to order success page
+                header("Location: orderSuccess.php?order_id=" . $order_id);
+                exit();
+            } else {
+                $msg = "Failed to create order!";
+                $msgType = "error";
             }
         }
-
-        $password = $newPassword ?: null;
-        $MyProfile->updateProfile($_SESSION['id'], $fullname, $phonenumber, $password, $profile_image);
-
-        // Update session
-        $_SESSION['fullname'] = $fullname;
-        $customer = $MyProfile->getById($_SESSION['id']); // reload
-
-        $msg     = "Profile updated successfully!";
-        $msgType = "success";
     }
 }
+
+// Get cart items
+$cartItems = $CartController->show($_SESSION['id']);
+$cartTotal = $CartController->getTotal($_SESSION['id']);
+
+// Get cart items
+$cartItems = $CartController->show($_SESSION['id']);
+$cartTotal = $CartController->getTotal($_SESSION['id']);
 ?>
 
 <!DOCTYPE html>
@@ -144,23 +191,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
             <section class="max-w-7xl mx-auto px-6 py-10">
-                <?php foreach ($newFoods as $newfood) { ?>
                 <h1 class="text-3xl font-bold text-gray-800 mb-8">
                     <i class="fas fa-cart-shopping text-blue-700"></i>
                     My Cart
                 </h1>
+
+                <?php if ($msg): ?>
+                <div class="mb-4 p-4 rounded-lg <?= $msgType === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' ?>">
+                    <?= htmlspecialchars($msg) ?>
+                </div>
+                <?php endif; ?>
 
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
                     <!-- LEFT SIDE -->
                     <div class="lg:col-span-2 space-y-6">
 
+                        <?php if (empty($cartItems)): ?>
+                        <div class="bg-white rounded-2xl shadow-md p-10 text-center">
+                            <i class="fas fa-shopping-cart text-6xl text-gray-300 mb-4"></i>
+                            <h3 class="text-xl font-semibold text-gray-600">Your cart is empty</h3>
+                            <a href="menu.php" class="inline-block mt-4 bg-blue-700 hover:bg-blue-800 text-white font-semibold px-6 py-2 rounded-lg">
+                                Continue Shopping
+                            </a>
+                        </div>
+                        <?php else: ?>
+                        <?php foreach ($cartItems as $item): ?>
                         <!-- CART ITEM -->
                         <div class="bg-white rounded-2xl shadow-md p-5 flex flex-col md:flex-row gap-5">
 
                             <!-- IMAGE -->
-                            <img src="../../../public/Image/food/burger.jpg"
-                                class="w-full md:w-40 h-40 object-cover rounded-xl">
+                            <img src="../../../public/image/newfood/<?= htmlspecialchars($item['photo']) ?>"
+                                class="w-full md:w-40 h-40 object-cover rounded-xl"
+                                onerror="this.src='../../../public/image/category/default.jpg'">
 
                             <!-- DETAILS -->
                             <div class="flex-1">
@@ -168,58 +231,58 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <div class="flex justify-between items-start">
                                     <div>
                                         <h2 class="text-xl font-bold text-gray-800">
-                                            <?php echo $newfood['food_name_khmer']; ?>
+                                            <?= htmlspecialchars($item['food_name_khmer']) ?>
                                         </h2>
-                                        <h4 class="text-xl font-bold text-gray-800">
-                                            <?php echo $newfood['food_name_english']; ?>
+                                        <h4 class="text-lg font-semibold text-gray-700">
+                                            <?= htmlspecialchars($item['food_name_english']) ?>
                                         </h4>
-
                                         <p class="text-gray-500 text-sm mt-1">
-                                            <?php echo $newfood['descrip']; ?>
+                                            <?= htmlspecialchars($item['descrip'] ?? '') ?>
                                         </p>
                                     </div>
 
-                                    <button class="text-red-500 hover:text-red-700">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
+                                    <form method="POST" style="display:inline;">
+                                        <input type="hidden" name="action" value="remove">
+                                        <input type="hidden" name="cart_id" value="<?= $item['id'] ?>">
+                                        <button type="submit" class="text-red-500 hover:text-red-700" onclick="return confirm('Remove this item?')">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
                                 </div>
 
-                                <!-- PRICE -->
+                                <!-- PRICE & QTY -->
                                 <div class="mt-4 flex items-center justify-between">
 
                                     <div>
-                                        <span class="text-sm text-gray-500">
-                                            Price
-                                        </span>
-
-                                        <p id="priceText" class="text-2xl font-bold text-blue-700">
-                                            <?php echo $newfood['price']; ?>
+                                        <span class="text-sm text-gray-500">Price</span>
+                                        <p class="text-2xl font-bold text-blue-700">
+                                            $<?= number_format($item['price'], 2) ?>
                                         </p>
                                     </div>
 
                                     <!-- QTY -->
-                                    <div class="flex items-center gap-3">
-
-                                        <button onclick="decreaseQty()"
-                                            class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-lg font-bold">
+                                    <form method="POST" class="flex items-center gap-3">
+                                        <input type="hidden" name="action" value="update_qty">
+                                        <input type="hidden" name="cart_id" value="<?= $item['id'] ?>">
+                                        
+                                        <button type="button" onclick="decreaseQty(this)" class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-lg font-bold">
                                             -
                                         </button>
 
-                                        <span id="qty" class="text-xl font-bold w-8 text-center">
+                                        <input type="number" name="quantity" value="<?= $item['quantity'] ?>" 
+                                            class="text-xl font-bold w-8 text-center border border-gray-300 rounded" 
+                                            min="1" onchange="this.form.submit()">
 
-                                        </span>
-
-                                        <button onclick="increaseQty()"
-                                            class="w-10 h-10 rounded-lg bg-blue-700 hover:bg-blue-800 text-white text-lg font-bold">
+                                        <button type="button" onclick="increaseQty(this)" class="w-10 h-10 rounded-lg bg-blue-700 hover:bg-blue-800 text-white text-lg font-bold">
                                             +
                                         </button>
-
-                                    </div>
+                                    </form>
                                 </div>
 
                             </div>
                         </div>
-                        <?php } ?>
+                        <?php endforeach; ?>
+                        <?php endif; ?>
                     </div>
 
                     <!-- RIGHT SIDE -->
@@ -231,52 +294,52 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 Order Summary
                             </h2>
 
-                            <!-- PAYMENT -->
-                            <div class="mb-6">
+                            <!-- PAYMENT FORM -->
+                            <form method="POST">
+                                <input type="hidden" name="action" value="checkout">
 
-                                <label class="block text-sm font-semibold text-gray-700 mb-3">
-                                    Payment Method
-                                </label>
+                                <!-- PAYMENT -->
+                                <div class="mb-6">
 
-                                <select
-                                    class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none">
+                                    <label class="block text-sm font-semibold text-gray-700 mb-3">
+                                        Payment Method
+                                    </label>
 
-                                    <option value="cash">Cash</option>
-                                    <option value="card">Credit Card</option>
-                                    <option value="aba">ABA Pay</option>
-                                    <option value="acleda">ACLEDA</option>
-
-                                </select>
-                            </div>
-
-                            <!-- TOTAL -->
-                            <div class="space-y-4 border-t pt-4">
-
-                                <div class="flex justify-between text-gray-600">
-                                    <span>Subtotal</span>
-                                    <span id="subtotal">$5</span>
+                                    <select name="payment_method" class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none">
+                                        <option value="cash">Cash</option>
+                                        <option value="card">Credit Card</option>
+                                        <option value="aba">ABA Pay</option>
+                                        <option value="acleda">ACLEDA</option>
+                                    </select>
                                 </div>
 
-                                <div class="flex justify-between text-gray-600">
-                                    <span>Delivery</span>
-                                    <span>$2</span>
+                                <!-- TOTAL -->
+                                <div class="space-y-4 border-t pt-4">
+
+                                    <div class="flex justify-between text-gray-600">
+                                        <span>Subtotal</span>
+                                        <span id="subtotal">$<?= number_format($cartTotal, 2) ?></span>
+                                    </div>
+
+                                    <div class="flex justify-between text-gray-600">
+                                        <span>Delivery</span>
+                                        <span>$2.00</span>
+                                    </div>
+
+                                    <div class="flex justify-between text-xl font-bold text-gray-800 border-t pt-4">
+                                        <span>Total</span>
+                                        <span id="total">$<?= number_format($cartTotal + 2, 2) ?></span>
+                                    </div>
+
                                 </div>
 
-                                <div class="flex justify-between text-xl font-bold text-gray-800 border-t pt-4">
-                                    <span>Total</span>
-                                    <span id="total">$7</span>
-                                </div>
-
-                            </div>
-
-                            <!-- BUTTON -->
-                            <button
-                                class="w-full mt-6 bg-blue-700 hover:bg-blue-800 text-white font-semibold py-3 rounded-xl transition duration-200">
-
-                                <i class="fas fa-credit-card mr-2"></i>
-                                Checkout
-
-                            </button>
+                                <!-- BUTTON -->
+                                <button type="submit" <?= empty($cartItems) ? 'disabled' : '' ?>
+                                    class="w-full mt-6 bg-blue-700 hover:bg-blue-800 text-white font-semibold py-3 rounded-xl transition duration-200 <?= empty($cartItems) ? 'opacity-50 cursor-not-allowed' : '' ?>">
+                                    <i class="fas fa-credit-card mr-2"></i>
+                                    Checkout
+                                </button>
+                            </form>
 
                         </div>
 

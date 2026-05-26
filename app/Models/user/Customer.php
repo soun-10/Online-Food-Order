@@ -21,7 +21,7 @@ class Customer
 
     public function selectCustomers()
     {
-        $stmt = $this->con->prepare("SELECT id, fullname, email, phonenumber FROM customers");
+        $stmt = $this->con->prepare("SELECT id, fullname, email, phonenumber, created_at FROM customers");
         $stmt->execute();
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $rows;

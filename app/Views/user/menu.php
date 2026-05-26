@@ -151,6 +151,7 @@ if (isset($_SESSION['id'])) {
                 <input type="hidden" name="food_name" value="<?= htmlspecialchars($newfood['food_name_english']) ?>">
                 <input type="hidden" name="price" value="<?= htmlspecialchars($newfood['price']) ?>">
                 <input type="hidden" name="photo" value="<?= htmlspecialchars($newfood['photo']) ?>">
+                <input type="hidden" name="quantity" value="1">
 
                 <!-- Card -->
                 <div
