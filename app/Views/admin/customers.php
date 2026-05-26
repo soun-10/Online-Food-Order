@@ -21,7 +21,7 @@ $totalCustomers = $CustomerController->countOrders();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customers</title>
     <?php include __DIR__ . "/../components/cdns.php"; ?>
-</head>
+    <link rel="stylesheet" href="../../../public/css/manageCustomer.css" />
 
 <body class="bg-gray-100 font-sans flex min-h-screen overflow-hidden">
     <nav class="w-64 bg-blue-700 text-white flex flex-col sticky top-0 h-screen">
@@ -124,6 +124,10 @@ $totalCustomers = $CustomerController->countOrders();
                                 </td>
                                 <td class="px-5 py-4">
                                     <div class="flex items-center gap-2">
+                                        <!-- view -->
+                                         <button data-modal-target="default-modal" data-modal-toggle="default-modal" class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded-md cursor-pointer" type="button" data-customer-id="<?php echo $cusomter["id"]; ?>">
+                                            <i class="fa-solid fa-eye"></i>
+                                         </button>
                                         <!-- Delete -->
                                         <a href="deleteCustomers.php?id=<?php echo $cusomter["id"]; ?>"
                                             onclick="return confirm('Are you sure you want to delete this item?');"
@@ -142,7 +146,48 @@ $totalCustomers = $CustomerController->countOrders();
             </div>
 
         </div>
+        <!-- Main modal -->
+        <div id="default-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <div class="relative p-4 w-full max-w-2xl max-h-full">
+                <!-- Modal content -->
+                <div class="relative bg-white border border-gray-200 rounded-lg shadow-lg p-4 md:p-6">
+                    <!-- Modal header -->
+                    <div class="flex items-center justify-between border-b border-gray-200 pb-4 md:pb-5">
+                        <h3 class="text-lg font-semibold text-gray-900">
+                            Customer Information
+                        </h3>
+                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-100 hover:text-gray-900 rounded-lg text-sm w-9 h-9 ms-auto inline-flex justify-center items-center" data-modal-hide="default-modal">
+                            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/></svg>
+                            <span class="sr-only">Close modal</span>
+                        </button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="space-y-4 md:space-y-6 py-4 md:py-6">
+                        <div class="grid grid-cols-2 gap-4">
+                           <div class="col-8 col-sm-6">
+                            <p style="text-align: center;">
+                                <img id="studentPhoto" src="" width="300px">
+                            </p>
+                        </div>
+                        <div class="col-4 col-sm-6">
+                            <p><b>Full Name:</p>
+                            <p><b>Email: </p>
+                            <p><b>Phone Number:</p>
+                            <p><b>Create Date:</p>
+                        </div>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="flex items-center justify-end border-t border-gray-200 space-x-4 pt-4 md:pt-5">
+                        <button data-modal-hide="default-modal" type="button" class="text-gray-700 bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Script to handle modal population -->
+        <script src="../../../public/js/manageCustomer.js"></script>
     </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 </body>
 
 </html>
