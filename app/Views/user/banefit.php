@@ -7,7 +7,6 @@
 
 $newFoodController = new NewFoodController($con);
 
-// if category selected → filter
 if ($category_id) {
     $newFood = $newFoodController->getByCategory($category_id);
 } else {
