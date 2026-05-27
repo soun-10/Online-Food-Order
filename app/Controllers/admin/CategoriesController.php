@@ -1,5 +1,5 @@
 <?php
-    require_once __DIR__ . "../../../Models/admin/Categories.php";
+    require_once __DIR__ . "/../../Models/admin/Categories.php";
     class CategoriesController
     {
         private $categoryModel;
@@ -17,8 +17,8 @@
         public function getCategoryById($id){
             return $this->categoryModel->getCategoryById($id);
         }
-        public function updateCategory($id, $food_name, $category, $price, $status ,$photo_url ){
-            $this->categoryModel->updateCategory($id, $food_name, $category, $price, $status ,$photo_url );
+        public function updateCategory($id, $food_name, $category, $status ,$photo_url ){
+            $this->categoryModel->updateCategory($id, $food_name, $category, $status ,$photo_url );
         }
         public function deleteCategory($id){
             $this->categoryModel->deleteCategory($id);
