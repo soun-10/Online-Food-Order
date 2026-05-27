@@ -117,12 +117,13 @@ if (isset($_POST['food_name_english'])) {
                         </thead>
 
                         <tbody class="divide-y divide-gray-200">
+                            <?php $id=1; ?>
                             <?php foreach ($newFoods as $newfood) { ?>
                             <tr class="hover:bg-gray-50 transition text-center">
 
                                 <!-- ID -->
                                 <td class="py-4 text-sm text-gray-700">
-                                    <?php echo $newfood['id']; ?>
+                                    <?php echo $id++; ?>
                                 </td>
 
                                 <!-- Image -->
