@@ -81,10 +81,10 @@ if (isset($_POST['food_name'])) {
             <!-- ADD FOOD FORM -->
             <div class="bg-white p-6 rounded-lg shadow-md mb-8">
 
-                <h3 class="text-lg font-semibold mb-4">Add New Food</h3>
+                <h3 class="text-lg font-semibold mb-4">Add New Category:</h3>
 
                 <form method="POST" action="" class="space-y-3" enctype="multipart/form-data">
-                    <input type="text" name="food_name" placeholder="Food Name"
+                    <input type="text" name="food_name" placeholder="Category Name"
                         class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
                     <select name="category"
                         class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
@@ -124,12 +124,13 @@ if (isset($_POST['food_name'])) {
 
                         <!-- Body -->
                         <tbody class="divide-y divide-gray-200">
+                            <?php $id = 1; ?>
                             <?php foreach ($result as $food) { ?>
                             <tr class="hover:bg-gray-50 transition text-center">
 
                                 <!-- ID -->
                                 <td class="py-4 text-sm text-gray-700">
-                                    <?php echo $food['id']; ?>
+                                    <?php echo $id++; ?>
                                 </td>
 
                                 <!-- Image -->
