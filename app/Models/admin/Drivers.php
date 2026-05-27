@@ -39,11 +39,11 @@ class Driver
     }
     public function updateDriver($id, $driver_name, $phone, $dob, $address, $vehicle, $join_date)
     {
-        $stmt = $this->db->prepare("UPDATE drivers SET driver_name = :fn, phone = :ph, dob = :em, address = :ad, vehicle = :ve, join_date = :jd WHERE id = :id");
+        $stmt = $this->db->prepare("UPDATE drivers SET driver_name = :fn, phone = :ph, dob = :dob, address = :ad, vehicle = :ve, join_date = :jd WHERE id = :id");
         $stmt->bindParam(':id', $id);
         $stmt->bindParam(':fn', $driver_name);
         $stmt->bindParam(':ph', $phone);
-        $stmt->bindParam(':em', $dob);
+        $stmt->bindParam(':dob', $dob);
         $stmt->bindParam(':ad', $address);
         $stmt->bindParam(':ve', $vehicle);
         $stmt->bindParam(':jd', $join_date);

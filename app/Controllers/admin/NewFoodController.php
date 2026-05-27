@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . "../../../Models/admin/NewFood.php";
+require_once __DIR__ . "/../../Models/admin/NewFood.php";
 class NewFoodController
     {
         private $newFoodModel;

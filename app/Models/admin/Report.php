@@ -12,7 +12,7 @@ class ReportModel {
     }
 
     public function getTotalRevenue() {
-        return $this->con->query("SELECT COALESCE(SUM(total), 0) FROM orders")->fetchColumn();
+        return $this->con->query("SELECT COALESCE(SUM(total_amount), 0) FROM orders")->fetchColumn();
     }
 
     public function getTotalCustomers() {
@@ -20,18 +20,18 @@ class ReportModel {
     }
 
     public function getDeliveredOrders() {
-        return $this->con->query("SELECT COUNT(*) FROM orders")->fetchColumn();
+        return $this->con->query("SELECT COUNT(*) FROM orders WHERE status = 'completed'")->fetchColumn();
     }
 
     // Sales Report Table
     public function getSalesReport($from, $to) {
         $sql = "SELECT 
-                    DATE(order_date) AS date,
+                    DATE(created_at) AS date,
                     COUNT(*)         AS total_orders,
-                    SUM(total)       AS revenue
+                    SUM(total_amount)       AS revenue
                 FROM orders
-                WHERE DATE(order_date) BETWEEN :from AND :to
-                GROUP BY DATE(order_date)
+                WHERE DATE(created_at) BETWEEN :from AND :to
+                GROUP BY DATE(created_at)
                 ORDER BY date DESC";
 
         $stmt = $this->con->prepare($sql);

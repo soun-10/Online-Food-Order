@@ -5,35 +5,36 @@ session_start();
 //     header("Location: ../../public");
 // }
 
+require_once __DIR__ . "/../../../config/database.php";
 require_once __DIR__ . "/../../Controllers/admin/CategoriesController.php";
 
 $Category = new CategoriesController($con);
 $result = $Category->show();
-$id = $_GET['id'];
+$id = $_GET['id'] ?? 0;
 $row = $Category->getCategoryById($id);
 
-if (isset($_POST['food_name'])) {
-    $food_name = $_POST["food_name"];
-    $categorye = $_POST["categorye"];
-    $price = $_POST["price"];
-    $action = $_POST["action"];
-
-    
-   if ($food_name && $categorye) {
-
-    $Category->updateCategory (
-        $id,
-        $food_name,
-        $categorye,
-        $price,
-        $action,
-        $image,
-        $rating,
-        $description
-    );
-
-        header("Location: categories.php");
+// If category not found, redirect
+if (!$row) {
+    header("Location: categories.php");
+    exit();
 }
+
+if (isset($_POST['food_name'])) {
+    $food_name = $_POST["food_name"] ?? '';
+    $category = $_POST["category"] ?? '';
+    $status = $_POST["status"] ?? 'Active';
+
+    if ($food_name && $category) {
+        $Category->updateCategory(
+            $id,
+            $food_name,
+            $category,
+            $status,
+            $row['photo_url'] ?? ''
+        );
+        header("Location: categories.php");
+        exit();
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -53,38 +54,33 @@ if (isset($_POST['food_name'])) {
 
         <h1 class="text-2xl font-bold mb-6">Edit Category</h1>
 
-        <!-- ADD FOOD FORM -->
+        <!-- EDIT CATEGORY FORM -->
         <div class="bg-white p-6 rounded-lg shadow-md mb-8">
 
-            <h3 class="text-lg font-semibold mb-4">Add New Food</h3>
+            <h3 class="text-lg font-semibold mb-4">Edit Category Details</h3>
 
             <form method="POST" action="" class="space-y-3">
 
                 <input type="text" name="food_name" placeholder="Food Name"
                     class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-                    value="<?php echo $row['food_name']; ?>">
+                    value="<?php echo htmlspecialchars($row['food_name'] ?? ''); ?>" required>
 
-                <input type="number" name="price" placeholder="Price"
-                    class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-                    value="<?php echo $row['price']; ?>">
+                <select name="category"
+                    class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+                    <option value="">Select Category</option>
+                    <option value="FastFoods" <?php echo ($row['category'] ?? '') == "FastFoods" ? "selected" : ""; ?>>FastFoods</option>
+                    <option value="Burgers" <?php echo ($row['category'] ?? '') == "Burgers" ? "selected" : ""; ?>>Burgers</option>
+                    <option value="Drinks" <?php echo ($row['category'] ?? '') == "Drinks" ? "selected" : ""; ?>>Drinks</option>
+                </select>
 
-                <select name="categorye"
-                    class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-                    value="FastFood" <?php if ($row['categorye'] == "FastFood") {
-                        echo "selected";
-                    } elseif ($row['categorye'] == "Burger") {
-                        echo "selected";
-                    } elseif ($row['categorye'] == "Drink") {
-                        echo "selected";
-                    }
-                 ?>>
-                    <option>FastFood</option>
-                    <option>Burger</option>
-                    <option>Drink</option>
+                <select name="status"
+                    class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+                    <option value="Active" <?php echo ($row['status'] ?? '') == "Active" ? "selected" : ""; ?>>Active</option>
+                    <option value="InActive" <?php echo ($row['status'] ?? '') == "InActive" ? "selected" : ""; ?>>InActive</option>
                 </select>
 
                 <button type="submit" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md">
-                    Update Food
+                    Update Category
                 </button>
 
             </form>
@@ -97,7 +93,7 @@ if (isset($_POST['food_name'])) {
                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">No</th>
                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Food Name</th>
                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Category</th>
-                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Price</th>
+                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Status</th>
 
                         </tr>
                     </thead>
@@ -121,7 +117,9 @@ if (isset($_POST['food_name'])) {
                             </td>
 
                             <td class="px-6 py-4 text-sm text-gray-700">
-                                $<?php echo $food['price']; ?>
+                                <span class="<?php echo $food['status'] == 'Active' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'; ?> px-3 py-1 rounded-full text-xs font-medium">
+                                    <?php echo $food['status']; ?>
+                                </span>
                             </td>
 
 

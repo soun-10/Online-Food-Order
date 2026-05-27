@@ -45,7 +45,7 @@
         $stmt = $this->db->prepare ("DELETE FROM categories WHERE id = :id");
         $stmt -> bindParam (':id' , $id);
         if ($stmt->execute()){
-            return $stmt->rowCOunt() > 0 ;
+            return $stmt->rowCount() > 0 ;
         }
         return false ;
     }

@@ -8,29 +8,21 @@ document.addEventListener("click", function (e) {
   }
 });
 
-let qty = 1;
-let pricePerItem = 5;
-let delivery = 2;
-
-function updatePrice() {
-  document.getElementById("qty").innerText = qty;
-
-  let subtotal = qty * pricePerItem;
-  let total = subtotal + delivery;
-
-  document.getElementById("priceText").innerText = "$" + subtotal;
-  document.getElementById("subtotal").innerText = "$" + subtotal;
-  document.getElementById("total").innerText = "$" + total;
+function increaseQty(button) {
+  const form = button.closest('form');
+  const quantityInput = form.querySelector('input[name="quantity"]');
+  let quantity = parseInt(quantityInput.value) || 1;
+  quantityInput.value = quantity + 1;
+  form.submit();
 }
 
-function increaseQty() {
-  qty++;
-  updatePrice();
-}
-
-function decreaseQty() {
-  if (qty > 1) {
-    qty--;
-    updatePrice();
+function decreaseQty(button) {
+  const form = button.closest('form');
+  const quantityInput = form.querySelector('input[name="quantity"]');
+  let quantity = parseInt(quantityInput.value) || 1;
+  if (quantity > 1) {
+    quantityInput.value = quantity - 1;
+    form.submit();
   }
 }
+
